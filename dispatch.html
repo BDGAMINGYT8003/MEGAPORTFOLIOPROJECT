@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- [Existing head content remains unchanged] -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dispatch - Contact</title>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <style>
+    /* Global Reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'VT323', monospace;
+      background-color: #111;
+      color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    /* Card/Modal Container */
+    .card-modal {
+      background-color: #222;
+      border: 4px double #555;
+      padding: 20px;
+      box-shadow: 7px 7px 0px #333;
+      animation: fadeIn 1s ease-out forwards;
+      opacity: 0;
+      width: 95%;
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+    /* Title & Inquiry Type Selector */
+    .card-header {
+      text-align: center;
+    }
+    .card-header h2 {
+      font-size: 2em;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+      text-shadow: 2px 2px 0px #111;
+    }
+    .card-header label {
+      font-size: 1.2em;
+      margin-right: 10px;
+    }
+    .card-header select {
+      font-family: 'VT323', monospace;
+      background-color: #111;
+      color: #f0f0f0;
+      border: 2px solid #555;
+      padding: 5px;
+    }
+    /* Disabled Select Styling */
+    .card-header select:disabled {
+      background-color: #333;
+      color: #777;
+    }
+    /* Form Styling */
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .contact-form label {
+      font-size: 1.1em;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      font-family: 'VT323', monospace;
+      background-color: #111;
+      color: #f0f0f0;
+      border: 2px solid #555;
+      padding: 8px;
+    }
+    .contact-form .button-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 15px;
+    }
+    .contact-form button,
+    .contact-form .go-back-button {
+      font-family: 'VT323', monospace;
+      background-color: #222;
+      color: #f0f0f0;
+      border: 2px solid #555;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      text-decoration: none;
+      text-align: center;
+    }
+    .contact-form button:hover,
+    .contact-form .go-back-button:hover {
+      background-color: #333;
+    }
+    /* Confirmation Message Styling */
+    .confirmation-message {
+      display: none;
+      text-align: center;
+    }
+    .confirmation-message h2 {
+      font-size: 2em;
+      letter-spacing: 1px;
+      text-shadow: 2px 2px 0px #111;
+      margin-bottom: 20px;
+    }
+    .confirmation-message p {
+      font-size: 1.2em;
+      color: #aaa;
+    }
+    /* Footer */
+    .footer-area {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 1.1em;
+      color: #aaa;
+      text-shadow: 1px 1px 0px #111;
+    }
+    /* Background Scanlines */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0),
+        rgba(0, 0, 0, 0.1) 0.5px,
+        transparent 1px
+      );
+      pointer-events: none;
+      z-index: -1;
+      animation: scanlines 5s linear infinite;
+    }
+    @keyframes scanlines {
+      to { background-position: 0 200%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card-modal">
+    <!-- Header with Inquiry Type Selection -->
+    <div class="card-header" id="cardHeader">
+      <h2 id="form-title">General Inquiry</h2>
+      <div>
+        <label for="contactType">Inquiry Type:</label>
+        <select id="contactType">
+          <option value="General Inquiry" selected>General Inquiry</option>
+          <option value="Technical Support">Technical Support</option>
+          <option value="Partnerships">Partnerships</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Contact Form -->
+    <form class="contact-form" id="contactForm" action="#" method="post">
+      <!-- Hidden field to pass the inquiry type -->
+      <input type="hidden" name="inquiryType" id="inquiryType" value="General Inquiry" />
+
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" placeholder="Your Name" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" placeholder="you@example.com" required>
+
+      <label for="message">Message:</label>
+      <textarea id="message" name="message" placeholder="Your message here" rows="4" required></textarea>
+
+      <!-- Button Row with Send and Go Back Buttons -->
+      <div class="button-row">
+        <a href="index.html" class="go-back-button">Go Back</a>
+        <button type="submit">Send</button>
+      </div>
+    </form>
+
+    <!-- Confirmation Message -->
+    <div class="confirmation-message" id="confirmationMessage">
+      <h2>Message Sent!</h2>
+      <p>Thanks for reaching out. We'll get back to you shortly.</p>
+      <!-- Go Back Button on Confirmation Screen -->
+      <div style="margin-top: 20px;">
+        <a href="index.html" class="go-back-button">Go Back</a>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-area">
+      <p>© 2025 Our Company. Dispatch Center. All communications are monitored.</p>
+    </div>
+  </div>
+
+  <script>
+    // When the user changes the select, update the heading and hidden inquiry type field.
+    const contactTypeSelect = document.getElementById('contactType');
+    const formTitle = document.getElementById('form-title');
+    const inquiryTypeHidden = document.getElementById('inquiryType');
+
+    contactTypeSelect.addEventListener('change', (event) => {
+      const selectedType = event.target.value;
+      formTitle.textContent = selectedType;
+      inquiryTypeHidden.value = selectedType;
+    });
+
+    // Handle form submission
+    const contactForm = document.getElementById('contactForm');
+    const confirmationMessage = document.getElementById('confirmationMessage');
+    const cardHeader = document.getElementById('cardHeader');
+
+    contactForm.addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent default form submission
+
+      // Simulate successful email sending (you'd replace this with actual email sending logic)
+      setTimeout(() => {
+        // Hide the form and show the confirmation message
+        contactForm.style.display = 'none';
+        confirmationMessage.style.display = 'block';
+
+        // Disable and gray out the Inquiry Type select box
+        contactTypeSelect.disabled = true;
+
+      }, 500); // Simulate a slight delay
+    });
+
+    console.log("Dispatch (Contact) page loaded. Communication hub active.");
+  </script>
+</body>
+</html>

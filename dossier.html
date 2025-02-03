@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Dossier - About Us</title>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <style>
+    /* Global Reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'VT323', monospace;
+      background-color: #111;
+      color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    /* Mainframe Container */
+    .mainframe-container {
+      background-color: #222;
+      border: 4px double #555;
+      padding: 20px;
+      box-shadow: 7px 7px 0px #333;
+      animation: fadeIn 1s ease-out forwards;
+      opacity: 0;
+      display: flex;
+      flex-direction: column;
+      width: 95%;
+      max-width: 600px;
+      align-items: center;
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+    /* Header Area */
+    .header-area {
+      text-align: center;
+      margin-bottom: 20px;
+      animation: slideDown 1s ease-out 0.3s forwards;
+      transform: translateY(-30px);
+      opacity: 0;
+      width: 100%;
+    }
+    @keyframes slideDown {
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .main-title {
+      font-size: 2.8em;
+      margin-bottom: 10px;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 0px #111;
+    }
+    .subtitle {
+      font-size: 1.4em;
+      color: #aaa;
+      text-shadow: 1px 1px 0px #111;
+    }
+    /* Content Area */
+    .content-area {
+      width: 100%;
+      padding: 0 10px 20px 10px;
+      animation: slideInRight 1s ease-out 0.9s forwards;
+      transform: translateX(30px);
+      opacity: 0;
+    }
+    @keyframes slideInRight {
+      to { transform: translateX(0); opacity: 1; }
+    }
+    /* Details (Toggle Sections) */
+    .content-area details {
+      background-color: #222;
+      border: 4px double #555;
+      padding: 15px;
+      box-shadow: 7px 7px 0px #333;
+      margin-bottom: 20px;
+      /* No entrance animation on toggle to avoid collisions */
+      transition: background-color 0.3s ease;
+    }
+    .content-area summary {
+      font-size: 2.1em;
+      text-shadow: 1px 1px 0px #111;
+      cursor: pointer;
+      outline: none;
+      list-style: none;
+    }
+    /* Remove default marker on some browsers */
+    .content-area summary::-webkit-details-marker {
+      display: none;
+    }
+    .content-area p {
+      margin-top: 10px;
+      text-align: left;
+      font-size: 1.2em;
+      line-height: 1.4;
+    }
+    /* Footer Area */
+    .footer-area {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 1.12em;
+      color: #aaa;
+      text-shadow: 1px 1px 0px #111;
+      animation: fadeInUp 1s ease-out 1.8s forwards;
+      transform: translateY(10px);
+      opacity: 0;
+      width: 100%;
+    }
+    @keyframes fadeInUp {
+      to { transform: translateY(0); opacity: 1; }
+    }
+    /* Background Scanlines */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0),
+        rgba(0, 0, 0, 0.1) 0.5px,
+        transparent 1px
+      );
+      pointer-events: none;
+      z-index: -1;
+      animation: scanlines 5s linear infinite;
+    }
+    @keyframes scanlines {
+      to { background-position: 0 200%; }
+    }
+    /* Media Query: Larger Screens */
+    @media (min-width: 769px) {
+      .mainframe-container {
+        flex-direction: row;
+        max-width: 900px;
+        padding: 30px;
+        align-items: stretch;
+      }
+      .header-area,
+      .content-area,
+      .footer-area {
+        width: auto;
+        text-align: left;
+      }
+      .content-area {
+        width: 100%;
+        padding-left: 20px;
+      }
+      .main-title {
+        font-size: 3.5em;
+        letter-spacing: 3px;
+      }
+      .subtitle {
+        font-size: 1.68em;
+      }
+      .footer-area {
+        font-size: 1.26em;
+        margin-top: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="mainframe-container">
+    <!-- Header Area -->
+    <div class="header-area">
+      <h1 class="main-title">THE DOSSIER</h1>
+      <p class="subtitle">About Us<br>Our biography, skills, and professional background</p>
+    </div>
+
+    <!-- Content Area: About Us Sections with Toggle Buttons -->
+    <div class="content-area">
+      <!-- Biography Section -->
+      <details>
+        <summary>Biography</summary>
+        <p>
+          Our journey began amid enigmatic occurrences and subtle clues that emerged from the shadows of forgotten histories. Born of relentless curiosity and the drive to uncover hidden truths, the path has been defined by deciphering mysteries and exploring the unknown.
+        </p>
+      </details>
+
+      <!-- Skills Section -->
+      <details>
+        <summary>Skills</summary>
+        <p>
+          Mastery is achieved through the art of unraveling cryptic phenomena and navigating perplexing enigmas. An intuitive blend of analytical precision and creative insight enables us to decode subtle signals and transform uncertainty into clarity.
+        </p>
+      </details>
+
+      <!-- Professional Background Section -->
+      <details>
+        <summary>Professional Background</summary>
+        <p>
+          A legacy forged through a series of challenging investigations and uncanny events, our background is woven from experiences that defy conventional explanation. Each encounter has deepened our commitment to rigorous inquiry and the pursuit of the truths concealed within the unexplained.
+        </p>
+      </details>
+    </div>
+
+    <!-- Footer Area -->
+    <div class="footer-area">
+      <footer>
+        <p>© 2025 Our Company. Confidential Dossier. Clearance Level: TOP SECRET.</p>
+      </footer>
+    </div>
+  </div>
+  <script>
+    console.log("The Dossier - About Us page loaded without toggle collision issues.");
+  </script>
+</body>
+</html>
