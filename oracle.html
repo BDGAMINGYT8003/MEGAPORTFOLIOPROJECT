@@ -150,24 +150,6 @@
     @keyframes scanlines {
       to { background-position: 0 200%; }
     }
-    /* Candle Flicker Effect (Pseudo-element) */
-    .mainframe-container::after {
-      content: '';
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      width: 20px;
-      height: 40px;
-      background: radial-gradient(circle, #ffa, transparent 70%);
-      filter: blur(3px);
-      opacity: 0.8;
-      animation: flicker 1.5s infinite alternate;
-    }
-    @keyframes flicker {
-      0% { opacity: 0.7; }
-      50% { opacity: 1; }
-      100% { opacity: 0.6; }
-    }
     /* Media Query: Larger Screens */
     @media (min-width: 769px) {
       .mainframe-container {
@@ -297,7 +279,7 @@
       <details>
         <summary>Do you charge for your services?</summary>
         <p>
-          The Ectoplasmic Investigators of Chapitala are primarily focused on researching paranormal phenomena and supporting rural communities in Bangladesh. We currently operate as a non-profit team, and generally do not charge fees for our investigations.  Depending on the specifics of a case and its location, community support or logistical help might be appreciated, but this is discussed case-by-case. Our main goal is to discover the truth and help communities, not to make money.
+          The Ectoplasmic Investigators of Chapitala are primarily focused on researching paranormal phenomena and supporting rural communities in Bangladesh. We currently operate as a non-profit team, and generally do not charge fees for our investigations. Depending on the specifics of a case and its location, community support or logistical help might be appreciated, but this is discussed case-by-case. Our main goal is to discover the truth and help communities, not to make money.
         </p>
       </details>
     </div>
@@ -307,7 +289,7 @@
       <footer>
         <p>
           © 2025 THE ECTOPLASMIC INVESTIGATORS<br>
-          SECRET LOGS AWAIT DISCOVERY.
+          SECRET LOGS AWAIT DISCOVERY
         </p>
       </footer>
     </div>
