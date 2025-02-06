@@ -1,147 +1,123 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-  <meta name="description" content="The Dossier - About The Ectoplasmic Investigators of Chapitala" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Dossier - About Us</title>
   <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --primary-bg: #111;
-      --secondary-bg: #222;
-      --border-color: #555;
-      --text-color: #f0f0f0;
-      --accent-color: #66eeff;
-      --shadow-color: #333;
-    }
-
+    /* Global Reset */
     *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      -webkit-tap-highlight-color: transparent;
     }
-
     body {
       font-family: 'VT323', monospace;
-      background-color: var(--primary-bg);
-      color: var(--text-color);
+      background-color: #111;
+      color: #f0f0f0;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
       overflow-x: hidden;
-      padding: 15px;
-      line-height: 1.6;
     }
-
+    /* Mainframe Container */
     .mainframe-container {
-      background-color: var(--secondary-bg);
-      border: 4px double var(--border-color);
-      padding: clamp(15px, 5vw, 30px);
-      box-shadow: 7px 7px 0px var(--shadow-color);
+      background-color: #222;
+      border: 4px double #555;
+      padding: 20px;
+      box-shadow: 7px 7px 0px #333;
       animation: fadeIn 1s ease-out forwards;
       opacity: 0;
-      width: min(95%, 800px);
-      border-radius: 8px;
-      position: relative;
+      display: flex;
+      flex-direction: column;
+      width: 95%;
+      max-width: 600px;
+      align-items: center;
     }
-
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+    /* Header Area */
     .header-area {
       text-align: center;
-      margin-bottom: clamp(20px, 5vw, 30px);
+      margin-bottom: 20px;
       animation: slideDown 1s ease-out 0.3s forwards;
       transform: translateY(-30px);
       opacity: 0;
+      width: 100%;
     }
-
+    @keyframes slideDown {
+      to { transform: translateY(0); opacity: 1; }
+    }
     .main-title {
-      font-size: clamp(2.4em, 8vw, 3.5em);
+      font-size: 2.8em;
       margin-bottom: 10px;
       letter-spacing: 2px;
-      text-shadow: 2px 2px 0px var(--primary-bg);
-      color: var(--accent-color);
+      text-shadow: 2px 2px 0px #111;
     }
-
     .subtitle {
-      font-size: clamp(1.2em, 4vw, 1.6em);
+      font-size: 1.4em;
       color: #aaa;
-      text-shadow: 1px 1px 0px var(--primary-bg);
+      text-shadow: 1px 1px 0px #111;
     }
-
+    /* Content Area */
     .content-area {
+      width: 100%;
+      padding: 0 10px 20px 10px;
       animation: slideInRight 1s ease-out 0.9s forwards;
       transform: translateX(30px);
       opacity: 0;
     }
-
+    @keyframes slideInRight {
+      to { transform: translateX(0); opacity: 1; }
+    }
+    /* Details (Toggle Sections) */
     .content-area details {
-      background-color: rgba(34, 34, 34, 0.8);
-      border: 3px double var(--border-color);
-      padding: clamp(15px, 4vw, 25px);
-      box-shadow: 5px 5px 0px var(--shadow-color);
+      background-color: #222;
+      border: 4px double #555;
+      padding: 15px;
+      box-shadow: 7px 7px 0px #333;
       margin-bottom: 20px;
-      border-radius: 6px;
-      transition: all 0.3s ease;
+      /* No entrance animation on toggle to avoid collisions */
+      transition: background-color 0.3s ease;
     }
-
-    .content-area details[open] {
-      background-color: rgba(40, 40, 40, 0.9);
-      transform: translateX(5px);
-    }
-
     .content-area summary {
-      font-size: clamp(1.8em, 6vw, 2.2em);
-      text-shadow: 1px 1px 0px var(--primary-bg);
+      font-size: 2.1em;
+      text-shadow: 1px 1px 0px #111;
       cursor: pointer;
       outline: none;
       list-style: none;
-      color: var(--accent-color);
-      position: relative;
-      padding-left: 25px;
     }
-
+    /* Remove default marker on some browsers */
     .content-area summary::-webkit-details-marker {
       display: none;
     }
-
-    .content-area summary::before {
-      content: '>';
-      position: absolute;
-      left: 0;
-      transition: transform 0.3s ease;
-    }
-
-    .content-area details[open] summary::before {
-      transform: rotate(90deg);
-    }
-
     .content-area p {
-      margin-top: 15px;
-      font-size: clamp(1.1em, 3.5vw, 1.3em);
-      line-height: 1.5;
-      padding-left: 25px;
+      margin-top: 10px;
+      text-align: left;
+      font-size: 1.2em;
+      line-height: 1.4;
     }
-
+    /* Footer Area */
     .footer-area {
       text-align: center;
-      margin-top: clamp(20px, 5vw, 30px);
-      font-size: clamp(1em, 3vw, 1.2em);
+      margin-top: 20px;
+      font-size: 1.12em;
       color: #aaa;
-      text-shadow: 1px 1px 0px var(--primary-bg);
+      text-shadow: 1px 1px 0px #111;
       animation: fadeInUp 1s ease-out 1.8s forwards;
       transform: translateY(10px);
       opacity: 0;
+      width: 100%;
     }
-
-    @keyframes fadeIn { to { opacity: 1; } }
-    @keyframes slideDown { to { transform: translateY(0); opacity: 1; } }
-    @keyframes slideInRight { to { transform: translateX(0); opacity: 1; } }
-    @keyframes fadeInUp { to { transform: translateY(0); opacity: 1; } }
-
-    .scanlines {
+    @keyframes fadeInUp {
+      to { transform: translateY(0); opacity: 1; }
+    }
+    /* Background Scanlines */
+    body::before {
+      content: '';
       position: fixed;
       top: 0;
       left: 0;
@@ -150,55 +126,59 @@
       background: repeating-linear-gradient(
         0deg,
         rgba(0, 0, 0, 0),
-        rgba(0, 0, 0, 0.1) 1px,
-        transparent 2px
+        rgba(0, 0, 0, 0.1) 0.5px,
+        transparent 1px
       );
       pointer-events: none;
       z-index: -1;
-      animation: scanlines 8s linear infinite;
+      animation: scanlines 5s linear infinite;
     }
-
     @keyframes scanlines {
-      from { transform: translateY(0); }
-      to { transform: translateY(100px); }
+      to { background-position: 0 200%; }
     }
-
-    @media (hover: hover) {
-      .content-area details:hover {
-        transform: translateX(8px);
-      }
-      
-      .content-area summary:hover {
-        color: #88ffff;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-      }
-    }
-
-    @supports (backdrop-filter: blur(1px)) {
+    /* Media Query: Larger Screens */
+    @media (min-width: 769px) {
       .mainframe-container {
-        background-color: rgba(34, 34, 34, 0.8);
-        backdrop-filter: blur(10px);
+        flex-direction: row;
+        max-width: 900px;
+        padding: 30px;
+        align-items: stretch;
+      }
+      .header-area,
+      .content-area,
+      .footer-area {
+        width: auto;
+        text-align: left;
+      }
+      .content-area {
+        width: 100%;
+        padding-left: 20px;
+      }
+      .main-title {
+        font-size: 3.5em;
+        letter-spacing: 3px;
+      }
+      .subtitle {
+        font-size: 1.68em;
+      }
+      .footer-area {
+        font-size: 1.26em;
+        margin-top: 30px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="scanlines"></div>
   <div class="mainframe-container">
+    <!-- Header Area -->
     <div class="header-area">
       <h1 class="main-title">THE DOSSIER</h1>
       <p class="subtitle">About Us<br>Our biography, skills, and professional background</p>
     </div>
 
+    <!-- Content Area: About Us Sections with Toggle Buttons -->
     <div class="content-area">
+      <!-- Biography Section -->
       <details>
         <summary>Biography</summary>
         <p>
@@ -206,6 +186,7 @@
         </p>
       </details>
 
+      <!-- Skills Section -->
       <details>
         <summary>Skills</summary>
         <p>
@@ -213,6 +194,7 @@
         </p>
       </details>
 
+      <!-- Professional Background Section -->
       <details>
         <summary>Professional Background</summary>
         <p>
@@ -221,11 +203,18 @@
       </details>
     </div>
 
+    <!-- Footer Area -->
     <div class="footer-area">
       <footer>
-        <p>© 2025 THE ECTOPLASMIC INVESTIGATORS<br>SECRET LOGS AWAIT DISCOVERY</p>
+        <p>
+      © 2025 THE ECTOPLASMIC INVESTIGATORS<br>
+      SECRET LOGS AWAIT DISCOVERY
+        </p>
       </footer>
     </div>
   </div>
+  <script>
+    console.log("The Dossier - About Us page loaded without toggle collision issues.");
+  </script>
 </body>
 </html>
