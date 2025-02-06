@@ -23,6 +23,7 @@
       min-height: 100vh;
       overflow-x: hidden;
       --glow-color: #00ffff; /* Define glow color here */
+      background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0L100 100M0 100L100 0' stroke='%23555' stroke-width='2'/%3E%3C/svg%3E"); /* Subtle scanlines */
     }
 
     /* Mainframe Container */
@@ -38,6 +39,9 @@
       width: 95%;
       max-width: 600px;
       align-items: center;
+      background-color: rgba(0,0,0,0.8); /* slightly darker background */
+      border: 4px solid #333; /* darker border */
+      box-shadow: 10px 10px 15px rgba(0,0,0,0.7); /* more pronounced shadow */
     }
     @keyframes fadeIn {
       to { opacity: 1; }
@@ -51,6 +55,7 @@
       transform: translateY(-30px);
       opacity: 0;
       width: 100%;
+      color: #800080; /* Dark Purple */
     }
     @keyframes slideDown {
       to { transform: translateY(0); opacity: 1; }
@@ -60,6 +65,7 @@
       margin-bottom: 10px;
       letter-spacing: 2px;
       text-shadow: 2px 2px 0px #111;
+      color: #ff0000; /* Red */
     }
     .subtitle {
       font-size: 1.4em;  /* originally 1em */
@@ -145,6 +151,7 @@
       font-size: 2.1em;  /* originally 1.5em */
       margin-bottom: 10px;
       text-shadow: 1px 1px 0px #111;
+      color: #008000; /* Dark Green */
     }
     /* Typewriter Text (Desktop) */
     .typewriter-text {
@@ -157,6 +164,7 @@
       text-align: left;
       animation: typewriter 4s steps(40) 1.2s forwards,
                  blink-caret 0.75s step-end infinite alternate;
+      color: #800080; /* Dark Purple */
     }
     @keyframes typewriter {
       from { width: 0; }
