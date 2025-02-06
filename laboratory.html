@@ -2,149 +2,158 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta name="description" content="The Laboratory - Team Information of The Ectoplasmic Investigators" />
   <title>THE LABORATORY - Classified Team Info</title>
   <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
   <style>
-    /* Global Reset */
+    :root {
+      --primary-bg: #111;
+      --secondary-bg: #222;
+      --border-color: #555;
+      --text-color: #f0f0f0;
+      --accent-color: #66eeff;
+      --shadow-color: #333;
+    }
+
     *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
       font-family: 'VT323', monospace;
-      background-color: #111;
-      color: #f0f0f0;
+      background-color: var(--primary-bg);
+      color: var(--text-color);
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
       overflow-x: hidden;
+      padding: 15px;
+      line-height: 1.6;
     }
 
-    /* Mainframe Container (used here for THE LABORATORY) */
     .mainframe-container {
-      background-color: #222;
-      border: 4px double #555;
-      padding: 20px;
-      box-shadow: 7px 7px 0px #333;
+      background-color: var(--secondary-bg);
+      border: 4px double var(--border-color);
+      padding: clamp(15px, 5vw, 30px);
+      box-shadow: 7px 7px 0px var(--shadow-color);
       animation: fadeIn 1s ease-out forwards;
       opacity: 0;
-      display: flex;
-      flex-direction: column;
-      width: 95%;
-      max-width: 600px;
-      align-items: center;
-    }
-    @keyframes fadeIn {
-      to { opacity: 1; }
+      width: min(95%, 1200px);
+      border-radius: 8px;
+      position: relative;
     }
 
-    /* Header Area */
     .header-area {
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: clamp(20px, 5vw, 30px);
       animation: slideDown 1s ease-out 0.3s forwards;
       transform: translateY(-30px);
       opacity: 0;
-      width: 100%;
     }
-    @keyframes slideDown {
-      to { transform: translateY(0); opacity: 1; }
-    }
+
     .main-title {
-      font-size: 2.8em;
+      font-size: clamp(2.4em, 8vw, 3.5em);
       margin-bottom: 10px;
       letter-spacing: 2px;
-      text-shadow: 2px 2px 0px #111;
+      text-shadow: 2px 2px 0px var(--primary-bg);
+      color: var(--accent-color);
     }
+
     .subtitle {
-      font-size: 1.4em;
+      font-size: clamp(1.2em, 4vw, 1.6em);
       color: #aaa;
-      text-shadow: 1px 1px 0px #111;
+      text-shadow: 1px 1px 0px var(--primary-bg);
     }
 
-    /* Navigation Area */
-    <!-- Optional: If you want to include navigation, you can uncomment this section.
-    .navigation-area {
-      text-align: center;
-      margin-bottom: 20px;
-      animation: slideInLeft 1s ease-out 0.6s forwards;
-      transform: translateX(-30px);
-      opacity: 0;
-      width: 100%;
-    }
-    @keyframes slideInLeft {
-      to { transform: translateX(0); opacity: 1; }
-    }
-    .navigation-list {
-      list-style: none;
-      padding: 0;
-      display: inline-block;
-    }
-    .navigation-list li {
-      margin-bottom: 8px;
-    }
-    .navigation-link {
-      display: block;
-      padding: 10px 18px;
-      background-color: #444;
-      color: #f0f0f0;
-      text-decoration: none;
-      border: 2px outset #777;
-      border-radius: 5px;
-      transition: all 0.3s ease;
-      box-shadow: 2px 2px 0px #111;
-      font-size: 1.4em;
-      text-align: center;
-    }
-    .navigation-link:hover,
-    .navigation-link:focus {
-      background-color: #555;
-      border-style: inset;
-      box-shadow: none;
-    }
-    -->
-
-    /* Content Area */
     .content-area {
-      text-align: center;
-      padding: 0 10px 20px 10px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
       animation: slideInRight 1s ease-out 0.9s forwards;
       transform: translateX(30px);
       opacity: 0;
-      width: 100%;
-    }
-    @keyframes slideInRight {
-      to { transform: translateX(0); opacity: 1; }
-    }
-    .content-area h2 {
-      font-size: 2.1em;
-      margin-bottom: 10px;
-      text-shadow: 1px 1px 0px #111;
     }
 
-    /* Footer Area */
+    .member-card {
+      background-color: rgba(34, 34, 34, 0.8);
+      border: 3px double var(--border-color);
+      padding: clamp(15px, 4vw, 25px);
+      border-radius: 8px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .member-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .member-card img.profile-pic {
+      width: 120px;
+      height: 120px;
+      border: 2px solid var(--border-color);
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 15px;
+      display: block;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .member-card:hover img.profile-pic {
+      transform: scale(1.05);
+    }
+
+    .member-card h2 {
+      font-size: clamp(1.8em, 6vw, 2.2em);
+      margin-bottom: 15px;
+      text-align: center;
+      color: var(--accent-color);
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .member-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .member-card ul li {
+      margin-bottom: 12px;
+      font-size: clamp(1.1em, 3.5vw, 1.3em);
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .member-card ul li::before {
+      content: '>';
+      position: absolute;
+      left: 0;
+      color: var(--accent-color);
+    }
+
+    .member-card ul li strong {
+      color: #ffcc66;
+      margin-right: 8px;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
     .footer-area {
       text-align: center;
-      margin-top: 20px;
-      font-size: 1.12em;
+      margin-top: clamp(20px, 5vw, 30px);
+      font-size: clamp(1em, 3vw, 1.2em);
       color: #aaa;
-      text-shadow: 1px 1px 0px #111;
       animation: fadeInUp 1s ease-out 1.8s forwards;
       transform: translateY(10px);
       opacity: 0;
-      width: 100%;
-    }
-    @keyframes fadeInUp {
-      to { transform: translateY(0); opacity: 1; }
     }
 
-    /* Background Scanlines */
-    body::before {
-      content: '';
+    .scanlines {
       position: fixed;
       top: 0;
       left: 0;
@@ -153,120 +162,52 @@
       background: repeating-linear-gradient(
         0deg,
         rgba(0, 0, 0, 0),
-        rgba(0, 0, 0, 0.1) 0.5px,
-        transparent 1px
+        rgba(0, 0, 0, 0.1) 1px,
+        transparent 2px
       );
       pointer-events: none;
       z-index: -1;
-      animation: scanlines 5s linear infinite;
+      animation: scanlines 8s linear infinite;
     }
+
+    @keyframes fadeIn { to { opacity: 1; } }
+    @keyframes slideDown { to { transform: translateY(0); opacity: 1; } }
+    @keyframes slideInRight { to { transform: translateX(0); opacity: 1; } }
+    @keyframes fadeInUp { to { transform: translateY(0); opacity: 1; } }
     @keyframes scanlines {
-      to { background-position: 0 200%; }
+      from { transform: translateY(0); }
+      to { transform: translateY(100px); }
     }
 
-    /* Media Query: Larger Screens */
-    @media (min-width: 769px) {
-      .mainframe-container {
-        flex-direction: row;
-        max-width: 900px;
-        padding: 30px;
-        align-items: stretch;
-      }
-      .header-area,
-      .content-area,
-      .footer-area {
-        width: auto;
-        text-align: left;
-      }
-      .content-area {
-        width: 100%;
-        padding-left: 20px;
-      }
-      .main-title {
-        font-size: 3.5em;
-        letter-spacing: 3px;
-      }
-      .subtitle {
-        font-size: 1.68em;
-      }
-      .footer-area {
-        font-size: 1.26em;
-        margin-top: 30px;
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
       }
     }
 
-    /* ------------------------------
-       Dossier Member Card Styling
-       ------------------------------ */
-    .member-card {
-      background-color: #222;
-      border: 4px double #555;
-      padding: 20px;
-      box-shadow: 7px 7px 0px #333;
-      margin-bottom: 20px;
-      animation: fadeIn 1s ease-out forwards;
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    .member-card img.profile-pic {
-      width: 100px;
-      height: 100px;
-      border: 2px solid #555;
-      box-shadow: 3px 3px 0px #333;
-      object-fit: cover;
-      margin-bottom: 10px;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .member-card h2 {
-      font-size: 2em;
-      margin-bottom: 10px;
-      text-shadow: 1px 1px 0px #111;
-      text-align: center;
-    }
-    .member-card ul {
-      list-style: disc;
-      margin-left: 20px;
-      font-size: 1.2em;
-      text-align: left;
-    }
-    .member-card ul li {
-        margin-bottom: 8px; /* Add some spacing between list items */
-    }
-    .member-card ul li strong { /* Style for the labels (Investigation, Description, etc.) */
-        color: #ffcc66; /* A different color to highlight labels */
-        font-weight: bold; /* Make labels bold */
-        margin-right: 10px; /* Add space between label and value */
+    @media (max-width: 480px) {
+      .member-card {
+        padding: 15px;
+      }
+
+      .member-card img.profile-pic {
+        width: 100px;
+        height: 100px;
+      }
     }
   </style>
 </head>
 <body>
+  <div class="scanlines"></div>
   <div class="mainframe-container">
-    <!-- Header Area -->
     <div class="header-area">
       <h1 class="main-title">THE LABORATORY</h1>
       <p class="subtitle">CLASSIFIED TEAM INFO – ECTOPLASMIC INVESTIGATORS</p>
     </div>
 
-    <!-- Optional Navigation Area -->
-    <!--
-    <div class="navigation-area">
-      <nav>
-        <h2>NAVIGATION</h2>
-        <ul class="navigation-list">
-          <li><a href="mainframe.html" class="navigation-link">1. THE MAINFRAME</a></li>
-          <li><a href="dossier.html" class="navigation-link">2. THE LABORATORY</a></li>
-          <li><a href="casefiles.html" class="navigation-link">3. CASE FILES</a></li>
-          <li><a href="evidence.html" class="navigation-link">4. THE EVIDENCE</a></li>
-          <li><a href="laboratory.html" class="navigation-link">5. THE LABORATORY</a></li>
-          <li><a href="dispatch.html" class="navigation-link">6. DISPATCH</a></li>
-        </ul>
-      </nav>
-    </div>
-    -->
-
-    <!-- Content Area: Dossier Members -->
     <div class="content-area">
       <section class="member-card">
         <img class="profile-pic" src="images/Moin.png" alt="Moin Uddin">
@@ -313,18 +254,11 @@
       </section>
     </div>
 
-    <!-- Footer Area -->
     <div class="footer-area">
       <footer>
-        <p>
-      © 2025 THE ECTOPLASMIC INVESTIGATORS<br>
-      SECRET LOGS AWAIT DISCOVERY
-        </p>
+        <p>© 2025 THE ECTOPLASMIC INVESTIGATORS<br>SECRET LOGS AWAIT DISCOVERY</p>
       </footer>
     </div>
   </div>
-  <script>
-    console.log("Dossier Page Loaded with Mainframe Design CSS.");
-  </script>
 </body>
 </html>
