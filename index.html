@@ -2,209 +2,180 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>The Mainframe - Command Center</title>
   <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
   <style>
-    /* Global Reset */
+    :root {
+      --primary-color: #111;
+      --secondary-color: #222;
+      --accent-color: #555;
+      --text-color: #f0f0f0;
+      --highlight-color: #66eeff;
+      --shadow-color: #333;
+      --border-color: #777;
+    }
+
     *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
       font-family: 'VT323', monospace;
-      background-color: #111;
-      color: #f0f0f0;
+      background-color: var(--primary-color);
+      color: var(--text-color);
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
       overflow-x: hidden;
+      padding: 15px;
     }
 
-    /* Mainframe Container */
     .mainframe-container {
-      background-color: #222;
-      border: 4px double #555;
-      padding: 20px;
-      box-shadow: 7px 7px 0px #333;
+      background-color: var(--secondary-color);
+      border: 4px double var(--accent-color);
+      padding: min(5vw, 20px);
+      box-shadow: 7px 7px 0px var(--shadow-color);
       animation: fadeIn 1s ease-out forwards;
       opacity: 0;
       display: flex;
       flex-direction: column;
-      width: 95%;
-      max-width: 600px;
+      width: min(95%, 600px);
       align-items: center;
-    }
-    @keyframes fadeIn {
-      to { opacity: 1; }
+      gap: 20px;
+      border-radius: 8px;
     }
 
-    /* Header Area */
     .header-area {
       text-align: center;
-      margin-bottom: 20px;
       animation: slideDown 1s ease-out 0.3s forwards;
       transform: translateY(-30px);
       opacity: 0;
       width: 100%;
     }
-    @keyframes slideDown {
-      to { transform: translateY(0); opacity: 1; }
-    }
+
     .main-title {
-      font-size: 2.8em;  /* originally 2em */
+      font-size: clamp(2em, 8vw, 2.8em);
       margin-bottom: 10px;
       letter-spacing: 2px;
-      text-shadow: 2px 2px 0px #111;
-    }
-    .subtitle {
-      font-size: 1.4em;  /* originally 1em */
-      color: #aaa;
-      text-shadow: 1px 1px 0px #111;
+      text-shadow: 2px 2px 0px var(--primary-color);
     }
 
-    /* Navigation Area */
+    .subtitle {
+      font-size: clamp(1em, 4vw, 1.4em);
+      color: #aaa;
+      text-shadow: 1px 1px 0px var(--primary-color);
+    }
+
     .navigation-area {
       text-align: center;
-      margin-bottom: 20px;
       animation: slideInLeft 1s ease-out 0.6s forwards;
       transform: translateX(-30px);
       opacity: 0;
       width: 100%;
     }
-    @keyframes slideInLeft {
-      to { transform: translateX(0); opacity: 1; }
-    }
+
     .navigation-list {
       list-style: none;
       padding: 0;
-      display: inline-block;
+      display: grid;
+      gap: 10px;
+      width: 100%;
     }
-    .navigation-list li {
-      margin-bottom: 8px;
-    }
+
     .navigation-link {
       display: block;
-      padding: 10px 18px;
+      padding: clamp(8px, 2vw, 12px) clamp(12px, 3vw, 18px);
       background-color: #444;
-      color: #f0f0f0;
+      color: var(--text-color);
       text-decoration: none;
-      border: 2px outset #777;
+      border: 2px outset var(--border-color);
       border-radius: 5px;
-      transition: all 0.3s ease;
-      box-shadow: 2px 2px 0px #111;
-      font-size: 1.4em;  /* originally 1em */
+      transition: all 0.2s ease;
+      box-shadow: 2px 2px 0px var(--primary-color);
+      font-size: clamp(1em, 4vw, 1.4em);
       text-align: center;
+      position: relative;
+      overflow: hidden;
     }
-    .navigation-link:hover,
-    .navigation-link:focus {
-      background-color: #555;
-      border-style: inset;
+
+    .navigation-link:active {
+      transform: translateY(2px);
       box-shadow: none;
     }
 
-    /* Content Area */
+    .navigation-link::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+      transform: rotate(45deg);
+      transition: 0.3s;
+    }
+
+    .navigation-link:hover::after {
+      left: 100%;
+    }
+
     .content-area {
       text-align: center;
-      padding: 0 10px 20px 10px;
       animation: slideInRight 1s ease-out 0.9s forwards;
       transform: translateX(30px);
       opacity: 0;
       width: 100%;
     }
-    @keyframes slideInRight {
-      to { transform: translateX(0); opacity: 1; }
-    }
+
     .content-area h2 {
-      font-size: 2.1em;  /* originally 1.5em */
-      margin-bottom: 10px;
-      text-shadow: 1px 1px 0px #111;
+      font-size: clamp(1.5em, 6vw, 2.1em);
+      margin-bottom: 15px;
+      text-shadow: 1px 1px 0px var(--primary-color);
     }
-    /* Typewriter Text (Desktop) */
+
     .typewriter-text {
-      display: block;
-      width: 100%;
-      overflow: hidden;
-      white-space: nowrap;
-      border-right: 0.1em solid #f0f0f0;
-      font-size: 1.26em;  /* originally 0.9em */
-      text-align: left;
-      animation: typewriter 4s steps(40) 1.2s forwards,
-                 blink-caret 0.75s step-end infinite alternate;
-    }
-    @keyframes typewriter {
-      from { width: 0; }
-      to { width: 100%; }
-    }
-    @keyframes blink-caret {
-      from, to { border-color: transparent; }
-      50% { border-color: #f0f0f0; }
-    }
-
-    /* Pixel Art Example */
-    .pixel-art-example {
-      text-align: center;
+      font-size: clamp(0.9em, 3.5vw, 1.26em);
+      line-height: 1.4;
       margin: 15px 0;
-      animation: fadeIn 1s ease-out 1.5s forwards;
-      opacity: 0;
-      display: inline-block;
-    }
-    .pixel-art-example span {
-      display: inline-block;
-      width: 8px;
-      height: 8px;
-      border: 1px solid #555;
-      background-color: #66eeff;
-      margin: 1px;
-      opacity: 0.8;
-      animation: pixelFlicker 1.5s steps(8) infinite alternate;
-    }
-    @keyframes pixelFlicker {
-      to { opacity: 1; }
+      text-align: center;
     }
 
-    /* Footer Area */
+    .pixel-art-example {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 2px;
+      max-width: 200px;
+      margin: 20px auto;
+      padding: 10px;
+      background: rgba(0,0,0,0.2);
+      border-radius: 4px;
+    }
+
+    .pixel-art-example span {
+      aspect-ratio: 1;
+      width: 100%;
+      background-color: var(--highlight-color);
+      border-radius: 2px;
+      opacity: 0.8;
+      animation: pixelFlicker 1.5s infinite alternate;
+    }
+
     .footer-area {
       text-align: center;
-      margin-top: 20px;
-      font-size: 1.12em;  /* originally 0.8em */
+      font-size: clamp(0.8em, 3vw, 1.12em);
       color: #aaa;
-      text-shadow: 1px 1px 0px #111;
+      text-shadow: 1px 1px 0px var(--primary-color);
       animation: fadeInUp 1s ease-out 1.8s forwards;
       transform: translateY(10px);
       opacity: 0;
       width: 100%;
     }
-    @keyframes fadeInUp {
-      to { transform: translateY(0); opacity: 1; }
-    }
 
-    /* Background Scanlines */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: repeating-linear-gradient(
-        0deg,
-        rgba(0, 0, 0, 0),
-        rgba(0, 0, 0, 0.1) 0.5px,
-        transparent 1px
-      );
-      pointer-events: none;
-      z-index: -1;
-      animation: scanlines 5s linear infinite;
-    }
-    @keyframes scanlines {
-      to { background-position: 0 200%; }
-    }
-
-    /* Media Query: Larger Screens */
     @media (min-width: 769px) {
       .mainframe-container {
         flex-direction: row;
@@ -212,64 +183,35 @@
         padding: 30px;
         align-items: stretch;
       }
-      .header-area,
-      .navigation-area,
-      .content-area,
-      .footer-area {
-        width: auto;
+
+      .header-area, .navigation-area, .content-area, .footer-area {
         text-align: left;
       }
+
       .navigation-area {
         width: 30%;
         padding-right: 20px;
-        border-right: 2px dashed #555;
+        border-right: 2px dashed var(--accent-color);
         margin-bottom: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
       }
-      .navigation-list {
-        display: block;
-      }
-      .navigation-list li {
-        margin-bottom: 10px;
-      }
-      .navigation-link {
-        text-align: left;
-        font-size: 1.54em;  /* originally 1.1em */
-        padding: 12px 20px;
-      }
+
       .content-area {
         width: 70%;
         padding-left: 20px;
-        text-align: left;
-      }
-      .content-area h2 {
-        font-size: 2.52em;  /* originally 1.8em */
-      }
-      .content-area p {
-        font-size: 1.4em;  /* originally 1em */
-      }
-      .main-title {
-        font-size: 3.5em;  /* originally 2.5em */
-        letter-spacing: 3px;
-      }
-      .subtitle {
-        font-size: 1.68em;  /* originally 1.2em */
-      }
-      .footer-area {
-        font-size: 1.26em;  /* originally 0.9em */
-        margin-top: 30px;
       }
     }
 
-    /* Media Query: Mobile Typewriter Fix */
-    @media (max-width: 768px) {
-      .typewriter-text {
-        white-space: normal;
-        border: none;
-        animation: none;
-        text-align: center;
+    @keyframes fadeIn { to { opacity: 1; } }
+    @keyframes slideDown { to { transform: translateY(0); opacity: 1; } }
+    @keyframes slideInLeft { to { transform: translateX(0); opacity: 1; } }
+    @keyframes slideInRight { to { transform: translateX(0); opacity: 1; } }
+    @keyframes fadeInUp { to { transform: translateY(0); opacity: 1; } }
+    @keyframes pixelFlicker { to { opacity: 1; } }
+
+    @supports (backdrop-filter: blur(1px)) {
+      .mainframe-container {
+        background-color: rgba(34, 34, 34, 0.8);
+        backdrop-filter: blur(10px);
       }
     }
   </style>
@@ -282,7 +224,6 @@
     </div>
     <div class="navigation-area">
       <nav>
-        <h2>NAVIGATION</h2>
         <ul class="navigation-list">
           <li><a href="dossier.html" class="navigation-link">THE DOSSIER</a></li>
           <li><a href="laboratory.html" class="navigation-link">THE LABORATORY</a></li>
@@ -297,9 +238,7 @@
     <div class="content-area">
       <main>
         <h2>WELCOME OPERATIVE</h2>
-        <p class="typewriter-text">
-          INITIATE EXPLORATION VIA THE NAVIGATION MENU TO ACCESS CLASSIFIED INFORMATION
-        </p>
+        <p class="typewriter-text">INITIATE EXPLORATION VIA THE NAVIGATION MENU TO ACCESS CLASSIFIED INFORMATION</p>
         <div class="pixel-art-example">
           <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
           <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
@@ -314,16 +253,9 @@
     </div>
     <div class="footer-area">
       <footer>
-        <p>
-      © 2025 THE ECTOPLASMIC INVESTIGATORS<br>
-      SECRET LOGS AWAIT DISCOVERY
-        </p>
+        <p>© 2025 THE ECTOPLASMIC INVESTIGATORS<br>SECRET LOGS AWAIT DISCOVERY</p>
       </footer>
     </div>
   </div>
-  <script>
-    // Optional JavaScript
-    console.log("Mainframe Command Center Loaded.");
-  </script>
 </body>
 </html>
