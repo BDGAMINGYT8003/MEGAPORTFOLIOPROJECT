@@ -37,6 +37,12 @@
       width: 95%;
       max-width: 600px;
       align-items: center;
+      margin: 15px auto;
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      will-change: transform;
+      transform: translateZ(0);
+      -webkit-font-smoothing: antialiased;
     }
     @keyframes fadeIn {
       to { opacity: 1; }
@@ -204,13 +210,14 @@
       to { background-position: 0 200%; }
     }
 
-    /* Media Query: Larger Screens */
+    /* Improved Media Queries */
     @media (min-width: 769px) {
       .mainframe-container {
         flex-direction: row;
-        max-width: 900px;
+        max-width: 1200px;
         padding: 30px;
         align-items: stretch;
+        margin: 20px auto;
       }
       .header-area,
       .navigation-area,
@@ -230,46 +237,85 @@
       }
       .navigation-list {
         display: block;
+        width: 100%;
       }
       .navigation-list li {
-        margin-bottom: 10px;
+        margin-bottom: 15px;
       }
       .navigation-link {
         text-align: left;
-        font-size: 1.54em;  /* originally 1.1em */
+        font-size: 1.54em;
         padding: 12px 20px;
+        width: 100%;
+        display: block;
       }
       .content-area {
         width: 70%;
-        padding-left: 20px;
+        padding-left: 30px;
         text-align: left;
       }
       .content-area h2 {
-        font-size: 2.52em;  /* originally 1.8em */
+        font-size: 2.52em;
       }
       .content-area p {
-        font-size: 1.4em;  /* originally 1em */
+        font-size: 1.4em;
       }
       .main-title {
-        font-size: 3.5em;  /* originally 2.5em */
+        font-size: 3.5em;
         letter-spacing: 3px;
       }
       .subtitle {
-        font-size: 1.68em;  /* originally 1.2em */
+        font-size: 1.68em;
       }
       .footer-area {
-        font-size: 1.26em;  /* originally 0.9em */
+        font-size: 1.26em;
         margin-top: 30px;
       }
     }
 
-    /* Media Query: Mobile Typewriter Fix */
+    /* Enhanced Mobile Responsiveness */
     @media (max-width: 768px) {
+      .mainframe-container {
+        margin: 10px;
+        padding: 15px;
+      }
       .typewriter-text {
         white-space: normal;
         border: none;
         animation: none;
         text-align: center;
+        padding: 0 10px;
+      }
+      .navigation-list {
+        width: 100%;
+      }
+      .navigation-link {
+        width: 100%;
+        margin-bottom: 10px;
+        text-align: center;
+      }
+      .pixel-art-example {
+        max-width: 100%;
+        overflow-x: auto;
+        padding: 10px 0;
+      }
+      .header-area {
+        padding: 0 10px;
+      }
+    }
+
+    /* Small Mobile Devices */
+    @media (max-width: 480px) {
+      .mainframe-container {
+        margin: 5px;
+        padding: 10px;
+      }
+      .navigation-link {
+        padding: 8px 15px;
+      }
+      .pixel-art-example {
+        transform: scale(0.8);
+        margin: -10px;
       }
     }
   </style>
