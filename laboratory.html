@@ -6,325 +6,331 @@
   <title>THE LABORATORY - Classified Team Info</title>
   <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
   <style>
-    /* Global Reset */
-    *, *::before, *::after {
-      box-sizing: border-box;
+    :root {
+      --primary-bg: #111;
+      --secondary-bg: #222;
+      --accent-color: #66eeff;
+      --text-color: #f0f0f0;
+      --border-color: #555;
+    }
+
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+      font-family: 'VT323', monospace;
     }
 
     body {
-      font-family: 'VT323', monospace;
-      background-color: #111;
-      color: #f0f0f0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      overflow-x: hidden;
+      background-color: var(--primary-bg);
+      color: var(--text-color);
+      padding: 1rem;
+      font-size: 16px;
     }
 
-    /* Mainframe Container (used here for THE LABORATORY) */
-    .mainframe-container {
-      background-color: #222;
-      border: 4px double #555;
-      padding: 20px;
-      box-shadow: 7px 7px 0px #333;
-      animation: fadeIn 1s ease-out forwards;
-      opacity: 0;
-      display: flex;
-      flex-direction: column;
-      width: 95%;
-      max-width: 600px;
-      align-items: center;
-    }
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
-
-    /* Header Area */
-    .header-area {
-      text-align: center;
-      margin-bottom: 20px;
-      animation: slideDown 1s ease-out 0.3s forwards;
-      transform: translateY(-30px);
-      opacity: 0;
-      width: 100%;
-    }
-    @keyframes slideDown {
-      to { transform: translateY(0); opacity: 1; }
-    }
-    .main-title {
-      font-size: 2.8em;
-      margin-bottom: 10px;
-      letter-spacing: 2px;
-      text-shadow: 2px 2px 0px #111;
-    }
-    .subtitle {
-      font-size: 1.4em;
-      color: #aaa;
-      text-shadow: 1px 1px 0px #111;
-    }
-
-    /* Navigation Area */
-    <!-- Optional: If you want to include navigation, you can uncomment this section.
-    .navigation-area {
-      text-align: center;
-      margin-bottom: 20px;
-      animation: slideInLeft 1s ease-out 0.6s forwards;
-      transform: translateX(-30px);
-      opacity: 0;
-      width: 100%;
-    }
-    @keyframes slideInLeft {
-      to { transform: translateX(0); opacity: 1; }
-    }
-    .navigation-list {
-      list-style: none;
-      padding: 0;
-      display: inline-block;
-    }
-    .navigation-list li {
-      margin-bottom: 8px;
-    }
-    .navigation-link {
-      display: block;
-      padding: 10px 18px;
-      background-color: #444;
-      color: #f0f0f0;
-      text-decoration: none;
-      border: 2px outset #777;
-      border-radius: 5px;
-      transition: all 0.3s ease;
-      box-shadow: 2px 2px 0px #111;
-      font-size: 1.4em;
-      text-align: center;
-    }
-    .navigation-link:hover,
-    .navigation-link:focus {
-      background-color: #555;
-      border-style: inset;
-      box-shadow: none;
-    }
-    -->
-
-    /* Content Area */
-    .content-area {
-      text-align: center;
-      padding: 0 10px 20px 10px;
-      animation: slideInRight 1s ease-out 0.9s forwards;
-      transform: translateX(30px);
-      opacity: 0;
-      width: 100%;
-    }
-    @keyframes slideInRight {
-      to { transform: translateX(0); opacity: 1; }
-    }
-    .content-area h2 {
-      font-size: 2.1em;
-      margin-bottom: 10px;
-      text-shadow: 1px 1px 0px #111;
-    }
-
-    /* Footer Area */
-    .footer-area {
-      text-align: center;
-      margin-top: 20px;
-      font-size: 1.12em;
-      color: #aaa;
-      text-shadow: 1px 1px 0px #111;
-      animation: fadeInUp 1s ease-out 1.8s forwards;
-      transform: translateY(10px);
-      opacity: 0;
-      width: 100%;
-    }
-    @keyframes fadeInUp {
-      to { transform: translateY(0); opacity: 1; }
-    }
-
-    /* Background Scanlines */
-    body::before {
-      content: '';
+    .grid-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: repeating-linear-gradient(
-        0deg,
-        rgba(0, 0, 0, 0),
-        rgba(0, 0, 0, 0.1) 0.5px,
-        transparent 1px
-      );
+      background:
+        linear-gradient(90deg, rgba(102, 238, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(rgba(102, 238, 255, 0.03) 1px, transparent 1px);
+      background-size: 20px 20px;
       pointer-events: none;
       z-index: -1;
-      animation: scanlines 5s linear infinite;
-    }
-    @keyframes scanlines {
-      to { background-position: 0 200%; }
     }
 
-    /* Media Query: Larger Screens */
-    @media (min-width: 769px) {
-      .mainframe-container {
-        flex-direction: row;
-        max-width: 900px;
-        padding: 30px;
-        align-items: stretch;
-      }
-      .header-area,
-      .content-area,
-      .footer-area {
-        width: auto;
-        text-align: left;
-      }
-      .content-area {
-        width: 100%;
-        padding-left: 20px;
-      }
-      .main-title {
-        font-size: 3.5em;
-        letter-spacing: 3px;
-      }
-      .subtitle {
-        font-size: 1.68em;
-      }
-      .footer-area {
-        font-size: 1.26em;
-        margin-top: 30px;
-      }
+    .scanline {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        to bottom,
+        transparent 50%,
+        rgba(0, 0, 0, 0.05) 50%
+      );
+      background-size: 100% 4px;
+      pointer-events: none;
+      z-index: 10;
+      animation: scanline 10s linear infinite;
     }
 
-    /* ------------------------------
-       Dossier Member Card Styling
-       ------------------------------ */
-    .member-card {
-      background-color: #222;
-      border: 4px double #555;
-      padding: 20px;
-      box-shadow: 7px 7px 0px #333;
-      margin-bottom: 20px;
-      animation: fadeIn 1s ease-out forwards;
+    @keyframes scanline {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(100vh); }
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
       opacity: 0;
-      transform: translateY(30px);
+      animation: fadeIn 1s ease-out forwards;
     }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    .header {
+      text-align: center;
+      padding: 2rem;
+      background: var(--secondary-bg);
+      border: 2px solid var(--border-color);
+      position: relative;
+      overflow: hidden;
+      transform: translateY(-30px);
+      opacity: 0;
+      animation: slideDown 1s ease-out 0.3s forwards;
+    }
+
+    @keyframes slideDown {
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .header h1 {
+      font-size: 2.5em;
+      margin-bottom: 0.5rem;
+    }
+
+    .header p {
+      font-size: 1.2em;
+      color: var(--accent-color);
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--accent-color);
+      animation: scan 2s linear infinite;
+    }
+
+    @keyframes scan {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    .content-section {
+      background: var(--secondary-bg);
+      border: 2px solid var(--border-color);
+      padding: 2rem;
+      transform: translateX(30px);
+      opacity: 0;
+      animation: slideInRight 1s ease-out 0.6s forwards;
+    }
+
+    @keyframes slideInRight {
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    .member-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+
+    .member-card {
+      background: var(--primary-bg);
+      border: 4px double var(--border-color);
+      padding: 1.5rem;
+      box-shadow: 7px 7px 0px var(--primary-bg);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
     .member-card img.profile-pic {
       width: 100px;
       height: 100px;
-      border: 2px solid #555;
-      box-shadow: 3px 3px 0px #333;
+      border: 2px solid var(--border-color);
+      box-shadow: 3px 3px 0px var(--primary-bg);
       object-fit: cover;
       margin-bottom: 10px;
       display: block;
       margin-left: auto;
       margin-right: auto;
     }
+
     .member-card h2 {
       font-size: 2em;
       margin-bottom: 10px;
-      text-shadow: 1px 1px 0px #111;
-      text-align: center;
+      color: var(--accent-color);
+      text-shadow: 1px 1px 0px var(--primary-bg);
     }
+
     .member-card ul {
       list-style: disc;
       margin-left: 20px;
       font-size: 1.2em;
       text-align: left;
+      color: var(--text-color);
     }
+
     .member-card ul li {
-        margin-bottom: 8px; /* Add some spacing between list items */
+      margin-bottom: 8px;
     }
-    .member-card ul li strong { /* Style for the labels (Investigation, Description, etc.) */
-        color: #ffcc66; /* A different color to highlight labels */
-        font-weight: bold; /* Make labels bold */
-        margin-right: 10px; /* Add space between label and value */
+
+    .member-card ul li strong {
+      color: var(--accent-color);
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    .member-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--accent-color);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+
+    .member-card:hover::after {
+      transform: scaleX(1);
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: var(--secondary-bg);
+      border: 2px solid var(--border-color);
+      font-size: 1.1em;
+      transform: translateY(10px);
+      opacity: 0;
+      animation: fadeInUp 1s ease-out 0.9s forwards;
+    }
+
+    @keyframes fadeInUp {
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    footer p {
+      margin: 0.5rem 0;
+    }
+
+    .copyright-info {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .copyright-icon {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      background-color: var(--accent-color);
+      -webkit-mask-image: url('data:image/svg+xml,<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM16 12c0 2.21-1.79 4-4 4-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4z"/></svg>');
+      mask-image: url('data:image/svg+xml,<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM16 12c0 2.21-1.79 4-4 4-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4z"/></svg>');
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      mask-position: center;
+      -webkit-mask-size: contain;
+      mask-size: contain;
+    }
+
+    @media (max-width: 480px) {
+      body {
+        font-size: 14px;
+        padding: 0.5rem;
+      }
+
+      .header {
+        padding: 1rem;
+      }
+
+      .content-section {
+        padding: 1rem;
+      }
+
+      .member-card {
+        padding: 1rem;
+      }
+
+      .member-card h2 {
+        font-size: 1.8em;
+      }
+
+      .member-card ul {
+        font-size: 1.1em;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="mainframe-container">
-    <!-- Header Area -->
-    <div class="header-area">
-      <h1 class="main-title">THE LABORATORY</h1>
-      <p class="subtitle">CLASSIFIED TEAM INFO – ECTOPLASMIC INVESTIGATORS</p>
-    </div>
-
-    <!-- Optional Navigation Area -->
-    <!--
-    <div class="navigation-area">
-      <nav>
-        <h2>NAVIGATION</h2>
-        <ul class="navigation-list">
-          <li><a href="mainframe.html" class="navigation-link">1. THE MAINFRAME</a></li>
-          <li><a href="dossier.html" class="navigation-link">2. THE LABORATORY</a></li>
-          <li><a href="casefiles.html" class="navigation-link">3. CASE FILES</a></li>
-          <li><a href="evidence.html" class="navigation-link">4. THE EVIDENCE</a></li>
-          <li><a href="laboratory.html" class="navigation-link">5. THE LABORATORY</a></li>
-          <li><a href="dispatch.html" class="navigation-link">6. DISPATCH</a></li>
-        </ul>
-      </nav>
-    </div>
-    -->
-
-    <!-- Content Area: Dossier Members -->
-    <div class="content-area">
-      <section class="member-card">
-        <img class="profile-pic" src="images/Moin.png" alt="Moin Uddin">
-        <h2>Moin Uddin</h2>
-        <ul>
-          <li><strong>Role:</strong> Lead Investigator</li>
-          <li><strong>Expertise:</strong> Ectoplasmic anomalies</li>
-          <li><strong>Strength:</strong> Analytical and fearless approach</li>
-          <li><strong>Motto:</strong> "Uncovering secrets beyond the ordinary."</li>
-        </ul>
-      </section>
-
-      <section class="member-card">
-        <img class="profile-pic" src="images/Fakhruddin.png" alt="Fakhruddin">
-        <h2>Fakhruddin</h2>
-        <ul>
-          <li><strong>Role:</strong> Tech Specialist</li>
-          <li><strong>Expertise:</strong> Digital archiving & data decryption</li>
-          <li><strong>Strength:</strong> Precision and methodical analysis</li>
-          <li><strong>Motto:</strong> "Every byte holds a clue."</li>
-        </ul>
-      </section>
-
-      <section class="member-card">
-        <img class="profile-pic" src="images/Oli.png" alt="Oli Ullah">
-        <h2>Oli Ullah</h2>
-        <ul>
-          <li><strong>Role:</strong> Creative Field Operative</li>
-          <li><strong>Expertise:</strong> Artistic documentation of paranormal events</li>
-          <li><strong>Strength:</strong> Intuitive and innovative perspective</li>
-          <li><strong>Motto:</strong> "Seeing the unseen with creativity."</li>
-        </ul>
-      </section>
-
-      <section class="member-card">
-        <img class="profile-pic" src="images/Nasir.png" alt="Nasir Uddin">
-        <h2>Nasir Uddin</h2>
-        <ul>
-          <li><strong>Role:</strong> Medical Expert</li>
-          <li><strong>Expertise:</strong> Human physiology and anomalous biological effects</li>
-          <li><strong>Strength:</strong> Calm under pressure, diagnostic precision</li>
-          <li><strong>Motto:</strong> "Understanding the body's response to the unknown."</li>
-        </ul>
-      </section>
-    </div>
-
-    <!-- Footer Area -->
-    <div class="footer-area">
-      <footer>
-        <p>
-      © 2025 THE ECTOPLASMIC INVESTIGATORS<br>
-      SECRET LOGS AWAIT DISCOVERY
-        </p>
-      </footer>
-    </div>
+  <div class="grid-overlay"></div>
+  <div class="scanline"></div>
+  <div class="container">
+    <header class="header">
+      <h1>THE LABORATORY</h1>
+      <p>CLASSIFIED TEAM INFO – ECTOPLASMIC INVESTIGATORS</p>
+    </header>
+    <main class="content-section">
+      <div class="member-grid">
+        <section class="member-card">
+          <img class="profile-pic" src="images/Moin.png" alt="Moin Uddin">
+          <h2>Moin Uddin</h2>
+          <ul>
+            <li><strong>Role:</strong> Lead Investigator</li>
+            <li><strong>Expertise:</strong> Ectoplasmic anomalies</li>
+            <li><strong>Strength:</strong> Analytical and fearless approach</li>
+            <li><strong>Motto:</strong> "Uncovering secrets beyond the ordinary."</li>
+          </ul>
+        </section>
+        <section class="member-card">
+          <img class="profile-pic" src="images/Fakhruddin.png" alt="Fakhruddin">
+          <h2>Fakhruddin</h2>
+          <ul>
+            <li><strong>Role:</strong> Tech Specialist</li>
+            <li><strong>Expertise:</strong> Digital archiving & data decryption</li>
+            <li><strong>Strength:</strong> Precision and methodical analysis</li>
+            <li><strong>Motto:</strong> "Every byte holds a clue."</li>
+          </ul>
+        </section>
+        <section class="member-card">
+          <img class="profile-pic" src="images/Oli.png" alt="Oli Ullah">
+          <h2>Oli Ullah</h2>
+          <ul>
+            <li><strong>Role:</strong> Creative Field Operative</li>
+            <li><strong>Expertise:</strong> Artistic documentation of paranormal events</li>
+            <li><strong>Strength:</strong> Intuitive and innovative perspective</li>
+            <li><strong>Motto:</strong> "Seeing the unseen with creativity."</li>
+          </ul>
+        </section>
+        <section class="member-card">
+          <img class="profile-pic" src="images/Nasir.png" alt="Nasir Uddin">
+          <h2>Nasir Uddin</h2>
+          <ul>
+            <li><strong>Role:</strong> Medical Expert</li>
+            <li><strong>Expertise:</strong> Human physiology and anomalous biological effects</li>
+            <li><strong>Strength:</strong> Calm under pressure, diagnostic precision</li>
+            <li><strong>Motto:</strong> "Understanding the body's response to the unknown."</li>
+          </ul>
+        </section>
+      </div>
+    </main>
+    <footer>
+      <p class="copyright-info">
+        <i class="copyright-icon"></i> 2025 THE ECTOPLASMIC INVESTIGATORS
+      </p>
+      <p>SECRET LOGS AWAIT DISCOVERY</p>
+    </footer>
   </div>
   <script>
-    console.log("Dossier Page Loaded with Mainframe Design CSS.");
+    console.log("Laboratory Page Loaded with Optimized CSS.");
   </script>
 </body>
 </html>
