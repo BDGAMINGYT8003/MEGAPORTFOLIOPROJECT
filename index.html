@@ -42,6 +42,12 @@
             flex: 1;
             gap: 1rem;
             margin-top: 1rem;
+              opacity: 0; /* Start with 0 opacity */
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+          to { opacity: 1; }
         }
 
         .grid-overlay {
@@ -87,7 +93,14 @@
             border: 2px solid var(--border-color);
             position: relative;
             overflow: hidden;
+             transform: translateY(-30px);
+          opacity: 0;
+          animation: slideDown 1s ease-out 0.3s forwards;
         }
+         @keyframes slideDown {
+          to { transform: translateY(0); opacity: 1; }
+        }
+
 
         .header h1 {
             font-size: 2.5em;
@@ -120,6 +133,13 @@
             background: var(--secondary-bg);
             border: 2px solid var(--border-color);
             padding: 1rem;
+            transform: translateX(-30px);
+          opacity: 0;
+          animation: slideInLeft 1s ease-out 0.6s forwards;
+        }
+
+        @keyframes slideInLeft {
+          to { transform: translateX(0); opacity: 1; }
         }
 
         .main-content {
@@ -131,6 +151,13 @@
             flex-direction: column;
             gap: 1rem;
             min-width: 0;
+            transform: translateX(30px);
+          opacity: 0;
+          animation: slideInRight 1s ease-out 0.6s forwards;
+
+        }
+         @keyframes slideInRight {
+            to { transform: translateX(0); opacity: 1; }
         }
 
         .status-panel {
@@ -283,7 +310,14 @@
             border: 2px solid var(--border-color);
             font-size: 1.1em;
             margin-top: 1rem; /* Reduced margin-top to 1rem to match header-nav spacing */
+            transform: translateY(30px);
+          opacity: 0;
+          animation: slideInBottom 1s ease-out 0.9s forwards;
         }
+
+          @keyframes slideInBottom {
+            to { transform: translateY(0); opacity: 1; }
+          }
 
         footer p {
             margin: 0.5rem 0;
