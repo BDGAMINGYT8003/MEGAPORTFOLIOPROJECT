@@ -1,183 +1,280 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Existing head content remains unchanged -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dispatch - Contact</title>
   <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-  <!-- Font Awesome CDN for Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-j44g6ZhzZL1E3rRKl8VcEoYQ2blGu+xK47gHT+U7VTz7D6pYWYVJoS1zMOmUYuCP" crossorigin="anonymous">
   <style>
+    /* CSS Variables from Reference Codes */
+    :root {
+      --primary-bg: #111;
+      --secondary-bg: #222;
+      --accent-color: #66eeff;
+      --text-color: #f0f0f0;
+      --border-color: #555;
+    }
+
     /* Global Reset */
-    *, *::before, *::after {
-      box-sizing: border-box;
+    * {
       margin: 0;
       padding: 0;
-    }
-    body {
+      box-sizing: border-box;
       font-family: 'VT323', monospace;
-      background-color: #111;
-      color: #f0f0f0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
+    }
+
+    /* Body Styles */
+    body {
+      background-color: var(--primary-bg);
+      color: var(--text-color);
+      padding: 1rem;
+      font-size: 16px;
       overflow-x: hidden;
     }
-    /* Card/Modal Container */
-    .card-modal {
-      background-color: #222;
-      border: 4px double #555;
-      padding: 20px;
-      box-shadow: 7px 7px 0px #333;
-      animation: fadeIn 1s ease-out forwards;
-      opacity: 0;
-      width: 95%;
-      max-width: 600px;
+
+    /* Grid Overlay (Cloned from Reference) */
+    .grid-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background:
+        linear-gradient(90deg, rgba(102, 238, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(rgba(102, 238, 255, 0.03) 1px, transparent 1px);
+      background-size: 20px 20px;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* Scanline Effect (Cloned from Reference) */
+    .scanline {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        to bottom,
+        transparent 50%,
+        rgba(0, 0, 0, 0.05) 50%
+      );
+      background-size: 100% 4px;
+      pointer-events: none;
+      z-index: 10;
+      animation: scanline 10s linear infinite;
+    }
+
+    @keyframes scanline {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(100vh); }
+    }
+
+    /* Container for Sections (Inspired by Case Files) */
+    .container {
       display: flex;
       flex-direction: column;
-      gap: 15px;
+      gap: 1rem;
+      opacity: 0;
+      animation: fadeIn 1s ease-out forwards;
     }
+
     @keyframes fadeIn {
       to { opacity: 1; }
     }
-    /* Title & Inquiry Type Selector */
-    .card-header {
+
+    /* Header (Cloned and Optimized from Reference) */
+    .header {
       text-align: center;
+      padding: 2rem;
+      background: var(--secondary-bg);
+      border: 2px solid var(--border-color);
+      position: relative;
+      overflow: hidden;
+      transform: translateY(-30px);
+      opacity: 0;
+      animation: slideDown 1s ease-out 0.3s forwards;
     }
-    .card-header h2 {
-      font-size: 2em;
-      margin-bottom: 10px;
-      letter-spacing: 1px;
-      text-shadow: 2px 2px 0px #111;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
+
+    @keyframes slideDown {
+      to { transform: translateY(0); opacity: 1; }
     }
-    .card-header h2 .icon {
+
+    .header h1 {
+      font-size: 2.5em;
+      margin-bottom: 0.5rem;
+    }
+
+    .header p {
       font-size: 1.2em;
+      color: var(--accent-color);
     }
-    .card-header label {
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--accent-color);
+      animation: scan 2s linear infinite;
+    }
+
+    @keyframes scan {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    .inquiry-type {
+      margin-top: 1rem;
+    }
+
+    .inquiry-type label {
       font-size: 1.2em;
       margin-right: 10px;
     }
-    .card-header select {
+
+    .inquiry-type select {
       font-family: 'VT323', monospace;
-      background-color: #111;
-      color: #f0f0f0;
-      border: 2px solid #555;
+      background: var(--primary-bg);
+      color: var(--text-color);
+      border: 2px solid var(--border-color);
       padding: 5px;
     }
-    /* Disabled Select Styling */
-    .card-header select:disabled {
-      background-color: #333;
+
+    .inquiry-type select:disabled {
+      background: #333;
       color: #777;
+      opacity: 0.7;
     }
-    /* Form Styling */
+
+    /* Main Content Section (Cloned and Optimized from Reference) */
+    .content-section {
+      background: var(--secondary-bg);
+      border: 2px solid var(--border-color);
+      padding: 2rem;
+      transform: translateX(30px);
+      opacity: 0;
+      animation: slideInRight 1s ease-out 0.6s forwards;
+    }
+
+    @keyframes slideInRight {
+      to { transform: translateX(0); opacity: 1; }
+    }
+
     .contact-form {
       display: flex;
       flex-direction: column;
       gap: 10px;
     }
+
     .contact-form label {
       font-size: 1.1em;
     }
+
     .contact-form input,
     .contact-form textarea {
       font-family: 'VT323', monospace;
-      background-color: #111;
-      color: #f0f0f0;
-      border: 2px solid #555;
+      background: var(--primary-bg);
+      color: var(--text-color);
+      border: 2px solid var(--border-color);
       padding: 8px;
     }
+
     .contact-form .button-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-top: 15px;
     }
+
     .contact-form button,
     .contact-form .go-back-button {
       font-family: 'VT323', monospace;
-      background-color: #222;
-      color: #f0f0f0;
-      border: 2px solid #555;
+      background: var(--primary-bg);
+      color: var(--text-color);
+      border: 2px solid var(--border-color);
       padding: 10px 20px;
       cursor: pointer;
       transition: background-color 0.3s ease;
       text-decoration: none;
       text-align: center;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
     }
+
     .contact-form button:hover,
     .contact-form .go-back-button:hover {
-      background-color: #333;
+      background-color: var(--accent-color);
+      color: var(--primary-bg);
     }
-    /* Confirmation Message Styling */
+
     .confirmation-message {
       display: none;
       text-align: center;
+      padding: 2rem;
     }
+
     .confirmation-message h2 {
       font-size: 2em;
-      letter-spacing: 1px;
-      text-shadow: 2px 2px 0px #111;
       margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
     }
-    .confirmation-message h2 .icon {
-      font-size: 1.2em;
-    }
+
     .confirmation-message p {
       font-size: 1.2em;
       color: #aaa;
     }
-    /* Footer */
-    .footer-area {
+
+    /* Footer (Cloned from Reference) */
+    footer {
       text-align: center;
-      margin-top: 10px;
+      padding: 1rem;
+      background: var(--secondary-bg);
+      border: 2px solid var(--border-color);
       font-size: 1.1em;
-      color: #aaa;
-      text-shadow: 1px 1px 0px #111;
+      transform: translateY(10px);
+      opacity: 0;
+      animation: fadeInUp 1s ease-out 0.9s forwards;
     }
-    /* Background Scanlines */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: repeating-linear-gradient(
-        0deg,
-        rgba(0, 0, 0, 0),
-        rgba(0, 0, 0, 0.1) 0.5px,
-        transparent 1px
-      );
-      pointer-events: none;
-      z-index: -1;
-      animation: scanlines 5s linear infinite;
+
+    @keyframes fadeInUp {
+      to { transform: translateY(0); opacity: 1; }
     }
-    @keyframes scanlines {
-      to { background-position: 0 200%; }
+
+    footer p {
+      margin: 0.5rem 0;
+    }
+
+    .copyright-info {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .copyright-icon {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      background-color: var(--accent-color);
+      -webkit-mask-image: url('data:image/svg+xml,<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM16 12c0 2.21-1.79 4-4 4-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4z"/></svg>');
+      mask-image: url('data:image/svg+xml,<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM16 12c0 2.21-1.79 4-4 4-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4z"/></svg>');
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      mask-position: center;
+      -webkit-mask-size: contain;
+      mask-size: contain;
     }
   </style>
 </head>
 <body>
-  <div class="card-modal">
-    <!-- Header with Inquiry Type Selection -->
-    <div class="card-header" id="cardHeader">
-      <h2 id="form-title">
-        General Inquiry
-      </h2>
-      <div>
+  <div class="grid-overlay"></div>
+  <div class="scanline"></div>
+  <div class="container">
+    <header class="header">
+      <h1>DISPATCH: <span id="form-title">General Inquiry</span></h1>
+      <p>COMMUNICATION HUB</p>
+      <div class="inquiry-type">
         <label for="contactType">Inquiry Type:</label>
         <select id="contactType">
           <option value="General Inquiry" selected>General Inquiry</option>
@@ -186,58 +283,46 @@
           <option value="Other">Other</option>
         </select>
       </div>
-    </div>
+    </header>
 
-    <!-- Contact Form -->
-    <!-- The form action is set to FormSubmit's endpoint with your email -->
-    <form class="contact-form" id="contactForm" action="https://formsubmit.co/gizaimoin@gmail.com" method="POST">
-      <!-- Hidden field to pass the inquiry type -->
-      <input type="hidden" name="inquiryType" id="inquiryType" value="General Inquiry" />
-      <!-- (Optional) Disable CAPTCHA by including the following hidden input -->
-      <input type="hidden" name="_captcha" value="false">
-
-      <label for="name"> Name:</label>
-      <input type="text" id="name" name="name" placeholder="Your Name" required>
-
-      <label for="email"> Email:</label>
-      <input type="email" id="email" name="email" placeholder="you@example.com" required>
-
-      <label for="message"> Message:</label>
-      <textarea id="message" name="message" placeholder="Your message here" rows="4" required></textarea>
-
-      <!-- Button Row with Send and Go Back Buttons -->
-      <div class="button-row">
-        <a href="index.html" class="go-back-button"> Go Back</a>
-        <button type="submit"> Send</button>
+    <main class="content-section">
+      <form class="contact-form" id="contactForm" action="https://formsubmit.co/gizaimoin@gmail.com" method="POST">
+        <input type="hidden" name="inquiryType" id="inquiryType" value="General Inquiry" />
+        <input type="hidden" name="_captcha" value="false">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" placeholder="Your Name" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required>
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" placeholder="Your message here" rows="4" required></textarea>
+        <div class="button-row">
+          <a href="index.html" class="go-back-button">Go Back</a>
+          <button type="submit">Send</button>
+        </div>
+      </form>
+      <div class="confirmation-message" id="confirmationMessage">
+        <h2>Message Sent!</h2>
+        <p>Thanks for reaching out. We'll get back to you shortly.</p>
+        <div class="button-row">
+          <a href="index.html" class="go-back-button">Go Back</a>
+        </div>
       </div>
-    </form>
+    </main>
 
-    <!-- Confirmation Message -->
-    <div class="confirmation-message" id="confirmationMessage">
-      <h2>
-        Message Sent!
-      </h2>
-      <p>Thanks for reaching out. We'll get back to you shortly.</p>
-      <!-- Go Back Button on Confirmation Screen -->
-      <div style="margin-top: 20px;">
-        <a href="index.html" class="go-back-button"> Go Back</a>
-      </div>
-    </div>
-
-    <!-- Footer -->
-    <div class="footer-area">
-      <p>
-      © 2025 THE ECTOPLASMIC INVESTIGATORS<br>
-      SECRET LOGS AWAIT DISCOVERY
+    <footer>
+      <p class="copyright-info">
+        <i class="copyright-icon"></i> 2025 THE ECTOPLASMIC INVESTIGATORS
       </p>
-    </div>
+      <p>SECRET LOGS AWAIT DISCOVERY</p>
+    </footer>
   </div>
 
   <script>
-    // Update the heading and hidden inquiry type field when the user changes the select
     const contactTypeSelect = document.getElementById('contactType');
     const formTitle = document.getElementById('form-title');
     const inquiryTypeHidden = document.getElementById('inquiryType');
+    const contactForm = document.getElementById('contactForm');
+    const confirmationMessage = document.getElementById('confirmationMessage');
 
     contactTypeSelect.addEventListener('change', (event) => {
       const selectedType = event.target.value;
@@ -245,25 +330,15 @@
       inquiryTypeHidden.value = selectedType;
     });
 
-    // Handle form submission using AJAX so that we can show a confirmation message without leaving the page.
-    const contactForm = document.getElementById('contactForm');
-    const confirmationMessage = document.getElementById('confirmationMessage');
-    const cardHeader = document.getElementById('cardHeader');
-
     contactForm.addEventListener('submit', function(event) {
-      event.preventDefault(); // Prevent the default form submission
-
-      // Use fetch to submit the form data to FormSubmit
+      event.preventDefault();
       fetch(contactForm.action, {
         method: "POST",
         body: new FormData(contactForm),
         mode: 'no-cors'
       }).then(() => {
-        // On success, hide the form and show the confirmation message
         contactForm.style.display = 'none';
         confirmationMessage.style.display = 'block';
-
-        // Disable and gray out the Inquiry Type select box
         contactTypeSelect.disabled = true;
       }).catch((error) => {
         console.error('Error submitting the form:', error);
