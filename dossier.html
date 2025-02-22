@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>THE DOSSIER - Unclassified</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dispatch - Contact</title>
   <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
   <style>
+    /* CSS Variables from Reference Codes */
     :root {
       --primary-bg: #111;
       --secondary-bg: #222;
@@ -13,36 +14,25 @@
       --text-color: #f0f0f0;
       --border-color: #555;
     }
-    
+
+    /* Global Reset */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
       font-family: 'VT323', monospace;
     }
-    
+
+    /* Body Styles */
     body {
       background-color: var(--primary-bg);
       color: var(--text-color);
       padding: 1rem;
       font-size: 16px;
       overflow-x: hidden;
-      /* Center container both vertically and horizontally */
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
     }
-    
-    body.scroll-lock {
-      overflow: hidden;
-    }
-    
-    body.scroll-unlock {
-      overflow-y: auto;
-    }
-    
+
+    /* Grid Overlay (Cloned from Reference) */
     .grid-overlay {
       position: fixed;
       top: 0;
@@ -56,7 +46,8 @@
       pointer-events: none;
       z-index: -1;
     }
-    
+
+    /* Scanline Effect (Cloned from Reference) */
     .scanline {
       position: fixed;
       top: 0;
@@ -73,26 +64,26 @@
       z-index: 10;
       animation: scanline 10s linear infinite;
     }
-    
+
     @keyframes scanline {
       0% { transform: translateY(0); }
       100% { transform: translateY(100vh); }
     }
-    
+
+    /* Container for Sections (Inspired by Case Files) */
     .container {
       display: flex;
       flex-direction: column;
       gap: 1rem;
       opacity: 0;
       animation: fadeIn 1s ease-out forwards;
-      width: 100%;
-      max-width: 800px; /* Adjust max-width as desired */
     }
-    
+
     @keyframes fadeIn {
       to { opacity: 1; }
     }
-    
+
+    /* Header (Cloned and Optimized from Reference) */
     .header {
       text-align: center;
       padding: 2rem;
@@ -104,21 +95,21 @@
       opacity: 0;
       animation: slideDown 1s ease-out 0.3s forwards;
     }
-    
+
     @keyframes slideDown {
       to { transform: translateY(0); opacity: 1; }
     }
-    
+
     .header h1 {
       font-size: 2.5em;
       margin-bottom: 0.5rem;
     }
-    
+
     .header p {
       font-size: 1.2em;
       color: var(--accent-color);
     }
-    
+
     .header::before {
       content: '';
       position: absolute;
@@ -129,12 +120,36 @@
       background: var(--accent-color);
       animation: scan 2s linear infinite;
     }
-    
+
     @keyframes scan {
       0% { transform: translateX(-100%); }
       100% { transform: translateX(100%); }
     }
-    
+
+    .inquiry-type {
+      margin-top: 1rem;
+    }
+
+    .inquiry-type label {
+      font-size: 1.2em;
+      margin-right: 10px;
+    }
+
+    .inquiry-type select {
+      font-family: 'VT323', monospace;
+      background: var(--primary-bg);
+      color: var(--text-color);
+      border: 2px solid var(--border-color);
+      padding: 5px;
+    }
+
+    .inquiry-type select:disabled {
+      background: #333;
+      color: #777;
+      opacity: 0.7;
+    }
+
+    /* Main Content Section (Cloned and Optimized from Reference) */
     .content-section {
       background: var(--secondary-bg);
       border: 2px solid var(--border-color);
@@ -143,55 +158,73 @@
       opacity: 0;
       animation: slideInRight 1s ease-out 0.6s forwards;
     }
-    
+
     @keyframes slideInRight {
       to { transform: translateX(0); opacity: 1; }
     }
-    
-    .section {
-      margin-bottom: 1rem;
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
-    
-    .section:last-child {
-      margin-bottom: 0;
+
+    .contact-form label {
+      font-size: 1.1em;
     }
-    
-    .section-title {
-      font-size: 2em;
-      color: var(--accent-color);
-      text-shadow: 1px 1px 0px var(--primary-bg);
-      cursor: pointer;
-      position: relative;
-      padding-bottom: 0.5rem;
-    }
-    
-    .section-title::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: var(--accent-color);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.3s ease;
-    }
-    
-    .section-title:hover::after {
-      transform: scaleX(1);
-    }
-    
-    .section-content {
-      display: none;
+
+    .contact-form input,
+    .contact-form textarea {
+      font-family: 'VT323', monospace;
       background: var(--primary-bg);
-      border: 4px double var(--border-color);
-      padding: 1.5rem;
-      box-shadow: 7px 7px 0px var(--primary-bg);
-      font-size: 1.2em;
-      line-height: 1.6;
+      color: var(--text-color);
+      border: 2px solid var(--border-color);
+      padding: 8px;
     }
-    
+
+    .contact-form .button-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 15px;
+    }
+
+    .contact-form button,
+    .contact-form .go-back-button {
+      font-family: 'VT323', monospace;
+      background: var(--primary-bg);
+      color: var(--text-color);
+      border: 2px solid var(--border-color);
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .contact-form button:hover,
+    .contact-form .go-back-button:hover {
+      background-color: var(--accent-color);
+      color: var(--primary-bg);
+    }
+
+    .confirmation-message {
+      display: none;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .confirmation-message h2 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    .confirmation-message p {
+      font-size: 1.2em;
+      color: #aaa;
+    }
+
+    /* Footer (Cloned from Reference) */
     footer {
       text-align: center;
       padding: 1rem;
@@ -202,22 +235,22 @@
       opacity: 0;
       animation: fadeInUp 1s ease-out 0.9s forwards;
     }
-    
+
     @keyframes fadeInUp {
       to { transform: translateY(0); opacity: 1; }
     }
-    
+
     footer p {
       margin: 0.5rem 0;
     }
-    
+
     .copyright-info {
       display: flex;
       justify-content: center;
       align-items: center;
       gap: 0.5rem;
     }
-    
+
     .copyright-icon {
       display: inline-block;
       width: 16px;
@@ -232,65 +265,50 @@
       -webkit-mask-size: contain;
       mask-size: contain;
     }
-    
-    @media (max-width: 480px) {
-      body {
-        font-size: 14px;
-        padding: 0.5rem;
-      }
-    
-      .header {
-        padding: 1rem;
-      }
-    
-      .content-section {
-        padding: 1rem;
-      }
-    
-      .section-content {
-        padding: 1rem;
-      }
-    
-      .section-title {
-        font-size: 1.8em;
-      }
-    }
   </style>
 </head>
-<body class="scroll-lock">
+<body>
   <div class="grid-overlay"></div>
   <div class="scanline"></div>
   <div class="container">
     <header class="header">
-      <h1>THE DOSSIER</h1>
-      <p>ACCESSING SECURE FILES</p>
+      <h1>DISPATCH: <span id="form-title">General Inquiry</span></h1>
+      <p>COMMUNICATION HUB</p>
+      <div class="inquiry-type">
+        <label for="contactType">Inquiry Type:</label>
+        <select id="contactType">
+          <option value="General Inquiry" selected>General Inquiry</option>
+          <option value="Technical Support">Technical Support</option>
+          <option value="Partnerships">Partnerships</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
     </header>
+
     <main class="content-section">
-      <article class="section">
-        <h2 class="section-title" onclick="toggleSection('bio')">► BIOGRAPHY</h2>
-        <div class="section-content" id="bio">
-          <p>
-            We materialized from the ether of unexplained events, drawn together by whispers of forgotten lore and the scent of the uncanny...
-          </p>
+      <form class="contact-form" id="contactForm" action="https://formsubmit.co/gizaimoin@gmail.com" method="POST">
+        <input type="hidden" name="inquiryType" id="inquiryType" value="General Inquiry" />
+        <input type="hidden" name="_captcha" value="false">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" placeholder="Your Name" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required>
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" placeholder="Your message here" rows="4" required></textarea>
+        <div class="button-row">
+          <a href="index.html" class="go-back-button">Go Back</a>
+          <button type="submit">Send</button>
         </div>
-      </article>
-      <article class="section">
-        <h2 class="section-title" onclick="toggleSection('abilities')">► SKILLS</h2>
-        <div class="section-content" id="abilities">
-          <p>
-            Our expertise is honed in the delicate craft of deciphering the cryptic and navigating the labyrinthine...
-          </p>
+      </form>
+      <div class="confirmation-message" id="confirmationMessage">
+        <h2>Message Sent!</h2>
+        <p>Thanks for reaching out. We'll get back to you shortly.</p>
+        <div class="button-row">
+          <a href="index.html" class="go-back-button">Go Back</a>
         </div>
-      </article>
-      <article class="section">
-        <h2 class="section-title" onclick="toggleSection('history')">► PROFESSIONAL BACKGROUND</h2>
-        <div class="section-content" id="history">
-          <p>
-            Our legacy is etched in the chronicles of perplexing investigations and occurrences that defy standard explanation...
-          </p>
-        </div>
-      </article>
+      </div>
     </main>
+
     <footer>
       <p class="copyright-info">
         <i class="copyright-icon"></i> 2025 THE ECTOPLASMIC INVESTIGATORS
@@ -298,22 +316,36 @@
       <p>SECRET LOGS AWAIT DISCOVERY</p>
     </footer>
   </div>
+
   <script>
-    function toggleSection(sectionId) {
-      const content = document.getElementById(sectionId);
-      content.style.display = (content.style.display === 'block') ? 'none' : 'block';
-      updateScrollLock();
-    }
-    
-    function updateScrollLock() {
-      const contents = document.querySelectorAll('.section-content');
-      const isSectionOpen = Array.from(contents).some(c => c.style.display === 'block');
-      document.body.classList.toggle('scroll-unlock', isSectionOpen);
-      document.body.classList.toggle('scroll-lock', !isSectionOpen);
-    }
-    
-    // Initialize scroll lock state
-    updateScrollLock();
+    const contactTypeSelect = document.getElementById('contactType');
+    const formTitle = document.getElementById('form-title');
+    const inquiryTypeHidden = document.getElementById('inquiryType');
+    const contactForm = document.getElementById('contactForm');
+    const confirmationMessage = document.getElementById('confirmationMessage');
+
+    contactTypeSelect.addEventListener('change', (event) => {
+      const selectedType = event.target.value;
+      formTitle.textContent = selectedType;
+      inquiryTypeHidden.value = selectedType;
+    });
+
+    contactForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      fetch(contactForm.action, {
+        method: "POST",
+        body: new FormData(contactForm),
+        mode: 'no-cors'
+      }).then(() => {
+        contactForm.style.display = 'none';
+        confirmationMessage.style.display = 'block';
+        contactTypeSelect.disabled = true;
+      }).catch((error) => {
+        console.error('Error submitting the form:', error);
+      });
+    });
+
+    console.log("Dispatch (Contact) page loaded. Communication hub active.");
   </script>
 </body>
 </html>
