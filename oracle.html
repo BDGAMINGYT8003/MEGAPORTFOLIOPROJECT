@@ -6,227 +6,327 @@
   <title>The Oracle - FAQs & Q&A Sessions</title>
   <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
   <style>
-    /* Global Reset */
-    *, *::before, *::after {
-      box-sizing: border-box;
+    /* CSS Variables for Consistency */
+    :root {
+      --primary-bg: #111;
+      --secondary-bg: #222;
+      --accent-color: #66eeff;
+      --text-color: #f0f0f0;
+      --border-color: #555;
+    }
+
+    /* Global Styles */
+    * {
       margin: 0;
       padding: 0;
-    }
-    body {
+      box-sizing: border-box;
       font-family: 'VT323', monospace;
-      background-color: #111;
-      color: #f0f0f0;
+    }
+
+    body {
+      background-color: var(--primary-bg);
+      color: var(--text-color);
+      padding: 1rem;
+      font-size: 16px;
+      overflow-x: hidden;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      overflow-x: hidden;
     }
-    /* Mainframe Container */
-    .mainframe-container {
-      background-color: #222;
-      border: 4px double #555;
-      padding: 20px;
-      box-shadow: 7px 7px 0px #333;
-      animation: fadeIn 1s ease-out forwards;
-      opacity: 0;
-      display: flex;
-      flex-direction: column;
-      width: 95%;
-      max-width: 600px;
-      align-items: center;
-      position: relative;
-    }
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
-    /* Header Area */
-    .header-area {
-      text-align: center;
-      margin-bottom: 20px;
-      animation: slideDown 1s ease-out 0.3s forwards;
-      transform: translateY(-30px);
-      opacity: 0;
-      width: 100%;
-    }
-    @keyframes slideDown {
-      to { transform: translateY(0); opacity: 1; }
-    }
-    .main-title {
-      font-size: 2.8em;
-      margin-bottom: 10px;
-      letter-spacing: 2px;
-      text-shadow: 2px 2px 0px #111;
-    }
-    .subtitle {
-      font-size: 1.4em;
-      color: #aaa;
-      text-shadow: 1px 1px 0px #111;
-    }
-    /* Content Area */
-    .content-area {
-      width: 100%;
-      padding: 0 10px 20px 10px;
-      animation: slideInRight 1s ease-out 0.9s forwards;
-      transform: translateX(30px);
-      opacity: 0;
-    }
-    @keyframes slideInRight {
-      to { transform: translateX(0); opacity: 1; }
-    }
-    /* Details (Toggle Sections) */
-    .content-area details {
-      background-color: #222;
-      border: 4px double #555;
-      padding: 15px;
-      box-shadow: 7px 7px 0px #333;
-      margin-bottom: 20px;
-      transition: background-color 0.3s ease;
-    }
-    .content-area summary {
-      font-size: 2.1em;
-      text-shadow: 1px 1px 0px #111;
-      cursor: pointer;
-      outline: none;
-      list-style: none;
-      color: cyan; /* Highlight questions in cyan */
-    }
-    /* Remove default marker on some browsers */
-    .content-area summary::-webkit-details-marker {
-      display: none;
-    }
-    .content-area p {
-      margin-top: 10px;
-      text-align: left;
-      font-size: 1.2em;
-      line-height: 1.6; /* Increased line height for better readability */
-    }
-    .content-area details ul {
-      list-style-type: disc; /* Explicitly set list style */
-      margin-left: 25px; /* Indent the list for better visual hierarchy */
-      padding-left: 0; /* Reset default padding */
-    }
-    .content-area details ul li {
-      margin-bottom: 8px; /* Add some spacing between list items in details */
-    }
-    .content-area details ul li strong { /* Style for the labels in details */
-      color: #ffcc66; /* A different color to highlight labels, slightly yellowed */
-      font-weight: bold; /* Make labels bold */
-      margin-right: 10px; /* Add space between label and value */
-    }
-    /* Footer Area */
-    .footer-area {
-      text-align: center;
-      margin-top: 20px;
-      font-size: 1.12em;
-      color: #aaa;
-      text-shadow: 1px 1px 0px #111;
-      animation: fadeInUp 1s ease-out 1.8s forwards;
-      transform: translateY(10px);
-      opacity: 0;
-      width: 100%;
-    }
-    @keyframes fadeInUp {
-      to { transform: translateY(0); opacity: 1; }
-    }
-    /* Background Scanlines */
-    body::before {
-      content: '';
+
+    /* Retro Effects: Grid Overlay and Scanlines */
+    .grid-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: repeating-linear-gradient(
-        0deg,
-        rgba(0, 0, 0, 0),
-        rgba(0, 0, 0, 0.1) 0.5px,
-        transparent 1px
-      );
+      background:
+        linear-gradient(90deg, rgba(102, 238, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(rgba(102, 238, 255, 0.03) 1px, transparent 1px);
+      background-size: 20px 20px;
       pointer-events: none;
       z-index: -1;
-      animation: scanlines 5s linear infinite;
     }
-    @keyframes scanlines {
-      to { background-position: 0 200%; }
+
+    .scanline {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        to bottom,
+        transparent 50%,
+        rgba(0, 0, 0, 0.05) 50%
+      );
+      background-size: 100% 4px;
+      pointer-events: none;
+      z-index: 10;
+      animation: scanline 10s linear infinite;
     }
-    /* Media Query: Larger Screens */
-    @media (min-width: 769px) {
-      .mainframe-container {
-        flex-direction: row;
-        max-width: 900px;
-        padding: 30px;
-        align-items: stretch;
+
+    @keyframes scanline {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(100vh); }
+    }
+
+    /* Main Container */
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      opacity: 0;
+      animation: fadeIn 1s ease-out forwards;
+      width: 100%;
+      max-width: 800px;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    /* Header Styles */
+    .header {
+      text-align: center;
+      padding: 2rem;
+      background: var(--secondary-bg);
+      border: 2px solid var(--border-color);
+      position: relative;
+      overflow: hidden;
+      transform: translateY(-30px);
+      opacity: 0;
+      animation: slideDown 1s ease-out 0.3s forwards;
+    }
+
+    @keyframes slideDown {
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .header h1 {
+      font-size: 2.5em;
+      margin-bottom: 0.5rem;
+    }
+
+    .header p {
+      font-size: 1.2em;
+      color: var(--accent-color);
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--accent-color);
+      animation: scan 2s linear infinite;
+    }
+
+    @keyframes scan {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    /* Content Section */
+    .content-section {
+      background: var(--secondary-bg);
+      border: 2px solid var(--border-color);
+      padding: 2rem;
+      transform: translateX(30px);
+      opacity: 0;
+      animation: slideInRight 1s ease-out 0.6s forwards;
+    }
+
+    @keyframes slideInRight {
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    /* Collapsible Sections */
+    .section {
+      margin-bottom: 1rem;
+    }
+
+    .section:last-child {
+      margin-bottom: 0;
+    }
+
+    .section-title {
+      font-size: 2em;
+      color: var(--accent-color);
+      text-shadow: 1px 1px 0px var(--primary-bg);
+      cursor: pointer;
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--accent-color);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+
+    .section-title:hover::after {
+      transform: scaleX(1);
+    }
+
+    .section-content {
+      display: none;
+      background: var(--primary-bg);
+      border: 4px double var(--border-color);
+      padding: 1.5rem;
+      box-shadow: 7px 7px 0px var(--primary-bg);
+      font-size: 1.2em;
+      line-height: 1.6;
+    }
+
+    .section-content ul {
+      list-style-type: disc;
+      margin-left: 25px;
+      padding-left: 0;
+    }
+
+    .section-content ul li {
+      margin-bottom: 8px;
+    }
+
+    .section-content ul li strong {
+      color: #ffcc66;
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    /* Footer Styles */
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: var(--secondary-bg);
+      border: 2px solid var(--border-color);
+      font-size: 1.1em;
+      transform: translateY(10px);
+      opacity: 0;
+      animation: fadeInUp 1s ease-out 0.9s forwards;
+    }
+
+    @keyframes fadeInUp {
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    footer p {
+      margin: 0.5rem 0;
+    }
+
+    .copyright-info {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .copyright-icon {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      background-color: var(--accent-color);
+      -webkit-mask-image: url('data:image/svg+xml,<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM16 12c0 2.21-1.79 4-4 4-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4z"/></svg>');
+      mask-image: url('data:image/svg+xml,<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM16 12c0 2.21-1.79 4-4 4-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4z"/></svg>');
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      mask-position: center;
+      -webkit-mask-size: contain;
+      mask-size: contain;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 480px) {
+      body {
+        font-size: 14px;
+        padding: 0.5rem;
       }
-      .header-area,
-      .content-area,
-      .footer-area {
-        width: auto;
-        text-align: left;
+
+      .header {
+        padding: 1rem;
       }
-      .content-area {
-        width: 100%;
-        padding-left: 20px;
+
+      .content-section {
+        padding: 1rem;
       }
-      .main-title {
-        font-size: 3.5em;
-        letter-spacing: 3px;
+
+      .section-content {
+        padding: 1rem;
       }
-      .subtitle {
-        font-size: 1.68em;
-      }
-      .footer-area {
-        font-size: 1.26em;
-        margin-top: 30px;
+
+      .section-title {
+        font-size: 1.8em;
       }
     }
   </style>
 </head>
 <body>
-  <div class="mainframe-container">
-    <!-- Header Area -->
-    <div class="header-area">
-      <h1 class="main-title">THE ORACLE</h1>
-      <p class="subtitle">FREQUENTLY ASKED QUESTIONS</p>
-    </div>
+  <!-- Retro Background Effects -->
+  <div class="grid-overlay"></div>
+  <div class="scanline"></div>
 
-    <!-- Content Area: FAQs with Collapsible Details -->
-    <div class="content-area">
-      <!-- FAQ 1 -->
-      <details>
-        <summary>What exactly do The Ectoplasmic Investigators of Chapitala do?</summary>
-        <p>
-          We are a specialized paranormal investigation team dedicated to exploring unexplained events in rural Bangladesh. Villagers often report these occurrences, and we combine logical thinking with respect for local culture to find the truth. Our goal is to differentiate between genuine paranormal activities and natural explanations, offering clarity and peace of mind to the communities we serve.
-        </p>
-      </details>
+  <!-- Main Container -->
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <h1>THE ORACLE</h1>
+      <p>FREQUENTLY ASKED QUESTIONS</p>
+    </header>
 
-      <!-- FAQ 2 -->
-      <details>
-        <summary>What types of cases do you typically investigate?</summary>
-        <p>
-          We handle a range of cases, often inspired by the rich folklore and unique environment of rural Bangladesh. Our investigations include:
+    <!-- Content Section: FAQs -->
+    <main class="content-section">
+      <div class="section">
+        <h2 class="section-title" onclick="toggleSection('faq1')">► What exactly do The Ectoplasmic Investigators of Chapitala do?</h2>
+        <div class="section-content" id="faq1">
+          <p>
+            We are a specialized paranormal investigation team dedicated to exploring unexplained events in rural Bangladesh. Villagers often report these occurrences, and we combine logical thinking with respect for local culture to find the truth. Our goal is to differentiate between genuine paranormal activities and natural explanations, offering clarity and peace of mind to the communities we serve.
+          </p>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title" onclick="toggleSection('faq2')">► What types of cases do you typically investigate?</h2>
+        <div class="section-content" id="faq2">
+          <p>
+            We handle a range of cases, often inspired by the rich folklore and unique environment of rural Bangladesh. Our investigations include:
+          </p>
           <ul>
             <li><strong>Auditory Anomalies:</strong> Strange sounds, tree whispers, and phantom radio static.</li>
             <li><strong>Visual Phenomena:</strong> Shadowy figures, mysterious water visions, and buildings that seem to shift.</li>
             <li><strong>Time and Space Warps:</strong> Temporal anomalies in ruins, disappearing footprints, and objects moving strangely.</li>
             <li><strong>Object-Related Mysteries:</strong> Investigations into cursed items like furniture or haunted natural features like wells.</li>
           </ul>
-        </p>
-      </details>
+        </div>
+      </div>
 
-      <!-- FAQ 3 -->
-      <details>
-        <summary>Are you actually dealing with ghosts and spirits?</summary>
-        <p>
-          We start each investigation with a skeptical mindset, looking first for logical and scientific explanations. While we remain open to the possibility of paranormal causes, our investigations frequently uncover natural or psychological reasons behind the reported phenomena. On occasion, we do encounter events that defy normal explanations, hinting at something truly unusual. We meticulously record all findings, whether they point to earthly or unearthly origins.
-        </p>
-      </details>
+      <div class="section">
+        <h2 class="section-title" onclick="toggleSection('faq3')">► Are you actually dealing with ghosts and spirits?</h2>
+        <div class="section-content" id="faq3">
+          <p>
+            We start each investigation with a skeptical mindset, looking first for logical and scientific explanations. While we remain open to the possibility of paranormal causes, our investigations frequently uncover natural or psychological reasons behind the reported phenomena. On occasion, we do encounter events that defy normal explanations, hinting at something truly unusual. We meticulously record all findings, whether they point to earthly or unearthly origins.
+          </p>
+        </div>
+      </div>
 
-      <!-- FAQ 4 -->
-      <details>
-        <summary>How do you investigate a potential paranormal case?</summary>
-        <p>
-          Our investigation approach is detailed and combines traditional detective methods with modern scientific tools:
+      <div class="section">
+        <h2 class="section-title" onclick="toggleSection('faq4')">► How do you investigate a potential paranormal case?</h2>
+        <div class="section-content" id="faq4">
+          <p>
+            Our investigation approach is detailed and combines traditional detective methods with modern scientific tools:
+          </p>
           <ul>
             <li><strong>Initial Interviews:</strong> We carefully listen to and document the experiences of those involved, paying attention to local stories and background.</li>
             <li><strong>On-Site Exploration:</strong> We visit the location, sometimes conducting night observations, to witness the phenomena directly.</li>
@@ -234,67 +334,77 @@
             <li><strong>Analysis and Deduction:</strong> We study the evidence using logic and careful deduction to reach conclusions, similar to renowned detectives.</li>
             <li><strong>Resolution and Reporting:</strong> We aim to resolve disturbances, reassure the community, and document everything in thorough case files.</li>
           </ul>
-        </p>
-      </details>
+        </div>
+      </div>
 
-      <!-- FAQ 5 -->
-      <details>
-        <summary>What makes The Ectoplasmic Investigators different?</summary>
-        <p>
-          We stand out for several reasons:
+      <div class="section">
+        <h2 class="section-title" onclick="toggleSection('faq5')">► What makes The Ectoplasmic Investigators different?</h2>
+        <div class="section-content" id="faq5">
+          <p>
+            We stand out for several reasons:
+          </p>
           <ul>
             <li><strong>Local Expertise:</strong> Our deep understanding of rural Bangladeshi culture and geography is central to our work.</li>
             <li><strong>Balanced Perspective:</strong> We uniquely combine scientific methods with respect for local stories and traditions.</li>
             <li><strong>Discreet Operations:</strong> We work quietly to reassure communities, avoiding sensationalism.</li>
             <li><strong>Logical Approach:</strong> We prioritize logical explanations while still being open to paranormal possibilities.</li>
           </ul>
-        </p>
-      </details>
+        </div>
+      </div>
 
-      <!-- FAQ 6 -->
-      <details>
-        <summary>Have you encountered cases that are truly unexplainable?</summary>
-        <p>
-          Yes, while many cases can be explained by natural or psychological means, some instances have presented aspects that science cannot yet clarify. Cases like "The Phantom Radio Static of Koelpur" (Case #001) and "The Bamboo Grove's Vanishing Tracks" (Case #002) involved spectral frequencies and unusual residues that we're still analyzing. These cases remind us of the many mysteries that remain unsolved.
-        </p>
-      </details>
+      <div class="section">
+        <h2 class="section-title" onclick="toggleSection('faq6')">► Have you encountered cases that are truly unexplainable?</h2>
+        <div class="section-content" id="faq6">
+          <p>
+            Yes, while many cases can be explained by natural or psychological means, some instances have presented aspects that science cannot yet clarify. Cases like "The Phantom Radio Static of Koelpur" (Case #001) and "The Bamboo Grove's Vanishing Tracks" (Case #002) involved spectral frequencies and unusual residues that we're still analyzing. These cases remind us of the many mysteries that remain unsolved.
+          </p>
+        </div>
+      </div>
 
-      <!-- FAQ 7 -->
-      <details>
-        <summary>Is paranormal investigation dangerous?</summary>
-        <p>
-          Paranormal investigations inherently carry some level of unknown risk. We prioritize safety through careful planning, thorough preparation, and strict procedures. We equip ourselves with necessary tools and rely on our collective experience to mitigate potential dangers. However, we acknowledge the unpredictable nature of the phenomena we investigate and approach each case with caution and professionalism.
-        </p>
-      </details>
+      <div class="section">
+        <h2 class="section-title" onclick="toggleSection('faq7')">► Is paranormal investigation dangerous?</h2>
+        <div class="section-content" id="faq7">
+          <p>
+            Paranormal investigations inherently carry some level of unknown risk. We prioritize safety through careful planning, thorough preparation, and strict procedures. We equip ourselves with necessary tools and rely on our collective experience to mitigate potential dangers. However, we acknowledge the unpredictable nature of the phenomena we investigate and approach each case with caution and professionalism.
+          </p>
+        </div>
+      </div>
 
-      <!-- FAQ 8 -->
-      <details>
-        <summary>How can I report a potential paranormal event to your team?</summary>
-        <p>
-          If you're experiencing strange events in rural Bangladesh that you think we should investigate, please use <strong>THE DISPATCH</strong>. Navigate to the "DISPATCH" section on our website and send us a message with details of what's happening. Include specifics like the location, times, descriptions of events, and any local tales connected to it. We'll review your report and contact you if your case fits our expertise and availability.
-        </p>
-      </details>
+      <div class="section">
+        <h2 class="section-title" onclick="toggleSection('faq8')">► How can I report a potential paranormal event to your team?</h2>
+        <div class="section-content" id="faq8">
+          <p>
+            If you're experiencing strange events in rural Bangladesh that you think we should investigate, please use <strong>THE DISPATCH</strong>. Navigate to the "DISPATCH" section on our website and send us a message with details of what's happening. Include specifics like the location, times, descriptions of events, and any local tales connected to it. We'll review your report and contact you if your case fits our expertise and availability.
+          </p>
+        </div>
+      </div>
 
-      <!-- FAQ 9 -->
-      <details>
-        <summary>Do you charge for your services?</summary>
-        <p>
-          The Ectoplasmic Investigators of Chapitala are primarily focused on researching paranormal phenomena and supporting rural communities in Bangladesh. We currently operate as a non-profit team, and generally do not charge fees for our investigations. Depending on the specifics of a case and its location, community support or logistical help might be appreciated, but this is discussed case-by-case. Our main goal is to discover the truth and help communities, not to make money.
-        </p>
-      </details>
-    </div>
+      <div class="section">
+        <h2 class="section-title" onclick="toggleSection('faq9')">► Do you charge for your services?</h2>
+        <div class="section-content" id="faq9">
+          <p>
+            The Ectoplasmic Investigators of Chapitala are primarily focused on researching paranormal phenomena and supporting rural communities in Bangladesh. We currently operate as a non-profit team, and generally do not charge fees for our investigations. Depending on the specifics of a case and its location, community support or logistical help might be appreciated, but this is discussed case-by-case. Our main goal is to discover the truth and help communities, not to make money.
+          </p>
+        </div>
+      </div>
+    </main>
 
-    <!-- Footer Area -->
-    <div class="footer-area">
-      <footer>
-        <p>
-          © 2025 THE ECTOPLASMIC INVESTIGATORS<br>
-          SECRET LOGS AWAIT DISCOVERY
-        </p>
-      </footer>
-    </div>
+    <!-- Footer -->
+    <footer>
+      <p class="copyright-info">
+        <i class="copyright-icon"></i> 2025 THE ECTOPLASMIC INVESTIGATORS
+      </p>
+      <p>SECRET LOGS AWAIT DISCOVERY</p>
+    </footer>
   </div>
+
+  <!-- JavaScript for Collapsible Sections -->
   <script>
+    function toggleSection(sectionId) {
+      const content = document.getElementById(sectionId);
+      content.style.display = (content.style.display === 'block') ? 'none' : 'block';
+    }
+
     console.log("The Oracle page loaded with enigmatic wisdom and collapsible insights. Seekers of truth, dispatch your queries via THE DISPATCH.");
   </script>
 </body>
