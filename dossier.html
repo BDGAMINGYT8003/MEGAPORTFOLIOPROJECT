@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   <title>THE DOSSIER - Unclassified</title>
   <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
   <style>
@@ -13,14 +13,14 @@
       --text-color: #f0f0f0;
       --border-color: #555;
     }
-    
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
       font-family: 'VT323', monospace;
     }
-    
+
     body {
       background-color: var(--primary-bg);
       color: var(--text-color);
@@ -34,15 +34,15 @@
       align-items: center;
       min-height: 100vh;
     }
-    
+
     body.scroll-lock {
-      overflow: hidden;
+        overflow-y: hidden; /* Change overflow to overflow-y */
     }
-    
     body.scroll-unlock {
       overflow-y: auto;
     }
-    
+
+
     .grid-overlay {
       position: fixed;
       top: 0;
@@ -56,7 +56,7 @@
       pointer-events: none;
       z-index: -1;
     }
-    
+
     .scanline {
       position: fixed;
       top: 0;
@@ -73,12 +73,12 @@
       z-index: 10;
       animation: scanline 10s linear infinite;
     }
-    
+
     @keyframes scanline {
       0% { transform: translateY(0); }
       100% { transform: translateY(100vh); }
     }
-    
+
     .container {
       display: flex;
       flex-direction: column;
@@ -88,11 +88,11 @@
       width: 100%;
       max-width: 800px; /* Adjust max-width as desired */
     }
-    
+
     @keyframes fadeIn {
       to { opacity: 1; }
     }
-    
+
     .header {
       text-align: center;
       padding: 2rem;
@@ -104,21 +104,21 @@
       opacity: 0;
       animation: slideDown 1s ease-out 0.3s forwards;
     }
-    
+
     @keyframes slideDown {
       to { transform: translateY(0); opacity: 1; }
     }
-    
+
     .header h1 {
       font-size: 2.5em;
       margin-bottom: 0.5rem;
     }
-    
+
     .header p {
       font-size: 1.2em;
       color: var(--accent-color);
     }
-    
+
     .header::before {
       content: '';
       position: absolute;
@@ -129,12 +129,12 @@
       background: var(--accent-color);
       animation: scan 2s linear infinite;
     }
-    
+
     @keyframes scan {
       0% { transform: translateX(-100%); }
       100% { transform: translateX(100%); }
     }
-    
+
     .content-section {
       background: var(--secondary-bg);
       border: 2px solid var(--border-color);
@@ -143,19 +143,19 @@
       opacity: 0;
       animation: slideInRight 1s ease-out 0.6s forwards;
     }
-    
+
     @keyframes slideInRight {
       to { transform: translateX(0); opacity: 1; }
     }
-    
+
     .section {
       margin-bottom: 1rem;
     }
-    
+
     .section:last-child {
       margin-bottom: 0;
     }
-    
+
     .section-title {
       font-size: 2em;
       color: var(--accent-color);
@@ -164,7 +164,7 @@
       position: relative;
       padding-bottom: 0.5rem;
     }
-    
+
     .section-title::after {
       content: '';
       position: absolute;
@@ -177,11 +177,11 @@
       transform-origin: left;
       transition: transform 0.3s ease;
     }
-    
+
     .section-title:hover::after {
       transform: scaleX(1);
     }
-    
+
     .section-content {
       display: none;
       background: var(--primary-bg);
@@ -191,7 +191,7 @@
       font-size: 1.2em;
       line-height: 1.6;
     }
-    
+
     footer {
       text-align: center;
       padding: 1rem;
@@ -202,22 +202,22 @@
       opacity: 0;
       animation: fadeInUp 1s ease-out 0.9s forwards;
     }
-    
+
     @keyframes fadeInUp {
       to { transform: translateY(0); opacity: 1; }
     }
-    
+
     footer p {
       margin: 0.5rem 0;
     }
-    
+
     .copyright-info {
       display: flex;
       justify-content: center;
       align-items: center;
       gap: 0.5rem;
     }
-    
+
     .copyright-icon {
       display: inline-block;
       width: 16px;
@@ -232,25 +232,25 @@
       -webkit-mask-size: contain;
       mask-size: contain;
     }
-    
+
     @media (max-width: 480px) {
       body {
         font-size: 14px;
         padding: 0.5rem;
       }
-    
+
       .header {
         padding: 1rem;
       }
-    
+
       .content-section {
         padding: 1rem;
       }
-    
+
       .section-content {
         padding: 1rem;
       }
-    
+
       .section-title {
         font-size: 1.8em;
       }
@@ -304,14 +304,14 @@
       content.style.display = (content.style.display === 'block') ? 'none' : 'block';
       updateScrollLock();
     }
-    
+
     function updateScrollLock() {
       const contents = document.querySelectorAll('.section-content');
       const isSectionOpen = Array.from(contents).some(c => c.style.display === 'block');
       document.body.classList.toggle('scroll-unlock', isSectionOpen);
       document.body.classList.toggle('scroll-lock', !isSectionOpen);
     }
-    
+
     // Initialize scroll lock state
     updateScrollLock();
   </script>
