@@ -143,6 +143,11 @@
             margin-bottom: 1rem; /* Add some space below */
         }
 
+        /* Add space between SYSTEM and PRESENCE in status panel */
+        .status-panel > span:not(:last-child) {
+            margin-right: 0.7rem;
+        }
+
         .nav-button {
             display: block;
             width: 100%;
@@ -331,9 +336,10 @@
         </nav>
 
         <main class="main-content">
-            <div class="status-panel">
-                <span>SYSTEM: <span id="system-status">OPERATIONAL</span>    UPTIME: <span id="uptime">00:00:00</span></span>
+           <div class="status-panel">
+                <span>SYSTEM: <span id="system-status">OPERATIONAL</span></span><span>PRESENCE: <span id="uptime">00:00:00</span></span>
             </div>
+
 
             <div class="data-grid">
                 <div class="data-card">
