@@ -296,7 +296,7 @@
             height: 16px;
             background-color: var(--accent-color); /* Placeholder for copyright symbol - replace with your image or icon font */
             -webkit-mask-image: url('data:image/svg+xml,<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM16 12c0 2.21-1.79 4-4 4-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4z"/></svg>'); /* Example SVG copyright symbol - replace with your actual icon/image */
-            mask-image: url('data:image/svg+xml,<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8-8 8 3.59 8 8-3.59 8-8 8zM16 12c0 2.21-1.79 4-4 4-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4z"/></svg>');
+            mask-image: url('data:image/svg+xml,<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM16 12c0 2.21-1.79 4-4 4-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4z"/></svg>');
             -webkit-mask-repeat: no-repeat;
             mask-repeat: no-repeat;
             -webkit-mask-position: center;
@@ -385,12 +385,7 @@
             const seconds = Math.floor((ms / 1000) % 60);
             const minutes = Math.floor((ms / (1000 * 60)) % 60);
             const hours = Math.floor(ms / (1000 * 60 * 60));
-
-            const hoursStr = hours < 10 ? "0" + hours : String(hours);
-            const minutesStr = minutes < 10 ? "0" + minutes : String(minutes);
-            const secondsStr = seconds < 10 ? "0" + seconds : String(seconds);
-
-            return `${hoursStr}:${minutesStr}:${secondsStr}`;
+            return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
         }
 
         // Update values with animation
@@ -479,6 +474,24 @@
             updateValue('system-condition', conditions[conditionIndex]);
             updateValue('maintenance-level', maintenance);
         }
+        // Update cases and alerts every day
+        function updateCasesAndAlerts() {
+            const bdTime = getBangladeshiTime();
+            const seed = bdTime.getDate() + (bdTime.getMonth() * 31) + (bdTime.getFullYear() * 365); // Daily seed
+            const randomValue = seededRandom(seed);
+
+            // Cases
+            const minCases = 2;  // Minimum of 2
+            const maxCases = 5; // Maximum of 5
+            let currentCases = Math.floor(randomValue * (maxCases - minCases + 1)) + minCases;
+            updateValue('current-cases', currentCases);
+
+            // Alerts
+            const minAlerts = 1;  // Minimum of 1
+            const maxAlerts = 3; // Maximum of 3
+            let priorityAlerts = Math.floor(randomValue * (maxAlerts - minAlerts + 1)) + minAlerts;
+            updateValue('priority-alerts', priorityAlerts);
+        }
 
         // Update uptime (Every Second)
         function updateUptime() {
@@ -541,6 +554,7 @@
             updateSystemOperationalStatus(); // Initialize system status
             performDailyUpdates(); // Initial daily update
             updateDeployedAgents(); // Initial call to set deployed agents based on initial status
+            updateUptime();     // VERY IMPORTANT: INITIAL CALL TO AVOID 00:00:00
 
             // Set intervals
             setInterval(updateUptime, 1000); // Update uptime every second
