@@ -6,347 +6,427 @@
   <title>The Chronicle - Investigations Log</title>
   <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
   <style>
-    /* Global Reset */
-    *, *::before, *::after {
-      box-sizing: border-box;
+    /* CSS Variables */
+    :root {
+      --primary-bg: #111;
+      --secondary-bg: #222;
+      --accent-color: #66eeff;
+      --text-color: #f0f0f0;
+      --border-color: #555;
+    }
+
+    /* Global Styles */
+    * {
       margin: 0;
       padding: 0;
-    }
-    body {
+      box-sizing: border-box;
       font-family: 'VT323', monospace;
-      background-color: #111;
-      color: #f0f0f0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
+    }
+
+    body {
+      background-color: var(--primary-bg);
+      color: var(--text-color);
+      padding: 1rem;
+      font-size: 16px;
       overflow-x: hidden;
     }
-    /* Mainframe Container */
-    .mainframe-container {
-      background-color: #222;
-      border: 4px double #555;
-      padding: 20px;
-      box-shadow: 7px 7px 0px #333;
-      animation: fadeIn 1s ease-out forwards;
-      opacity: 0;
-      display: flex;
-      flex-direction: column;
-      width: 95%;
-      max-width: 600px;
-      align-items: center;
-    }
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
-    /* Header Area */
-    .header-area {
-      text-align: center;
-      margin-bottom: 20px;
-      animation: slideDown 1s ease-out 0.3s forwards;
-      transform: translateY(-30px);
-      opacity: 0;
-      width: 100%;
-    }
-    @keyframes slideDown {
-      to { transform: translateY(0); opacity: 1; }
-    }
-    .main-title {
-      font-size: 2.8em;
-      margin-bottom: 10px;
-      letter-spacing: 2px;
-      text-shadow: 2px 2px 0px #111;
-    }
-    .subtitle {
-      font-size: 1.4em;
-      color: #aaa;
-      text-shadow: 1px 1px 0px #111;
-    }
-    /* Content Area */
-    .content-area {
-      text-align: center;
-      padding: 0 10px 20px 10px;
-      animation: slideInRight 1s ease-out 0.9s forwards;
-      transform: translateX(30px);
-      opacity: 0;
-      width: 100%;
-    }
-    @keyframes slideInRight {
-      to { transform: translateX(0); opacity: 1; }
-    }
-    .content-area h2 {
-      font-size: 2.1em;
-      margin-bottom: 10px;
-      text-shadow: 1px 1px 0px #111;
-    }
-    /* Footer Area */
-    .footer-area {
-      text-align: center;
-      margin-top: 20px;
-      font-size: 1.12em;
-      color: #aaa;
-      text-shadow: 1px 1px 0px #111;
-      animation: fadeInUp 1s ease-out 1.8s forwards;
-      transform: translateY(10px);
-      opacity: 0;
-      width: 100%;
-    }
-    @keyframes fadeInUp {
-      to { transform: translateY(0); opacity: 1; }
-    }
-    /* Background Scanlines */
-    body::before {
-      content: '';
+
+    /* Grid Overlay and Scanline Effects */
+    .grid-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: repeating-linear-gradient(
-        0deg,
-        rgba(0, 0, 0, 0),
-        rgba(0, 0, 0, 0.1) 0.5px,
-        transparent 1px
-      );
+      background:
+        linear-gradient(90deg, rgba(102, 238, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(rgba(102, 238, 255, 0.03) 1px, transparent 1px);
+      background-size: 20px 20px;
       pointer-events: none;
       z-index: -1;
-      animation: scanlines 5s linear infinite;
     }
-    @keyframes scanlines {
-      to { background-position: 0 200%; }
+
+    .scanline {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        to bottom,
+        transparent 50%,
+        rgba(0, 0, 0, 0.05) 50%
+      );
+      background-size: 100% 4px;
+      pointer-events: none;
+      z-index: 10;
+      animation: scanline 10s linear infinite;
     }
-    /* Media Query: Larger Screens */
-    @media (min-width: 769px) {
-      .mainframe-container {
-        flex-direction: row;
-        max-width: 900px;
-        padding: 30px;
-        align-items: stretch;
-      }
-      .header-area,
-      .content-area,
-      .footer-area {
-        width: auto;
-        text-align: left;
-      }
-      .content-area {
-        width: 100%;
-        padding-left: 20px;
-      }
-      .main-title {
-        font-size: 3.5em;
-        letter-spacing: 3px;
-      }
-      .subtitle {
-        font-size: 1.68em;
-      }
-      .footer-area {
-        font-size: 1.26em;
-        margin-top: 30px;
-      }
+
+    @keyframes scanline {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(100vh); }
     }
-    /* ------------------------------
-       Chronicle Entry Card Styling
-       ------------------------------ */
-    .entry-card {
-      background-color: #222;
-      border: 4px double #555;
-      padding: 20px;
-      box-shadow: 7px 7px 0px #333;
-      margin-bottom: 20px;
-      animation: fadeIn 1s ease-out forwards;
+
+    /* Container */
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
       opacity: 0;
-      transform: translateY(30px);
+      animation: fadeIn 1s ease-out forwards;
     }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      padding: 2rem;
+      background: var(--secondary-bg);
+      border: 2px solid var(--border-color);
+      position: relative;
+      overflow: hidden;
+      transform: translateY(-30px);
+      opacity: 0;
+      animation: slideDown 1s ease-out 0.3s forwards;
+    }
+
+    @keyframes slideDown {
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .header h1 {
+      font-size: 2.5em;
+      margin-bottom: 0.5rem;
+    }
+
+    .header p {
+      font-size: 1.2em;
+      color: var(--accent-color);
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--accent-color);
+      animation: scan 2s linear infinite;
+    }
+
+    @keyframes scan {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    /* Content Section */
+    .content-section {
+      background: var(--secondary-bg);
+      border: 2px solid var(--border-color);
+      padding: 2rem;
+      transform: translateX(30px);
+      opacity: 0;
+      animation: slideInRight 1s ease-out 0.6s forwards;
+    }
+
+    @keyframes slideInRight {
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    /* Entry Grid */
+    .entry-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1rem;
+    }
+
+    /* Entry Card */
+    .entry-card {
+      background: var(--primary-bg);
+      border: 4px double var(--border-color);
+      padding: 1.5rem;
+      box-shadow: 7px 7px 0px var(--primary-bg);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
     .entry-card h2 {
       font-size: 2em;
       margin-bottom: 10px;
-      text-shadow: 1px 1px 0px #111;
-      text-align: center;
+      color: var(--accent-color);
+      text-shadow: 1px 1px 0px var(--primary-bg);
     }
+
     .entry-card ul {
       list-style: disc;
       margin-left: 20px;
       font-size: 1.2em;
       text-align: left;
+      color: var(--text-color);
     }
+
     .entry-card ul li {
       margin-bottom: 8px;
     }
+
     .entry-card ul li strong {
-      color: #ffcc66;
+      color: var(--accent-color);
       font-weight: bold;
       margin-right: 10px;
     }
-    /* Optional Easter Egg: Hidden marquee text */
+
+    .entry-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--accent-color);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+
+    .entry-card:hover::after {
+      transform: scaleX(1);
+    }
+
+    /* Easter Egg */
     .easter-egg {
       display: block;
       font-size: 0.9em;
       margin-top: 10px;
-      color: #66eeff;
+      color: var(--accent-color);
       animation: blink-caret 1s steps(2, start) infinite;
     }
+
     @keyframes blink-caret {
       50% { opacity: 0; }
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: var(--secondary-bg);
+      border: 2px solid var(--border-color);
+      font-size: 1.1em;
+      transform: translateY(10px);
+      opacity: 0;
+      animation: fadeInUp 1s ease-out 0.9s forwards;
+    }
+
+    @keyframes fadeInUp {
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    footer p {
+      margin: 0.5rem 0;
+    }
+
+    .copyright-info {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .copyright-icon {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      background-color: var(--accent-color);
+      -webkit-mask-image: url('data:image/svg+xml,<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM16 12c0 2.21-1.79 4-4 4-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4z"/></svg>');
+      mask-image: url('data:image/svg+xml,<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM16 12c0 2.21-1.79 4-4 4-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4z"/></svg>');
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      mask-position: center;
+      -webkit-mask-size: contain;
+      mask-size: contain;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 480px) {
+      body {
+        font-size: 14px;
+        padding: 0.5rem;
+      }
+
+      .header {
+        padding: 1rem;
+      }
+
+      .content-section {
+        padding: 1rem;
+      }
+
+      .entry-card {
+        padding: 1rem;
+      }
+
+      .entry-card h2 {
+        font-size: 1.8em;
+      }
+
+      .entry-card ul {
+        font-size: 1.1em;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="mainframe-container">
-    <!-- Header Area -->
-    <div class="header-area">
-      <h1 class="main-title">THE CHRONICLE</h1>
-      <p class="subtitle">Musings & Updates from the Field of Investigation</p>
-    </div>
+  <div class="grid-overlay"></div>
+  <div class="scanline"></div>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <h1>THE CHRONICLE</h1>
+      <p>Musings & Updates from the Field of Investigation</p>
+    </header>
 
-    <!-- Content Area: Chronicle Entries -->
-    <div class="content-area">
-      <!-- Chronicle Entry 1 -->
-      <section class="entry-card">
-        <h2>Entry #001</h2>
-        <ul>
-          <li><strong>Date:</strong> 2025-03-01</li>
-          <li><strong>Subject:</strong> The Koelpur Static Anomaly</li>
-          <li><strong>Entry:</strong> Commenced investigation in Koelpur. The reports of phantom radio static are indeed persistent. Utilizing spectral analysis equipment, we are attempting to isolate the source frequency. Initial readings suggest anomalies beyond conventional radio waves. The villagers' unease is palpable, a thick layer of fear clinging to the air itself. Further analysis is crucial to discern if this is a technological deception or something of a more…ethereal nature.</li>
-          <li><strong>Detective:</strong> Agent Fakhruddin</li>
-        </ul>
-        <span class="easter-egg">Hidden clue: "In static, voices may hide."</span>
-      </section>
+    <!-- Content Section: Chronicle Entries -->
+    <main class="content-section">
+      <div class="entry-grid">
+        <!-- Chronicle Entry #010 -->
+        <section class="entry-card">
+          <h2>Entry #010</h2>
+          <ul>
+            <li><strong>Date:</strong> 2025-04-24</li>
+            <li><strong>Subject:</strong> Minarpara Mobile Minaret - Surveying the Shift</li>
+            <li><strong>Entry:</strong> The Minarpara mosque's minaret's 'nocturnal wanderings' are, surprisingly, not entirely unfounded. Precise laser surveying conducted over several nights reveals minute, almost imperceptible, shifts in the minaret's position. Geological instability and slow soil creep are identified as the cause. The 'divine displeasure' is simply the earth subtly rearranging itself. While not paranormal, the phenomenon is a testament to the slow, powerful forces of nature. Case resolved; recommending structural assessment of the mosque.</li>
+            <li><strong>Detective:</strong> Agent Fakhruddin</li>
+          </ul>
+          <span class="easter-egg">Hidden clue: "Even the steadfast can be moved by unseen forces."</span>
+        </section>
 
-      <!-- Chronicle Entry 2 -->
-      <section class="entry-card">
-        <h2>Entry #002</h2>
-        <ul>
-          <li><strong>Date:</strong> 2025-03-05</li>
-          <li><strong>Subject:</strong> Amtali's Vanishing Footprints - Initial Findings</li>
-          <li><strong>Entry:</strong> In Amtali, the mystery of the vanishing footprints deepens.  Following the tracks to the bamboo grove, I observed no exit points, corroborating local accounts.  The soil composition within the grove is peculiar; it seems to absorb impressions unlike the surrounding paddy fields. Could this be natural phenomena amplified by folklore, or is there an entity at play, subtly erasing its passage?  Ground penetrating radar will be deployed to map subsurface anomalies within the grove.</li>
-          <li><strong>Detective:</strong> Agent Moin Uddin</li>
-        </ul>
-        <span class="easter-egg">Hidden clue: "Earth remembers, even when surfaces forget."</span>
-      </section>
+        <!-- Chronicle Entry #009 -->
+        <section class="entry-card">
+          <h2>Entry #009</h2>
+          <ul>
+            <li><strong>Date:</strong> 2025-04-17</li>
+            <li><strong>Subject:</strong> Anderkilla Weeping Well - Unearthing the Lament</li>
+            <li><strong>Entry:</strong> The weeping well of Anderkilla is indeed emanating sounds of distress, even in its dryness. Seismic sensors placed around the well detect subtle vibrations originating deep underground. Geological survey reveals an underground water cavity where trapped air is being slowly released through narrow fissures, creating low, sobbing sounds. The 'phantom's lament' is the earth itself sighing. Case resolved; a poignant reminder of nature's subtle voices.</li>
+            <li><strong>Detective:</strong> Agent Oli Ullah</li>
+          </ul>
+          <span class="easter-egg">Hidden clue: "Earth's sorrow echoes in the quiet depths."</span>
+        </section>
 
-      <!-- Chronicle Entry 3 -->
-      <section class="entry-card">
-        <h2>Entry #003</h2>
-        <ul>
-          <li><strong>Date:</strong> 2025-03-12</li>
-          <li><strong>Subject:</strong> Temporal Shifts in Shonargaon - Preliminary Assessment</li>
-          <li><strong>Entry:</strong> Shonargaon's ruins present a fascinating temporal puzzle.  Synchronized clock malfunctions across the village are confirmed.  Employing chronometers and temporal field detectors near the Zamindar Bari, we are registering fluctuations in time flow.  The readings are subtle but consistent, indicating a localized distortion.  The legends of a time-bending jinn may hold a kernel of truth, albeit likely misinterpreted.  Focusing on environmental factors within the ruins, particularly electromagnetic fields, is the next step.</li>
-          <li><strong>Detective:</strong> Agent Oli Ullah</li>
-        </ul>
-        <span class="easter-egg">Hidden clue: "Time's currents are felt, not always seen."</span>
-      </section>
+        <!-- Chronicle Entry #008 -->
+        <section class="entry-card">
+          <h2>Entry #008</h2>
+          <ul>
+            <li><strong>Date:</strong> 2025-04-10</li>
+            <li><strong>Subject:</strong> Polashpur Shadow Market - Exposing the Specters</li>
+            <li><strong>Entry:</strong> The spectral figures at Polashpur night market are revealed to be a clever, albeit unsettling, illusion. Projectors, hidden amongst the market stalls, cast pre-recorded shadow puppet shows onto strategically placed screens during the night. The 'shadow jinn' are a deliberate fabrication, likely intended to deter competitors or control market activity. The source of the projectors is under investigation. Fear, once again, exploited for earthly gain. Case resolved, but further inquiry into the perpetrators is warranted.</li>
+            <li><strong>Detective:</strong> Agent Moin Uddin</li>
+          </ul>
+          <span class="easter-egg">Hidden clue: "Deception dances best in the dim light."</span>
+        </section>
 
-      <!-- Chronicle Entry 4 -->
-      <section class="entry-card">
-        <h2>Entry #004</h2>
-        <ul>
-          <li><strong>Date:</strong> 2025-03-18</li>
-          <li><strong>Subject:</strong> Bottola's Whispering Baobab - Acoustic Analysis</li>
-          <li><strong>Entry:</strong> The Baobab of Bottola is indeed producing anomalous sounds at dusk.  Acoustic recordings reveal low-frequency murmurs, almost subsonic, coinciding with the villagers’ reported whispers.  Wind alone does not account for the complexity of the sounds.  We are investigating the tree's internal structure for cavities or unusual formations that could act as natural resonators.  Could this be a case of pareidolia, where natural sounds are interpreted as voices due to pre-existing beliefs, or is there a deeper acoustic phenomenon at play?</li>
-          <li><strong>Detective:</strong> Agent Fakhruddin</li>
-        </ul>
-        <span class="easter-egg">Hidden clue: "Nature speaks in tones we often misinterpret."</span>
-      </section>
+        <!-- Chronicle Entry #007 -->
+        <section class="entry-card">
+          <h2>Entry #007</h2>
+          <ul>
+            <li><strong>Date:</strong> 2025-04-03</li>
+            <li><strong>Subject:</strong> Shimultola Screaming Tree - Deciphering the Shrieks</li>
+            <li><strong>Entry:</strong> The screaming Silk Cotton tree in Shimultola is indeed emitting bloodcurdling sounds on full moon nights. Bioacoustic analysis reveals the ‘screams’ are produced by air being forced through hollow branches by strong lunar-influenced winds, amplified by the tree's unique structure. The sound frequency and resonance create an unnervingly human-like scream. The 'Rakshasa' is merely the wind playing a morbid tune on an ancient instrument of wood. Case resolved; natural phenomena mimicking the supernatural.</li>
+            <li><strong>Detective:</strong> Agent Fakhruddin</li>
+          </ul>
+          <span class="easter-egg">Hidden clue: "Wind's song can echo ancient fears."</span>
+        </section>
 
-      <!-- Chronicle Entry 5 -->
-      <section class="entry-card">
-        <h2>Entry #005</h2>
-        <ul>
-          <li><strong>Date:</strong> 2025-03-22</li>
-          <li><strong>Subject:</strong> Joynagar Lake - Dhoar Paani Case - Insights</li>
-          <li><strong>Entry:</strong> The 'mirror spirit' of Dhoar Paani lake appears to be tied to unusual optical properties.  Spectral analysis of the mist reveals a high concentration of particulate matter, causing significant light refraction and reflection.  Combined with the naturally occurring fog, this creates complex visual distortions, easily misinterpreted as phantom visions.  The villagers’ fear is understandable, but rooted in natural phenomena, not supernatural intervention. Case marked as resolved; educating the community on the science behind the 'visions' is now paramount.</li>
-          <li><strong>Detective:</strong> Agent Moin Uddin</li>
-        </ul>
-        <span class="easter-egg">Hidden clue: "Illusions fade when light reveals their source."</span>
-      </section>
+        <!-- Chronicle Entry #006 -->
+        <section class="entry-card">
+          <h2>Entry #006</h2>
+          <ul>
+            <li><strong>Date:</strong> 2025-03-28</li>
+            <li><strong>Subject:</strong> Kumarpur Charpai - Unraveling the Curse</li>
+            <li><strong>Entry:</strong> The cursed charpai of Kumarpur has yielded a surprising, yet mundane, explanation. Analysis of the wood reveals traces of a rare, sleep-inducing fungus. Prolonged exposure could induce vivid nightmares and physical malaise, perfectly aligning with the villagers' accounts. The 'vengeful spirit' is, in fact, a microscopic organism. The charpai has been removed for decontamination. Another case where fear and folklore obscured a natural, albeit unsettling, cause. Case closed.</li>
+            <li><strong>Detective:</strong> Agent Oli Ullah</li>
+          </ul>
+          <span class="easter-egg">Hidden clue: "The unseen can terrify, even when earthly."</span>
+        </section>
 
-      <!-- Chronicle Entry 6 -->
-      <section class="entry-card">
-        <h2>Entry #006</h2>
-        <ul>
-          <li><strong>Date:</strong> 2025-03-28</li>
-          <li><strong>Subject:</strong> Kumarpur Charpai - Unraveling the Curse</li>
-          <li><strong>Entry:</strong> The cursed charpai of Kumarpur has yielded a surprising, yet mundane, explanation.  Analysis of the wood reveals traces of a rare, sleep-inducing fungus.  Prolonged exposure could induce vivid nightmares and physical malaise, perfectly aligning with the villagers' accounts.  The 'vengeful spirit' is, in fact, a microscopic organism.  The charpai has been removed for decontamination.  Another case where fear and folklore obscured a natural, albeit unsettling, cause. Case closed.</li>
-          <li><strong>Detective:</strong> Agent Oli Ullah</li>
-        </ul>
-        <span class="easter-egg">Hidden clue: "The unseen can terrify, even when earthly."</span>
-      </section>
+        <!-- Chronicle Entry #005 -->
+        <section class="entry-card">
+          <h2>Entry #005</h2>
+          <ul>
+            <li><strong>Date:</strong> 2025-03-22</li>
+            <li><strong>Subject:</strong> Joynagar Lake - Dhoar Paani Case - Insights</li>
+            <li><strong>Entry:</strong> The 'mirror spirit' of Dhoar Paani lake appears to be tied to unusual optical properties. Spectral analysis of the mist reveals a high concentration of particulate matter, causing significant light refraction and reflection. Combined with the naturally occurring fog, this creates complex visual distortions, easily misinterpreted as phantom visions. The villagers’ fear is understandable, but rooted in natural phenomena, not supernatural intervention. Case marked as resolved; educating the community on the science behind the 'visions' is now paramount.</li>
+            <li><strong>Detective:</strong> Agent Moin Uddin</li>
+          </ul>
+          <span class="easter-egg">Hidden clue: "Illusions fade when light reveals their source."</span>
+        </section>
 
-      <!-- Chronicle Entry 7 -->
-      <section class="entry-card">
-        <h2>Entry #007</h2>
-        <ul>
-          <li><strong>Date:</strong> 2025-04-03</li>
-          <li><strong>Subject:</strong> Shimultola Screaming Tree - Deciphering the Shrieks</li>
-          <li><strong>Entry:</strong> The screaming Silk Cotton tree in Shimultola is indeed emitting bloodcurdling sounds on full moon nights.  Bioacoustic analysis reveals the ‘screams’ are produced by air being forced through hollow branches by strong lunar-influenced winds, amplified by the tree's unique structure.  The sound frequency and resonance create an unnervingly human-like scream.  The 'Rakshasa' is merely the wind playing a morbid tune on an ancient instrument of wood.  Case resolved; natural phenomena mimicking the supernatural.</li>
-          <li><strong>Detective:</strong> Agent Fakhruddin</li>
-        </ul>
-        <span class="easter-egg">Hidden clue: "Wind's song can echo ancient fears."</span>
-      </section>
+        <!-- Chronicle Entry #004 -->
+        <section class="entry-card">
+          <h2>Entry #004</h2>
+          <ul>
+            <li><strong>Date:</strong> 2025-03-18</li>
+            <li><strong>Subject:</strong> Bottola's Whispering Baobab - Acoustic Analysis</li>
+            <li><strong>Entry:</strong> The Baobab of Bottola is indeed producing anomalous sounds at dusk. Acoustic recordings reveal low-frequency murmurs, almost subsonic, coinciding with the villagers’ reported whispers. Wind alone does not account for the complexity of the sounds. We are investigating the tree's internal structure for cavities or unusual formations that could act as natural resonators. Could this be a case of pareidolia, where natural sounds are interpreted as voices due to pre-existing beliefs, or is there a deeper acoustic phenomenon at play?</li>
+            <li><strong>Detective:</strong> Agent Fakhruddin</li>
+          </ul>
+          <span class="easter-egg">Hidden clue: "Nature speaks in tones we often misinterpret."</span>
+        </section>
 
-      <!-- Chronicle Entry 8 -->
-      <section class="entry-card">
-        <h2>Entry #008</h2>
-        <ul>
-          <li><strong>Date:</strong> 2025-04-10</li>
-          <li><strong>Subject:</strong> Polashpur Shadow Market - Exposing the Specters</li>
-          <li><strong>Entry:</strong> The spectral figures at Polashpur night market are revealed to be a clever, albeit unsettling, illusion.  Projectors, hidden amongst the market stalls, cast pre-recorded shadow puppet shows onto strategically placed screens during the night.  The 'shadow jinn' are a deliberate fabrication, likely intended to deter competitors or control market activity.  The source of the projectors is under investigation.  Fear, once again, exploited for earthly gain. Case resolved, but further inquiry into the perpetrators is warranted.</li>
-          <li><strong>Detective:</strong> Agent Moin Uddin</li>
-        </ul>
-        <span class="easter-egg">Hidden clue: "Deception dances best in the dim light."</span>
-      </section>
+        <!-- Chronicle Entry #003 -->
+        <section class="entry-card">
+          <h2>Entry #003</h2>
+          <ul>
+            <li><strong>Date:</strong> 2025-03-12</li>
+            <li><strong>Subject:</strong> Temporal Shifts in Shonargaon - Preliminary Assessment</li>
+            <li><strong>Entry:</strong> Shonargaon's ruins present a fascinating temporal puzzle. Synchronized clock malfunctions across the village are confirmed. Employing chronometers and temporal field detectors near the Zamindar Bari, we are registering fluctuations in time flow. The readings are subtle but consistent, indicating a localized distortion. The legends of a time-bending jinn may hold a kernel of truth, albeit likely misinterpreted. Focusing on environmental factors within the ruins, particularly electromagnetic fields, is the next step.</li>
+            <li><strong>Detective:</strong> Agent Oli Ullah</li>
+          </ul>
+          <span class="easter-egg">Hidden clue: "Time's currents are felt, not always seen."</span>
+        </section>
 
-      <!-- Chronicle Entry 9 -->
-      <section class="entry-card">
-        <h2>Entry #009</h2>
-        <ul>
-          <li><strong>Date:</strong> 2025-04-17</li>
-          <li><strong>Subject:</strong> Anderkilla Weeping Well - Unearthing the Lament</li>
-          <li><strong>Entry:</strong> The weeping well of Anderkilla is indeed emanating sounds of distress, even in its dryness.  Seismic sensors placed around the well detect subtle vibrations originating deep underground.  Geological survey reveals an underground water cavity where trapped air is being slowly released through narrow fissures, creating low, sobbing sounds.  The 'phantom's lament' is the earth itself sighing.  Case resolved; a poignant reminder of nature's subtle voices.</li>
-          <li><strong>Detective:</strong> Agent Oli Ullah</li>
-        </ul>
-        <span class="easter-egg">Hidden clue: "Earth's sorrow echoes in the quiet depths."</span>
-      </section>
+        <!-- Chronicle Entry #002 -->
+        <section class="entry-card">
+          <h2>Entry #002</h2>
+          <ul>
+            <li><strong>Date:</strong> 2025-03-05</li>
+            <li><strong>Subject:</strong> Amtali's Vanishing Footprints - Initial Findings</li>
+            <li><strong>Entry:</strong> In Amtali, the mystery of the vanishing footprints deepens. Following the tracks to the bamboo grove, I observed no exit points, corroborating local accounts. The soil composition within the grove is peculiar; it seems to absorb impressions unlike the surrounding paddy fields. Could this be natural phenomena amplified by folklore, or is there an entity at play, subtly erasing its passage? Ground penetrating radar will be deployed to map subsurface anomalies within the grove.</li>
+            <li><strong>Detective:</strong> Agent Moin Uddin</li>
+          </ul>
+          <span class="easter-egg">Hidden clue: "Earth remembers, even when surfaces forget."</span>
+        </section>
 
-      <!-- Chronicle Entry 10 -->
-      <section class="entry-card">
-        <h2>Entry #010</h2>
-        <ul>
-          <li><strong>Date:</strong> 2025-04-24</li>
-          <li><strong>Subject:</strong> Minarpara Mobile Minaret - Surveying the Shift</li>
-          <li><strong>Entry:</strong> The Minarpara mosque's minaret's 'nocturnal wanderings' are, surprisingly, not entirely unfounded.  Precise laser surveying conducted over several nights reveals minute, almost imperceptible, shifts in the minaret's position.  Geological instability and slow soil creep are identified as the cause.  The 'divine displeasure' is simply the earth subtly rearranging itself.  While not paranormal, the phenomenon is a testament to the slow, powerful forces of nature. Case resolved; recommending structural assessment of the mosque.</li>
-          <li><strong>Detective:</strong> Agent Fakhruddin</li>
-        </ul>
-        <span class="easter-egg">Hidden clue: "Even the steadfast can be moved by unseen forces."</span>
-      </section>
+        <!-- Chronicle Entry #001 -->
+        <section class="entry-card">
+          <h2>Entry #001</h2>
+          <ul>
+            <li><strong>Date:</strong> 2025-03-01</li>
+            <li><strong>Subject:</strong> The Koelpur Static Anomaly</li>
+            <li><strong>Entry:</strong> Commenced investigation in Koelpur. The reports of phantom radio static are indeed persistent. Utilizing spectral analysis equipment, we are attempting to isolate the source frequency. Initial readings suggest anomalies beyond conventional radio waves. The villagers' unease is palpable, a thick layer of fear clinging to the air itself. Further analysis is crucial to discern if this is a technological deception or something of a more…ethereal nature.</li>
+            <li><strong>Detective:</strong> Agent Fakhruddin</li>
+          </ul>
+          <span class="easter-egg">Hidden clue: "In static, voices may hide."</span>
+        </section>
+      </div>
+    </main>
 
-       <!-- Add more entries here if needed to reach at least 10 -->
-       <!-- Chronicle Entry 11 - Example Extra Entry from Case File 2, focusing on "twist" -->
-       <section class="entry-card">
-        <h2>Entry #011</h2>
-        <ul>
-          <li><strong>Date:</strong> 2025-05-01</li>
-          <li><strong>Subject:</strong> Amtali Grove - The Twist in Vanishing Tracks</li>
-          <li><strong>Entry:</strong> Revisiting Amtali's bamboo grove case. While initial investigations pointed to soil absorption, deeper probing revealed a hidden network of underground tunnels, likely dug by large rodents or similar creatures. These tunnels begin *inside* the grove and exit far beyond the paddy fields.  The footprints, then, are not vanishing, but being *redirected* underground. Villagers' fear of spirits masked a more mundane, yet fascinating, biological explanation. Case status updated to "Resolved with a twist" - nature's ingenuity continues to surprise.</li>
-          <li><strong>Detective:</strong> Agent Moin Uddin</li>
-        </ul>
-        <span class="easter-egg">Hidden clue: "Look beneath the surface for hidden pathways."</span>
-      </section>
-    </div>
-
-    <!-- Footer Area -->
-    <div class="footer-area">
-      <footer>
-        <p>
-      © 2025 THE ECTOPLASMIC INVESTIGATORS<br>
-      SECRET LOGS AWAIT DISCOVERY
-        </p>
-      </footer>
-    </div>
+    <!-- Footer -->
+    <footer>
+      <p class="copyright-info">
+        <i class="copyright-icon"></i> 2025 THE ECTOPLASMIC INVESTIGATORS
+      </p>
+      <p>SECRET LOGS AWAIT DISCOVERY</p>
+    </footer>
   </div>
   <script>
-    console.log("The Chronicle Page Loaded with Mainframe Design CSS. Ongoing musings and updates logged.");
+    console.log("The Chronicle Page Loaded with Cloned and Optimized CSS.");
   </script>
 </body>
 </html>
