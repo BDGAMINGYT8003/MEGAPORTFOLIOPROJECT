@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- ADDED: Enhanced viewport meta tag to prevent horizontal scrolling and zooming -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Case Files - Investigations</title>
   <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
   <style>
@@ -71,6 +72,9 @@
       gap: 1rem;
       opacity: 0;
       animation: fadeIn 1s ease-out forwards;
+      width: 100%; /* Ensures container takes full width */
+      max-width: 100%; /* Prevents container from being wider than viewport */
+      box-sizing: border-box; /* Ensures padding and border are included in width */
     }
 
     @keyframes fadeIn {
@@ -87,6 +91,9 @@
       transform: translateY(-30px);
       opacity: 0;
       animation: slideDown 1s ease-out 0.3s forwards;
+      width: 100%; /* Ensures header takes full width */
+      max-width: 100%; /* Prevents header from being wider than viewport */
+      box-sizing: border-box; /* Ensures padding and border are included in width */
     }
 
     @keyframes slideDown {
@@ -126,6 +133,9 @@
       transform: translateX(30px);
       opacity: 0;
       animation: slideInRight 1s ease-out 0.6s forwards;
+      width: 100%; /* Ensures content-section takes full width */
+      max-width: 100%; /* Prevents content-section from being wider than viewport */
+      box-sizing: border-box; /* Ensures padding and border are included in width */
     }
 
     @keyframes slideInRight {
@@ -136,6 +146,8 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 1rem;
+      width: 100%; /* Ensures case-grid takes full width */
+      box-sizing: border-box; /* Ensures padding and border are included in width */
     }
 
     .case-card {
@@ -146,6 +158,8 @@
       text-align: center;
       position: relative;
       overflow: hidden;
+      width: 100%; /* Ensures case-card takes full width of grid cell */
+      box-sizing: border-box; /* Ensures padding and border are included in width */
     }
 
     .case-card h2 {
@@ -211,6 +225,9 @@
       transform: translateY(10px);
       opacity: 0;
       animation: fadeInUp 1s ease-out 0.9s forwards;
+      width: 100%; /* Ensures footer takes full width */
+      max-width: 100%; /* Prevents footer from being wider than viewport */
+      box-sizing: border-box; /* Ensures padding and border are included in width */
     }
 
     @keyframes fadeInUp {
