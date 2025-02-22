@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Crucial viewport meta tag for preventing horizontal scroll -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>THE LABORATORY - Classified Team Info</title>
   <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
   <style>
@@ -26,7 +27,12 @@
       color: var(--text-color);
       padding: 1rem;
       font-size: 16px;
+      overflow-x: hidden; /* Prevents horizontal scrolling at the body level */
+      width: 100%;      /* Ensure body takes full width */
+      max-width: 100%;    /* Prevent body from exceeding viewport width */
     }
+
+    /* --- Rest of your CSS remains unchanged --- */
 
     .grid-overlay {
       position: fixed;
@@ -70,6 +76,8 @@
       gap: 1rem;
       opacity: 0;
       animation: fadeIn 1s ease-out forwards;
+       width: 100%;       /* Ensure container takes full width within body */
+      max-width: 100%;     /* Prevent container from exceeding viewport width*/
     }
 
     @keyframes fadeIn {
@@ -86,6 +94,8 @@
       transform: translateY(-30px);
       opacity: 0;
       animation: slideDown 1s ease-out 0.3s forwards;
+      width: 100%;       /* Ensure container takes full width within body */
+      max-width: 100%;     /* Prevent container from exceeding viewport width*/
     }
 
     @keyframes slideDown {
@@ -125,6 +135,8 @@
       transform: translateX(30px);
       opacity: 0;
       animation: slideInRight 1s ease-out 0.6s forwards;
+      width: 100%;        /* Ensure section takes full width within container*/
+      max-width: 100%;     /* Prevent section from exceeding viewport width */
     }
 
     @keyframes slideInRight {
@@ -135,6 +147,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 1rem;
+      width: 100%;          /* Grid takes full width of its container */
     }
 
     .member-card {
@@ -145,6 +158,9 @@
       text-align: center;
       position: relative;
       overflow: hidden;
+        width: 100%;          /* Cards take full width of grid cell */
+      max-width: 100%;      /* Prevents cards from overflowing */
+      box-sizing: border-box; /* Includes padding and border in width */
     }
 
     .member-card img.profile-pic {
@@ -210,6 +226,8 @@
       transform: translateY(10px);
       opacity: 0;
       animation: fadeInUp 1s ease-out 0.9s forwards;
+      width: 100%;      /* Ensure footer takes full width */
+    max-width: 100%;    /* Prevent footer from exceeding viewport */
     }
 
     @keyframes fadeInUp {
@@ -268,6 +286,7 @@
         font-size: 1.1em;
       }
     }
+
   </style>
 </head>
 <body>
