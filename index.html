@@ -18,614 +18,613 @@
             --success-color: #00ff99;
             --passive-color: #aaa; /* Color for passive status indicator */
         }
+* {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'VT323', monospace;
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'VT323', monospace;
-        }
+    body {
+        background-color: var(--primary-bg);
+        color: var(--text-color);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        font-size: 16px;
+        overflow-x: hidden; /* PREVENT HORIZONTAL SCROLLING */
+    }
 
-        body {
-            background-color: var(--primary-bg);
-            color: var(--text-color);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            padding: 1rem;
-            font-size: 16px;
-            overflow-x: hidden; /* PREVENT HORIZONTAL SCROLLING */
-        }
+    .content-wrapper {
+        display: flex;
+        flex: 1;
+        gap: 1rem;
+        margin-top: 1rem;
+          opacity: 0; /* Start with 0 opacity */
+        animation: fadeIn 1s ease-out forwards;
+    }
 
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    .grid-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background:
+            linear-gradient(90deg, rgba(102, 238, 255, 0.03) 1px, transparent 1px),
+            linear-gradient(rgba(102, 238, 255, 0.03) 1px, transparent 1px);
+        background-size: 20px 20px;
+        pointer-events: none;
+        z-index: -1;
+    }
+
+    .scanline {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            to bottom,
+            transparent 50%,
+            rgba(0, 0, 0, 0.05) 50%
+        );
+        background-size: 100% 4px;
+        pointer-events: none;
+        z-index: 10;
+        animation: scanline 10s linear infinite;
+    }
+
+    @keyframes scanline {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(100vh); }
+    }
+
+    .header {
+        text-align: center;
+        padding: 2rem;
+        background: var(--secondary-bg);
+        border: 2px solid var(--border-color);
+        position: relative;
+        overflow: hidden;
+         transform: translateY(-30px);
+      opacity: 0;
+      animation: slideDown 1s ease-out 0.3s forwards;
+    }
+     @keyframes slideDown {
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+
+    .header h1 {
+        font-size: 2.5em;
+        margin-bottom: 0.5rem;
+    }
+
+    .header p {
+        font-size: 1.2em;
+        color: var(--accent-color);
+    }
+
+    .header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: var(--accent-color);
+        animation: scan 2s linear infinite;
+    }
+
+    @keyframes scan {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+    }
+
+    .nav-section {
+        flex: 0 0 250px;
+        background: var(--secondary-bg);
+        border: 2px solid var(--border-color);
+        padding: 1rem;
+        transform: translateX(-30px);
+      opacity: 0;
+      animation: slideInLeft 1s ease-out 0.6s forwards;
+    }
+
+    @keyframes slideInLeft {
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    .main-content {
+        flex: 1;
+        background: var(--secondary-bg);
+        border: 2px solid var(--border-color);
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        min-width: 0;
+        transform: translateX(30px);
+      opacity: 0;
+      animation: slideInRight 1s ease-out 0.6s forwards;
+
+    }
+     @keyframes slideInRight {
+        to { transform: translateX(0); opacity: 1; }
+    }
+
+    .status-panel {
+        display: flex;
+        justify-content: center; /* Center the content horizontally */
+        align-items: center;
+        padding: 1rem;
+        border: 2px solid var(--status-border-color); /* Thicker, accent colored border */
+        background: var(--primary-bg);
+        font-size: 1.2em;
+        margin-bottom: 1rem; /* Add some space below */
+    }
+
+    /* Add space between SYSTEM and PRESENCE in status panel */
+    .status-panel > span:not(:last-child) {
+        margin-right: 0.7rem;
+    }
+
+    .nav-button {
+        display: block;
+        width: 100%;
+        padding: 1rem;
+        margin: 0.5rem 0;
+        background: var(--primary-bg);
+        border: 1px solid var(--border-color);
+        color: var(--text-color);
+        text-decoration: none;
+        text-align: left;
+        transition: all 0.3s ease;
+        font-size: 1.1em;
+    }
+
+    .nav-button:hover {
+        background: var(--accent-color);
+        color: var(--primary-bg);
+        transform: translateX(5px);
+    }
+
+    .data-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+    }
+
+    .data-card {
+        background: var(--primary-bg);
+        border: 4px double var(--border-color); /* MODIFIED BORDER STYLE */
+        padding: 1.5rem;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 7px 7px 0px var(--primary-bg); /* ADDED BOX SHADOW */
+    }
+
+    .data-card h3 {
+        font-size: 1.3em;
+        margin-bottom: 1rem;
+        color: var(--accent-color);
+    }
+
+    .data-card p {
+        font-size: 1.2em;
+        margin: 0.5rem 0;
+    }
+
+    .data-card::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: var(--accent-color);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.3s ease;
+    }
+
+    .data-card:hover::after {
+        transform: scaleX(1);
+    }
+
+    .status-indicator {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        margin-left: 8px;
+        animation: blink 1s step-end infinite;
+    }
+
+    .status-active {
+        background-color: var(--success-color);
+    }
+
+    .status-passive {
+        background-color: var(--passive-color); /* Style for passive indicator */
+        animation: none; /* No blink in passive mode */
+        opacity: 0.7; /* Slightly dimmed in passive mode */
+    }
+
+    @keyframes blink {
+        50% { opacity: 0; }
+    }
+
+    @media (max-width: 1024px) {
         .content-wrapper {
-            display: flex;
-            flex: 1;
-            gap: 1rem;
-            margin-top: 1rem;
-              opacity: 0; /* Start with 0 opacity */
-            animation: fadeIn 1s ease-out forwards;
-        }
-
-        @keyframes fadeIn {
-          to { opacity: 1; }
-        }
-
-        .grid-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background:
-                linear-gradient(90deg, rgba(102, 238, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(rgba(102, 238, 255, 0.03) 1px, transparent 1px);
-            background-size: 20px 20px;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .scanline {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                to bottom,
-                transparent 50%,
-                rgba(0, 0, 0, 0.05) 50%
-            );
-            background-size: 100% 4px;
-            pointer-events: none;
-            z-index: 10;
-            animation: scanline 10s linear infinite;
-        }
-
-        @keyframes scanline {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(100vh); }
-        }
-
-        .header {
-            text-align: center;
-            padding: 2rem;
-            background: var(--secondary-bg);
-            border: 2px solid var(--border-color);
-            position: relative;
-            overflow: hidden;
-             transform: translateY(-30px);
-          opacity: 0;
-          animation: slideDown 1s ease-out 0.3s forwards;
-        }
-         @keyframes slideDown {
-          to { transform: translateY(0); opacity: 1; }
-        }
-
-
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 0.5rem;
-        }
-
-        .header p {
-            font-size: 1.2em;
-            color: var(--accent-color);
-        }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: var(--accent-color);
-            animation: scan 2s linear infinite;
-        }
-
-        @keyframes scan {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
+            flex-direction: column;
         }
 
         .nav-section {
-            flex: 0 0 250px;
-            background: var(--secondary-bg);
-            border: 2px solid var(--border-color);
-            padding: 1rem;
-            transform: translateX(-30px);
-          opacity: 0;
-          animation: slideInLeft 1s ease-out 0.6s forwards;
-        }
-
-        @keyframes slideInLeft {
-          to { transform: translateX(0); opacity: 1; }
-        }
-
-        .main-content {
-            flex: 1;
-            background: var(--secondary-bg);
-            border: 2px solid var(--border-color);
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            min-width: 0;
-            transform: translateX(30px);
-          opacity: 0;
-          animation: slideInRight 1s ease-out 0.6s forwards;
-
-        }
-         @keyframes slideInRight {
-            to { transform: translateX(0); opacity: 1; }
-        }
-
-        .status-panel {
-            display: flex;
-            justify-content: center; /* Center the content horizontally */
-            align-items: center;
-            padding: 1rem;
-            border: 2px solid var(--status-border-color); /* Thicker, accent colored border */
-            background: var(--primary-bg);
-            font-size: 1.2em;
-            margin-bottom: 1rem; /* Add some space below */
-        }
-
-        /* Add space between SYSTEM and PRESENCE in status panel */
-        .status-panel > span:not(:last-child) {
-            margin-right: 0.7rem;
-        }
-
-        .nav-button {
-            display: block;
-            width: 100%;
-            padding: 1rem;
-            margin: 0.5rem 0;
-            background: var(--primary-bg);
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-            text-decoration: none;
-            text-align: left;
-            transition: all 0.3s ease;
-            font-size: 1.1em;
-        }
-
-        .nav-button:hover {
-            background: var(--accent-color);
-            color: var(--primary-bg);
-            transform: translateX(5px);
+            flex: none;
         }
 
         .data-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+    }
+
+    @media (max-width: 480px) {
+        body {
+            font-size: 14px;
+            padding: 0.5rem;
         }
 
-        .data-card {
-            background: var(--primary-bg);
-            border: 1px solid var(--border-color);
-            padding: 1.5rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .data-card h3 {
-            font-size: 1.3em;
-            margin-bottom: 1rem;
-            color: var(--accent-color);
-        }
-
-        .data-card p {
-            font-size: 1.2em;
-            margin: 0.5rem 0;
-        }
-
-        .data-card::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: var(--accent-color);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.3s ease;
-        }
-
-        .data-card:hover::after {
-            transform: scaleX(1);
-        }
-
-        .status-indicator {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            margin-left: 8px;
-            animation: blink 1s step-end infinite;
-        }
-
-        .status-active {
-            background-color: var(--success-color);
-        }
-
-        .status-passive {
-            background-color: var(--passive-color); /* Style for passive indicator */
-            animation: none; /* No blink in passive mode */
-            opacity: 0.7; /* Slightly dimmed in passive mode */
-        }
-
-        @keyframes blink {
-            50% { opacity: 0; }
-        }
-
-        @media (max-width: 1024px) {
-            .content-wrapper {
-                flex-direction: column;
-            }
-
-            .nav-section {
-                flex: none;
-            }
-
-            .data-grid {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            }
-        }
-
-        @media (max-width: 480px) {
-            body {
-                font-size: 14px;
-                padding: 0.5rem;
-            }
-
-            .header {
-                padding: 1rem;
-            }
-
-            .main-content {
-                padding: 1rem;
-            }
-
-            .data-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .value-change {
-            animation: valueUpdate 0.5s ease-in-out;
-        }
-
-        @keyframes valueUpdate {
-            0% { color: var(--accent-color); }
-            100% { color: var(--text-color); }
-        }
-
-        footer {
-            text-align: center;
+        .header {
             padding: 1rem;
-            background: var(--secondary-bg);
-            border: 2px solid var(--border-color);
-            font-size: 1.1em;
-            margin-top: 1rem; /* Reduced margin-top to 1rem to match header-nav spacing */
-            transform: translateY(30px);
-          opacity: 0;
-          animation: slideInBottom 1s ease-out 0.9s forwards;
         }
 
-          @keyframes slideInBottom {
-            to { transform: translateY(0); opacity: 1; }
-          }
-
-        footer p {
-            margin: 0.5rem 0;
+        .main-content {
+            padding: 1rem;
         }
 
-        footer .copyright-info {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 0.5rem;
+        .data-grid {
+            grid-template-columns: 1fr;
         }
+    }
 
-        footer .copyright-icon {
-            display: inline-block;
-            width: 16px; /* Adjust size as needed */
-            height: 16px;
-            background-color: var(--accent-color); /* Placeholder for copyright symbol - replace with your image or icon font */
-            -webkit-mask-image: url('data:image/svg+xml,<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM16 12c0 2.21-1.79 4-4 4-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4z"/></svg>'); /* Example SVG copyright symbol - replace with your actual icon/image */
-            mask-image: url('data:image/svg+xml,<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM16 12c0 2.21-1.79 4-4 4-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4z"/></svg>');
-            -webkit-mask-repeat: no-repeat;
-            mask-repeat: no-repeat;
-            -webkit-mask-position: center;
-            mask-position: center;
-            -webkit-mask-size: contain;
-            mask-size: contain;
-            content: ''; /* Required for mask to work */
-        }
-    </style>
+    .value-change {
+        animation: valueUpdate 0.5s ease-in-out;
+    }
+
+    @keyframes valueUpdate {
+        0% { color: var(--accent-color); }
+        100% { color: var(--text-color); }
+    }
+
+    footer {
+        text-align: center;
+        padding: 1rem;
+        background: var(--secondary-bg);
+        border: 2px solid var(--border-color);
+        font-size: 1.1em;
+        margin-top: 1rem; /* Reduced margin-top to 1rem to match header-nav spacing */
+        transform: translateY(30px);
+      opacity: 0;
+      animation: slideInBottom 1s ease-out 0.9s forwards;
+    }
+
+      @keyframes slideInBottom {
+        to { transform: translateY(0); opacity: 1; }
+      }
+
+    footer p {
+        margin: 0.5rem 0;
+    }
+
+    footer .copyright-info {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    footer .copyright-icon {
+        display: inline-block;
+        width: 16px; /* Adjust size as needed */
+        height: 16px;
+        background-color: var(--accent-color); /* Placeholder for copyright symbol - replace with your image or icon font */
+        -webkit-mask-image: url('data:image/svg+xml,<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM16 12c0 2.21-1.79 4-4 4-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4z"/></svg>'); /* Example SVG copyright symbol - replace with your actual icon/image */
+        mask-image: url('data:image/svg+xml,<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM16 12c0 2.21-1.79 4-4 4-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4z"/></svg>');
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        content: ''; /* Required for mask to work */
+    }
+</style>
 </head>
 <body>
     <div class="grid-overlay"></div>
     <div class="scanline"></div>
+<header class="header">
+    <h1>THE ECTOPLASMIC INVESTIGATORS</h1>
+    <p>COMMAND CENTER • CLEARANCE LEVEL ALPHA</p>
+</header>
 
-    <header class="header">
-        <h1>THE ECTOPLASMIC INVESTIGATORS</h1>
-        <p>COMMAND CENTER • CLEARANCE LEVEL ALPHA</p>
-    </header>
+<div class="content-wrapper">
+    <nav class="nav-section">
+        <div class="status-panel">
+            <span>STATUS: <span id="system-operational-status">ACTIVE</span><span class="status-indicator status-active" id="status-indicator"></span></span>
+        </div>
+        <a href="dossier.html" class="nav-button">► THE DOSSIER</a>
+        <a href="laboratory.html" class="nav-button">► THE LABORATORY</a>
+        <a href="casefiles.html" class="nav-button">► CASE FILES</a>
+        <a href="evidence.html" class="nav-button">► EVIDENCE ARCHIVES</a>
+        <a href="chronicle.html" class="nav-button">► FIELD CHRONICLE</a>
+        <a href="oracle.html" class="nav-button">► COMMAND ORACLE</a>
+        <a href="dispatch.html" class="nav-button">► DISPATCH INQUIRY</a>
+    </nav>
 
-    <div class="content-wrapper">
-        <nav class="nav-section">
-            <div class="status-panel">
-                <span>STATUS: <span id="system-operational-status">ACTIVE</span><span class="status-indicator status-active" id="status-indicator"></span></span>
+    <main class="main-content">
+       <div class="status-panel">
+            <span>SYSTEM: <span id="system-status">OPERATIONAL</span></span><span>PRESENCE: <span id="uptime">00:00:00</span></span>
+        </div>
+
+
+        <div class="data-grid">
+            <div class="data-card">
+                <h3>ACTIVE INVESTIGATIONS</h3>
+                <p>Current Cases: <span id="current-cases">0</span></p>
+                <p>Priority Alerts: <span id="priority-alerts">0</span></p>
             </div>
-            <a href="dossier.html" class="nav-button">► THE DOSSIER</a>
-            <a href="laboratory.html" class="nav-button">► THE LABORATORY</a>
-            <a href="casefiles.html" class="nav-button">► CASE FILES</a>
-            <a href="evidence.html" class="nav-button">► EVIDENCE ARCHIVES</a>
-            <a href="chronicle.html" class="nav-button">► FIELD CHRONICLE</a>
-            <a href="oracle.html" class="nav-button">► COMMAND ORACLE</a>
-            <a href="dispatch.html" class="nav-button">► DISPATCH INQUIRY</a>
-        </nav>
-
-        <main class="main-content">
-           <div class="status-panel">
-                <span>SYSTEM: <span id="system-status">OPERATIONAL</span></span><span>PRESENCE: <span id="uptime">00:00:00</span></span>
+            <div class="data-card">
+                <h3>FIELD AGENTS</h3>
+                <p>Total Agents: <span id="total-agents">4</span></p>
+                <p>Agents Deployed: <span id="deployed-agents">0</span></p>
             </div>
-
-
-            <div class="data-grid">
-                <div class="data-card">
-                    <h3>ACTIVE INVESTIGATIONS</h3>
-                    <p>Current Cases: <span id="current-cases">0</span></p>
-                    <p>Priority Alerts: <span id="priority-alerts">0</span></p>
-                </div>
-                <div class="data-card">
-                    <h3>FIELD AGENTS</h3>
-                    <p>Total Agents: <span id="total-agents">4</span></p>
-                    <p>Agents Deployed: <span id="deployed-agents">0</span></p>
-                </div>
-                <div class="data-card">
-                    <h3>ANOMALY READINGS</h3>
-                    <p>Level: <span id="anomaly-level">ANALYZING...</span></p>
-                    <p>Trending: <span id="anomaly-trend">--</span></p>
-                </div>
-                <div class="data-card">
-                    <h3>EQUIPMENT STATUS</h3>
-                    <p>Systems: <span id="system-condition">ANALYZING...</span></p>
-                    <p>Maintenance: <span id="maintenance-level">0</span>%</p>
-                </div>
+            <div class="data-card">
+                <h3>ANOMALY READINGS</h3>
+                <p>Level: <span id="anomaly-level">ANALYZING...</span></p>
+                <p>Trending: <span id="anomaly-trend">--</span></p>
             </div>
-        </main>
-    </div>
+            <div class="data-card">
+                <h3>EQUIPMENT STATUS</h3>
+                <p>Systems: <span id="system-condition">ANALYZING...</span></p>
+                <p>Maintenance: <span id="maintenance-level">0</span>%</p>
+            </div>
+        </div>
+    </main>
+</div>
 
-    <footer>
-        <p class="copyright-info">
-            <i class="copyright-icon"></i> 2025 THE ECTOPLASMIC INVESTIGATORS
-        </p>
-        <p>SECRET LOGS AWAIT DISCOVERY</p>
-    </footer>
+<footer>
+    <p class="copyright-info">
+        <i class="copyright-icon"></i> 2025 THE ECTOPLASMIC INVESTIGATORS
+    </p>
+    <p>SECRET LOGS AWAIT DISCOVERY</p>
+</footer>
 
-    <script>
-        // Initialize the start time for uptime calculation
-        const startTime = new Date();
-        const bangladeshiTimeOffset = 6; // Bangladesh is GMT+6
-        const totalAgents = 4; // Fixed total agents
+<script>
+    // Initialize the start time for uptime calculation
+    const startTime = new Date();
+    const bangladeshiTimeOffset = 6; // Bangladesh is GMT+6
+    const totalAgents = 4; // Fixed total agents
 
-        // Function to get Bangladeshi time
-        function getBangladeshiTime() {
-            const now = new Date();
-            const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
-            return new Date(utc + (3600000 * bangladeshiTimeOffset));
+    // Function to get Bangladeshi time
+    function getBangladeshiTime() {
+        const now = new Date();
+        const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+        return new Date(utc + (3600000 * bangladeshiTimeOffset));
+    }
+
+    // Utility function to format time duration
+    function formatDuration(ms) {
+        const seconds = Math.floor((ms / 1000) % 60);
+        const minutes = Math.floor((ms / (1000 * 60)) % 60);
+        const hours = Math.floor(ms / (1000 * 60 * 60));
+        return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    }
+
+    // Update values with animation
+    function updateValue(elementId, newValue) {
+        const element = document.getElementById(elementId);
+        if (element.textContent !== String(newValue)) { // Only update if value has changed
+            element.textContent = newValue;
+            element.classList.remove('value-change');
+            void element.offsetWidth; // Trigger reflow
+            element.classList.add('value-change');
         }
+    }
 
-        // Utility function to format time duration
-        function formatDuration(ms) {
-            const seconds = Math.floor((ms / 1000) % 60);
-            const minutes = Math.floor((ms / (1000 * 60)) % 60);
-            const hours = Math.floor(ms / (1000 * 60 * 60));
-            return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-        }
+    // Function to generate a seeded random number based on date (for daily consistency)
+    function seededRandom(seed) {
+        const x = Math.sin(seed) * 10000;
+        return x - Math.floor(x);
+    }
 
-        // Update values with animation
-        function updateValue(elementId, newValue) {
-            const element = document.getElementById(elementId);
-            if (element.textContent !== String(newValue)) { // Only update if value has changed
-                element.textContent = newValue;
-                element.classList.remove('value-change');
-                void element.offsetWidth; // Trigger reflow
-                element.classList.add('value-change');
-            }
-        }
+    // Function to get week number (ISO week date algorithm)
+    Date.prototype.getWeek = function() {
+        var date = new Date(this.getTime());
+        date.setHours(0, 0, 0, 0);
+        // Thursday in current week decides the year.
+        date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
+        // January 4 is always in week 1.
+        var week1 = new Date(date.getFullYear(), 0, 4);
+        // Adjust to Thursday in week 1 and count number of weeks from date to week1.
+        return 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000
+                                - 3 + (week1.getDay() + 6) % 7) / 7);
+    }
 
-        // Function to generate a seeded random number based on date (for daily consistency)
-        function seededRandom(seed) {
-            const x = Math.sin(seed) * 10000;
-            return x - Math.floor(x);
-        }
+    // Update deployed agents (Hourly Update, but now weekly consistent) - DEPLOYED NOW MEANS ACTIVE AGENTS
+    function updateDeployedAgents() {
+        const bdTime = getBangladeshiTime();
+        const bdHour = bdTime.getHours();
+        const systemStatus = document.getElementById('system-operational-status').textContent;
 
-        // Function to get week number (ISO week date algorithm)
-        Date.prototype.getWeek = function() {
-            var date = new Date(this.getTime());
-            date.setHours(0, 0, 0, 0);
-            // Thursday in current week decides the year.
-            date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
-            // January 4 is always in week 1.
-            var week1 = new Date(date.getFullYear(), 0, 4);
-            // Adjust to Thursday in week 1 and count number of weeks from date to week1.
-            return 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000
-                                    - 3 + (week1.getDay() + 6) % 7) / 7);
-        }
-
-        // Update deployed agents (Hourly Update, but now weekly consistent) - DEPLOYED NOW MEANS ACTIVE AGENTS
-        function updateDeployedAgents() {
-            const bdTime = getBangladeshiTime();
-            const bdHour = bdTime.getHours();
-            const systemStatus = document.getElementById('system-operational-status').textContent;
-
-            if (systemStatus === 'PASSIVE') {
-                updateValue('deployed-agents', 0); // Set to 0 if system is PASSIVE
-            } else {
-                // Weekly Seed for consistent hourly values each week
-                const weekNumber = bdTime.getWeek();
-                const dayOfWeek = bdTime.getDay(); // 0 (Sunday) to 6 (Saturday)
-                const seed = bdTime.getFullYear() + weekNumber + dayOfWeek + bdHour + 3000; // Adjusted seed
-                const randomValue = seededRandom(seed);
-
-                const minDeployed = 1;
-                const maxDeployed = 4;
-                let deployedAgents = Math.floor(randomValue * (maxDeployed - minDeployed + 1)) + minDeployed;
-                deployedAgents = Math.max(minDeployed, Math.min(maxDeployed, deployedAgents)); // Ensure within range
-                updateValue('deployed-agents', deployedAgents);
-            }
-        }
-
-        // Update anomaly status (Daily Update)
-        function updateAnomalyStatus() {
-            const bdTime = getBangladeshiTime();
-            const seed = bdTime.getDate() + (bdTime.getMonth() * 31) + (bdTime.getFullYear() * 365) + 1000; // Different seed for anomaly
+        if (systemStatus === 'PASSIVE') {
+            updateValue('deployed-agents', 0); // Set to 0 if system is PASSIVE
+        } else {
+            // Weekly Seed for consistent hourly values each week
+            const weekNumber = bdTime.getWeek();
+            const dayOfWeek = bdTime.getDay(); // 0 (Sunday) to 6 (Saturday)
+            const seed = bdTime.getFullYear() + weekNumber + dayOfWeek + bdHour + 3000; // Adjusted seed
             const randomValue = seededRandom(seed);
 
-            const levels = ['LOW', 'MODERATE', 'HIGH', 'SEVERE'];
-            const trends = ['▼ DOWN', '► STABLE', '▲ UP'];
+            const minDeployed = 1;
+            const maxDeployed = 4;
+            let deployedAgents = Math.floor(randomValue * (maxDeployed - minDeployed + 1)) + minDeployed;
+            deployedAgents = Math.max(minDeployed, Math.min(maxDeployed, deployedAgents)); // Ensure within range
+            updateValue('deployed-agents', deployedAgents);
+        }
+    }
 
-            const levelIndex = Math.floor(randomValue * levels.length);
-            const trendIndex = Math.floor(randomValue * trends.length);
+    // Update anomaly status (Daily Update)
+    function updateAnomalyStatus() {
+        const bdTime = getBangladeshiTime();
+        const seed = bdTime.getDate() + (bdTime.getMonth() * 31) + (bdTime.getFullYear() * 365) + 1000; // Different seed for anomaly
+        const randomValue = seededRandom(seed);
 
-            updateValue('anomaly-level', levels[levelIndex]);
-            updateValue('anomaly-trend', trends[trendIndex]);
+        const levels = ['LOW', 'MODERATE', 'HIGH', 'SEVERE'];
+        const trends = ['▼ DOWN', '► STABLE', '▲ UP'];
+
+        const levelIndex = Math.floor(randomValue * levels.length);
+        const trendIndex = Math.floor(randomValue * trends.length);
+
+        updateValue('anomaly-level', levels[levelIndex]);
+        updateValue('anomaly-trend', trends[trendIndex]);
+    }
+
+    // Update equipment status (Daily Update)
+    function updateEquipmentStatus() {
+        const bdTime = getBangladeshiTime();
+        const seed = bdTime.getDate() + (bdTime.getMonth() * 31) + (bdTime.getFullYear() * 365) + 2000; // Different seed for equipment
+        const randomValue = seededRandom(seed);
+
+        const conditions = ['NOMINAL', 'OPTIMAL', 'STABLE'];
+        const conditionIndex = Math.floor(randomValue * conditions.length);
+
+        const minMaintenance = 86; // Changed to 86% as per requirement (must be MORE than 85%)
+        const maxMaintenance = 100;
+        let maintenance = Math.floor(randomValue * (maxMaintenance - minMaintenance + 1)) + minMaintenance;
+        maintenance = Math.max(minMaintenance, Math.min(maxMaintenance, maintenance)); // Ensure within range
+
+        updateValue('system-condition', conditions[conditionIndex]);
+        updateValue('maintenance-level', maintenance);
+    }
+    // Update cases and alerts every day
+    function updateCasesAndAlerts() {
+        const bdTime = getBangladeshiTime();
+        const seed = bdTime.getDate() + (bdTime.getMonth() * 31) + (bdTime.getFullYear() * 365); // Daily seed
+        const randomValue = seededRandom(seed);
+
+        // Cases
+        const minCases = 2;  // Minimum of 2
+        const maxCases = 5; // Maximum of 5
+        let currentCases = Math.floor(randomValue * (maxCases - minCases + 1)) + minCases;
+        updateValue('current-cases', currentCases);
+
+        // Alerts
+        const minAlerts = 1;  // Minimum of 1
+        const maxAlerts = 3; // Maximum of 3
+        let priorityAlerts = Math.floor(randomValue * (maxAlerts - minAlerts + 1)) + minAlerts;
+        updateValue('priority-alerts', priorityAlerts);
+    }
+
+    // Update uptime (Every Second)
+    function updateUptime() {
+        const uptime = new Date() - startTime;
+        document.getElementById('uptime').textContent = formatDuration(uptime);
+    }
+
+    // Function to update system operational status based on Bangladeshi time
+    function updateSystemOperationalStatus() {
+        const bdTime = getBangladeshiTime();
+        const bdHour = bdTime.getHours();
+        const statusElement = document.getElementById('system-operational-status');
+        const indicatorElement = document.getElementById('status-indicator');
+
+        let newStatus = 'ACTIVE';
+        let statusClassToRemove = 'status-passive';
+        let statusClassToAdd = 'status-active';
+
+        if (bdHour >= 1 && bdHour < 7) { // 1 AM to 7 AM Bangladeshi time (exclusive of 7 AM)
+            newStatus = 'PASSIVE';
+            statusClassToRemove = 'status-active';
+            statusClassToAdd = 'status-passive';
         }
 
-        // Update equipment status (Daily Update)
-        function updateEquipmentStatus() {
-            const bdTime = getBangladeshiTime();
-            const seed = bdTime.getDate() + (bdTime.getMonth() * 31) + (bdTime.getFullYear() * 365) + 2000; // Different seed for equipment
-            const randomValue = seededRandom(seed);
+        if (statusElement.textContent !== newStatus) { // Only update if status has changed
+            statusElement.textContent = newStatus;
+            indicatorElement.classList.remove(statusClassToRemove);
+            indicatorElement.classList.add(statusClassToAdd);
 
-            const conditions = ['NOMINAL', 'OPTIMAL', 'STABLE'];
-            const conditionIndex = Math.floor(randomValue * conditions.length);
-
-            const minMaintenance = 86; // Changed to 86% as per requirement (must be MORE than 85%)
-            const maxMaintenance = 100;
-            let maintenance = Math.floor(randomValue * (maxMaintenance - minMaintenance + 1)) + minMaintenance;
-            maintenance = Math.max(minMaintenance, Math.min(maxMaintenance, maintenance)); // Ensure within range
-
-            updateValue('system-condition', conditions[conditionIndex]);
-            updateValue('maintenance-level', maintenance);
+            // Immediately update deployed agents when status changes to PASSIVE
+            if (newStatus === 'PASSIVE') {
+                updateDeployedAgents(); // Call it here to ensure immediate update to 0
+            }
         }
-        // Update cases and alerts every day
-        function updateCasesAndAlerts() {
-            const bdTime = getBangladeshiTime();
-            const seed = bdTime.getDate() + (bdTime.getMonth() * 31) + (bdTime.getFullYear() * 365); // Daily seed
-            const randomValue = seededRandom(seed);
+    }
 
-            // Cases
-            const minCases = 2;  // Minimum of 2
-            const maxCases = 5; // Maximum of 5
-            let currentCases = Math.floor(randomValue * (maxCases - minCases + 1)) + minCases;
-            updateValue('current-cases', currentCases);
+    // Function to perform daily updates
+    function performDailyUpdates() {
+        updateCasesAndAlerts();
+        updateAnomalyStatus();
+        updateEquipmentStatus();
+    }
 
-            // Alerts
-            const minAlerts = 1;  // Minimum of 1
-            const maxAlerts = 3; // Maximum of 3
-            let priorityAlerts = Math.floor(randomValue * (maxAlerts - minAlerts + 1)) + minAlerts;
-            updateValue('priority-alerts', priorityAlerts);
-        }
+    // Function to perform hourly updates
+    function performHourlyUpdates() {
+        updateDeployedAgents(); // Now updates deployed agents (active agents) hourly
+    }
 
-        // Update uptime (Every Second)
-        function updateUptime() {
-            const uptime = new Date() - startTime;
-            document.getElementById('uptime').textContent = formatDuration(uptime);
-        }
+    function initializeDashboard() {
+        // Initial values (optional - daily updates will overwrite these soon)
+        updateValue('current-cases', 4);
+        updateValue('priority-alerts', 2);
+        updateValue('total-agents', totalAgents); // Set total agents - fixed value
+        updateValue('deployed-agents', 3); // Initial deployed (active) agents - can be a starting random value if needed
+        updateValue('anomaly-level', 'MODERATE');
+        updateValue('anomaly-trend', '▲ UP');
+        updateValue('system-condition', 'NOMINAL');
+        updateValue('maintenance-level', '98');
 
-        // Function to update system operational status based on Bangladeshi time
-        function updateSystemOperationalStatus() {
-            const bdTime = getBangladeshiTime();
-            const bdHour = bdTime.getHours();
-            const statusElement = document.getElementById('system-operational-status');
-            const indicatorElement = document.getElementById('status-indicator');
+        updateSystemOperationalStatus(); // Initialize system status
+        performDailyUpdates(); // Initial daily update
+        updateDeployedAgents(); // Initial call to set deployed agents based on initial status
+        updateUptime();     // VERY IMPORTANT: INITIAL CALL TO AVOID 00:00:00
 
-            let newStatus = 'ACTIVE';
-            let statusClassToRemove = 'status-passive';
-            let statusClassToAdd = 'status-active';
+        // Set intervals
+        setInterval(updateUptime, 1000); // Update uptime every second
+        setInterval(updateSystemOperationalStatus, 60000); // Update system status every minute
+        setInterval(performHourlyUpdates, 3600000); // Update hourly stats
+        setInterval(performDailyUpdates, 86400000); // Update daily stats every 24 hours
 
-            if (bdHour >= 1 && bdHour < 7) { // 1 AM to 7 AM Bangladeshi time (exclusive of 7 AM)
-                newStatus = 'PASSIVE';
-                statusClassToRemove = 'status-active';
-                statusClassToAdd = 'status-passive';
+        // Run daily updates at the start of a new Bangladeshi day (midnight BDT)
+        function setDailyUpdateTimer() {
+            const now = getBangladeshiTime();
+            const midnightBDT = new Date(now);
+            midnightBDT.setHours(24, 0, 0, 0); // Set to next midnight
+            let timeUntilMidnight = midnightBDT.getTime() - now.getTime();
+
+            if (timeUntilMidnight < 0) {
+                midnightBDT.setDate(midnightBDT.getDate() + 1); // If it's already past midnight, set to tomorrow's midnight
+                timeUntilMidnight = midnightBDT.getTime() - now.getTime();
             }
 
-            if (statusElement.textContent !== newStatus) { // Only update if status has changed
-                statusElement.textContent = newStatus;
-                indicatorElement.classList.remove(statusClassToRemove);
-                indicatorElement.classList.add(statusClassToAdd);
-
-                // Immediately update deployed agents when status changes to PASSIVE
-                if (newStatus === 'PASSIVE') {
-                    updateDeployedAgents(); // Call it here to ensure immediate update to 0
-                }
-            }
+            setTimeout(() => {
+                performDailyUpdates();
+                setDailyUpdateTimer(); // Reset timer for the next day
+            }, timeUntilMidnight);
         }
-
-        // Function to perform daily updates
-        function performDailyUpdates() {
-            updateCasesAndAlerts();
-            updateAnomalyStatus();
-            updateEquipmentStatus();
-        }
-
-        // Function to perform hourly updates
-        function performHourlyUpdates() {
-            updateDeployedAgents(); // Now updates deployed agents (active agents) hourly
-        }
-
-        function initializeDashboard() {
-            // Initial values (optional - daily updates will overwrite these soon)
-            updateValue('current-cases', 4);
-            updateValue('priority-alerts', 2);
-            updateValue('total-agents', totalAgents); // Set total agents - fixed value
-            updateValue('deployed-agents', 3); // Initial deployed (active) agents - can be a starting random value if needed
-            updateValue('anomaly-level', 'MODERATE');
-            updateValue('anomaly-trend', '▲ UP');
-            updateValue('system-condition', 'NOMINAL');
-            updateValue('maintenance-level', '98');
-
-            updateSystemOperationalStatus(); // Initialize system status
-            performDailyUpdates(); // Initial daily update
-            updateDeployedAgents(); // Initial call to set deployed agents based on initial status
-            updateUptime();     // VERY IMPORTANT: INITIAL CALL TO AVOID 00:00:00
-
-            // Set intervals
-            setInterval(updateUptime, 1000); // Update uptime every second
-            setInterval(updateSystemOperationalStatus, 60000); // Update system status every minute
-            setInterval(performHourlyUpdates, 3600000); // Update hourly stats
-            setInterval(performDailyUpdates, 86400000); // Update daily stats every 24 hours
-
-            // Run daily updates at the start of a new Bangladeshi day (midnight BDT)
-            function setDailyUpdateTimer() {
-                const now = getBangladeshiTime();
-                const midnightBDT = new Date(now);
-                midnightBDT.setHours(24, 0, 0, 0); // Set to next midnight
-                let timeUntilMidnight = midnightBDT.getTime() - now.getTime();
-
-                if (timeUntilMidnight < 0) {
-                    midnightBDT.setDate(midnightBDT.getDate() + 1); // If it's already past midnight, set to tomorrow's midnight
-                    timeUntilMidnight = midnightBDT.getTime() - now.getTime();
-                }
-
-                setTimeout(() => {
-                    performDailyUpdates();
-                    setDailyUpdateTimer(); // Reset timer for the next day
-                }, timeUntilMidnight);
-            }
-            setDailyUpdateTimer(); // Start the daily update timer
-        }
+        setDailyUpdateTimer(); // Start the daily update timer
+    }
 
 
-        // Initialize dashboard when the script loads
-        initializeDashboard();
-    </script>
+    // Initialize dashboard when the script loads
+    initializeDashboard();
+</script>
 </body>
 </html>
