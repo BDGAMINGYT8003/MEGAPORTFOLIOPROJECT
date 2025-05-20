@@ -1,0 +1,81 @@
+@use 'variables' as *;
+@use 'animations' as *;
+
+footer {
+  text-align: center;
+  padding: $spacing-lg $spacing-md; // Increased padding
+  background: transparent; // Match header style
+  border: $border-width-medium solid $border-color;
+  border-top: $border-width-thick solid $accent-color; // Accent on top, similar to header bottom
+  font-size: $font-size-md; // Standardized font size
+  margin-top: $spacing-lg;
+  transform: translateY(30px);
+  opacity: 0;
+  animation: slideInBottom 1s ease-out 0.9s forwards;
+  box-shadow: 0 0 15px rgba($accent-color, 0.1), inset 0 0 10px rgba($primary-bg, 0.4); // Similar to header
+
+  p {
+    margin: $spacing-sm 0;
+    color: $text-color;
+    letter-spacing: $letter-spacing-base;
+
+    &.copyright-info { // Specific styling for the copyright line
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: $spacing-sm;
+      color: darken($text-color, 10%); // Slightly muted copyright
+      font-size: $font-size-sm;
+    }
+  }
+
+  .copyright-icon {
+    display: inline-block;
+    width: $font-size-base; // Scale with font size
+    height: $font-size-base;
+    // background-color: $accent-color; // Icon color - now will be set by font color
+    // -webkit-mask-image: url('data:image/svg+xml,<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14.5c-2.49 0-4.5 2.01-4.5 4.5s2.01 4.5 4.5 4.5 4.5-2.01 4.5-4.5-2.01-4.5-4.5-4.5zm0 7c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>'); // Updated SVG for a filled copyright symbol
+    // mask-image: url('data:image/svg+xml,<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14.5c-2.49 0-4.5 2.01-4.5 4.5s2.01 4.5 4.5 4.5 4.5-2.01 4.5-4.5-2.01-4.5-4.5-4.5zm0 7c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>');
+    // -webkit-mask-repeat: no-repeat;
+    // mask-repeat: no-repeat;
+    // -webkit-mask-position: center;
+    // mask-position: center;
+    // -webkit-mask-size: contain;
+    // mask-size: contain;
+    // Removed mask properties, will use Font Awesome class
+    color: $accent-color; // Set icon color directly
+    font-size: $font-size-base; // Match surrounding text or set as needed
+    transition: color $transition-speed-normal $transition-easing; // Transition color
+
+    &:hover {
+      color: lighten($accent-color, 15%);
+    }
+  }
+
+  // Adding a subtle top scanline effect to the footer, similar to header
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: $border-width-thin;
+    background: $accent-color;
+    animation: scan 3.5s linear infinite 0.5s; // Different speed and delay
+    box-shadow: 0 0 8px $glow-color;
+    opacity: 0.5;
+  }
+}
+
+// Responsive adjustments for footer
+@media (max-width: $bp-medium) {
+  footer {
+    padding: $spacing-md $spacing-sm;
+    font-size: $font-size-sm;
+
+    p.copyright-info {
+      font-size: $font-size-sm * 0.9; // Even smaller for copyright on mobile
+      gap: $spacing-xs;
+    }
+  }
+}

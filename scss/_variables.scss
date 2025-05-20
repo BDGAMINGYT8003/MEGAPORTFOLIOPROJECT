@@ -1,0 +1,106 @@
+// Color Palette
+:root {
+  // Existing Colors
+  --primary-bg: #0d0d0d; // Slightly darker than #111 for deeper blacks
+  --secondary-bg: #1a1a1a; // Slightly darker than #222
+  --accent-color: #00ffff; // Cyan, a classic retro-tech color
+  --text-color: #e0e0e0; // Slightly off-white for better readability
+  --border-color: #444; // Darker gray for borders
+
+  // Status & Feedback Colors
+  --status-border-color: var(--accent-color);
+  --danger-color: #ff3333; // Brighter red
+  --warning-color: #ffcc00; // Brighter yellow
+  --success-color: #00ff77; // Brighter green
+  --passive-color: #999; // Lighter gray for passive states
+
+  // New "Mysterious" & Highlight Colors
+  --deep-indigo: #300060; // Deep indigo for backgrounds or accents
+  --muted-radioactive-green: #7fff00; // Chartreuse, for highlights or active elements
+  --glow-color: rgba(0, 255, 255, 0.5); // Glow effect for accent color
+
+  // Typography
+  --font-family-main: 'VT323', monospace;
+  --font-size-base: 16px;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.5rem;
+  --font-size-xxl: 2.5rem;
+  --line-height-base: 1.6;
+  --letter-spacing-base: 0.5px;
+  --letter-spacing-wide: 1.5px;
+
+  // Spacing & Sizing
+  --spacing-unit: 1rem;
+  --spacing-xs: calc(var(--spacing-unit) * 0.25);
+  --spacing-sm: calc(var(--spacing-unit) * 0.5);
+  --spacing-md: var(--spacing-unit);
+  --spacing-lg: calc(var(--spacing-unit) * 1.5);
+  --spacing-xl: calc(var(--spacing-unit) * 2);
+  --spacing-xxl: calc(var(--spacing-unit) * 3);
+
+  // Borders
+  --border-width-thin: 1px;
+  --border-width-medium: 2px;
+  --border-width-thick: 3px;
+  --border-radius-sm: 3px;
+  --border-radius-md: 5px;
+
+  // Transitions & Animations
+  --transition-speed-fast: 0.2s;
+  --transition-speed-normal: 0.3s;
+  --transition-easing: ease-in-out;
+
+  // Z-Indexes
+  --z-index-background: -1;
+  --z-index-base: 1;
+  --z-index-content: 10;
+  --z-index-overlay: 100; // For scanlines, modals etc.
+}
+
+// SCSS Variables (can be used in SCSS context, not directly in CSS like :root variables)
+$primary-bg: var(--primary-bg);
+$secondary-bg: var(--secondary-bg);
+$accent-color: var(--accent-color);
+$text-color: var(--text-color);
+$border-color: var(--border-color);
+
+$status-border-color: var(--status-border-color);
+$danger-color: var(--danger-color);
+$warning-color: var(--warning-color);
+$success-color: var(--success-color);
+$passive-color: var(--passive-color);
+
+$deep-indigo: var(--deep-indigo);
+$muted-radioactive-green: var(--muted-radioactive-green);
+$glow-color: var(--glow-color);
+
+$font-family-main: var(--font-family-main);
+$font-size-base: var(--font-size-base);
+$line-height-base: var(--line-height-base);
+$letter-spacing-base: var(--letter-spacing-base);
+
+$spacing-unit: var(--spacing-unit);
+$spacing-sm: var(--spacing-sm);
+$spacing-md: var(--spacing-md);
+$spacing-lg: var(--spacing-lg);
+$spacing-xl: var(--spacing-xl);
+
+$border-width-thin: var(--border-width-thin);
+$border-width-medium: var(--border-width-medium);
+$border-radius-sm: var(--border-radius-sm);
+
+$transition-speed-normal: var(--transition-speed-normal);
+$transition-easing: var(--transition-easing);
+
+$z-index-background: var(--z-index-background);
+$z-index-base: var(--z-index-base);
+$z-index-content: var(--z-index-content);
+$z-index-overlay: var(--z-index-overlay);
+
+// Breakpoints for responsive design (Mobile First)
+$bp-small: 576px; // Small devices (landscape phones)
+$bp-medium: 768px; // Medium devices (tablets)
+$bp-large: 992px; // Large devices (desktops)
+$bp-xlarge: 1200px; // Extra large devices (large desktops)

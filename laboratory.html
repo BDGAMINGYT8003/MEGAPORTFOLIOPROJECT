@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>THE LABORATORY - Classified Team Info</title>
   <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.scss" />
   <style>
     :root {
       --primary-bg: #111;
@@ -292,16 +293,16 @@
 <body>
   <div class="grid-overlay"></div>
   <div class="scanline"></div>
-  <div class="container">
+  <div class="content-wrapper"> <!-- Changed from container to content-wrapper -->
     <header class="header">
       <h1>THE LABORATORY</h1>
       <p>CLASSIFIED TEAM INFO – ECTOPLASMIC INVESTIGATORS</p>
     </header>
-    <main class="content-section">
-      <div class="member-grid">
-        <section class="member-card">
+    <main class="main-content"> <!-- Changed from content-section to main-content -->
+      <div class="data-grid"> <!-- Changed from member-grid to data-grid -->
+        <section class="data-card member-card"> <!-- Changed to data-card, kept member-card for specific targeting -->
           <img class="profile-pic" src="images/Moin.png" alt="Moin Uddin">
-          <h2>Moin Uddin</h2>
+          <h3><i class="fas fa-user-secret card-icon"></i> Moin Uddin</h3> <!-- Changed h2 to h3 -->
           <ul>
             <li><strong>Role:</strong> Lead Investigator</li>
             <li><strong>Expertise:</strong> Ectoplasmic anomalies</li>
@@ -309,9 +310,9 @@
             <li><strong>Motto:</strong> "Uncovering secrets beyond the ordinary."</li>
           </ul>
         </section>
-        <section class="member-card">
+        <section class="data-card member-card"> <!-- Changed to data-card -->
           <img class="profile-pic" src="images/Atif.png" alt="Atif Ullah">
-          <h2>Atif Ullah</h2>
+          <h3><i class="fas fa-user-secret card-icon"></i> Atif Ullah</h3> <!-- Changed h2 to h3 -->
           <ul>
             <li><strong>Role:</strong> Paranormal Acoustics Specialist</li>
             <li><strong>Expertise:</strong> EVP analysis & spectral sound phenomena</li>
@@ -319,9 +320,9 @@
             <li><strong>Motto:</strong> "Listen closely—the unseen speaks volumes."</li>
           </ul>
         </section>
-        <section class="member-card">
+        <section class="data-card member-card"> <!-- Changed to data-card -->
           <img class="profile-pic" src="images/Fakhruddin.png" alt="Fakhruddin">
-          <h2>Fakhruddin</h2>
+          <h3><i class="fas fa-user-secret card-icon"></i> Fakhruddin</h3> <!-- Changed h2 to h3 -->
           <ul>
             <li><strong>Role:</strong> Tech Specialist</li>
             <li><strong>Expertise:</strong> Digital archiving & data decryption</li>
@@ -329,9 +330,9 @@
             <li><strong>Motto:</strong> "Every byte holds a clue."</li>
           </ul>
         </section>
-        <section class="member-card">
+        <section class="data-card member-card"> <!-- Changed to data-card -->
           <img class="profile-pic" src="images/Oli.png" alt="Oli Ullah">
-          <h2>Oli Ullah</h2>
+          <h3><i class="fas fa-user-secret card-icon"></i> Oli Ullah</h3> <!-- Changed h2 to h3 -->
           <ul>
             <li><strong>Role:</strong> Creative Field Operative</li>
             <li><strong>Expertise:</strong> Artistic documentation of paranormal events</li>
@@ -339,9 +340,9 @@
             <li><strong>Motto:</strong> "Seeing the unseen with creativity."</li>
           </ul>
         </section>
-        <section class="member-card">
+        <section class="data-card member-card"> <!-- Changed to data-card -->
           <img class="profile-pic" src="images/Nasir.png" alt="Nasir Uddin">
-          <h2>Nasir Uddin</h2>
+          <h3><i class="fas fa-user-secret card-icon"></i> Nasir Uddin</h3> <!-- Changed h2 to h3 -->
           <ul>
             <li><strong>Role:</strong> Medical Expert</li>
             <li><strong>Expertise:</strong> Human physiology and anomalous biological effects</li>
@@ -353,13 +354,11 @@
     </main>
     <footer>
       <p class="copyright-info">
-        <i class="copyright-icon"></i> 2025 THE ECTOPLASMIC INVESTIGATORS
+        <i class="fas fa-copyright copyright-icon"></i> 2025 THE ECTOPLASMIC INVESTIGATORS
       </p>
       <p>SECRET LOGS AWAIT DISCOVERY</p>
     </footer>
   </div>
-  <script>
-    console.log("Laboratory Page Loaded with Optimized CSS.");
-  </script>
+  <!-- Removed inline script -->
 </body>
 </html>

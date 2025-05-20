@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Dispatch - Contact</title>
   <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.scss" />
   <style>
     /* CSS Variables from Reference Codes */
     :root {
@@ -268,15 +269,15 @@
     }
   </style>
 </head>
-<body>
+<body class="page-dispatch"> <!-- Added page-specific class -->
   <div class="grid-overlay"></div>
   <div class="scanline"></div>
-  <div class="container">
+  <div class="content-wrapper"> <!-- Changed from container to content-wrapper -->
     <header class="header">
       <h1>DISPATCH: <span id="form-title">General Inquiry</span></h1>
       <p>COMMUNICATION HUB</p>
       <div class="inquiry-type">
-        <label for="contactType">Inquiry Type:</label>
+        <label for="contactType"><i class="fas fa-info-circle label-icon"></i> Inquiry Type:</label>
         <select id="contactType">
           <option value="General Inquiry" selected>General Inquiry</option>
           <option value="Technical Support">Technical Support</option>
@@ -286,67 +287,38 @@
       </div>
     </header>
 
-    <main class="content-section">
+    <main class="main-content"> <!-- Changed from content-section to main-content -->
       <form class="contact-form" id="contactForm" action="https://formsubmit.co/gizaimoin@gmail.com" method="POST">
         <input type="hidden" name="inquiryType" id="inquiryType" value="General Inquiry" />
         <input type="hidden" name="_captcha" value="false">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" placeholder="Your Name" required>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" placeholder="you@example.com" required>
-        <label for="message">Message:</label>
-        <textarea id="message" name="message" placeholder="Your message here" rows="4" required></textarea>
+        <label for="name"><i class="fas fa-user label-icon"></i> Name:</label>
+        <input type="text" id="name" name="name" placeholder="Your Name" required aria-required="true">
+        <label for="email"><i class="fas fa-envelope label-icon"></i> Email:</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required aria-required="true">
+        <label for="message"><i class="fas fa-keyboard label-icon"></i> Message:</label>
+        <textarea id="message" name="message" placeholder="Your message here" rows="4" required aria-required="true"></textarea>
         <div class="button-row">
-          <a href="index.html" class="go-back-button">Go Back</a>
-          <button type="submit">Send</button>
+          <a href="index.html" class="nav-button button-link">Go Back</a> <!-- Added nav-button and button-link classes -->
+          <button type="submit" class="nav-button">Send</button> <!-- Added nav-button class -->
         </div>
       </form>
-      <div class="confirmation-message" id="confirmationMessage">
+      <div class="confirmation-message" id="confirmationMessage" aria-live="assertive">
         <h2>Message Sent!</h2>
         <p>Thanks for reaching out. We'll get back to you shortly.</p>
         <div class="button-row">
-          <a href="index.html" class="go-back-button">Go Back</a>
+          <a href="index.html" class="nav-button button-link">Go Back</a> <!-- Added nav-button and button-link classes -->
         </div>
       </div>
     </main>
 
     <footer>
       <p class="copyright-info">
-        <i class="copyright-icon"></i> 2025 THE ECTOPLASMIC INVESTIGATORS
+        <i class="fas fa-copyright copyright-icon"></i> 2025 THE ECTOPLASMIC INVESTIGATORS
       </p>
       <p>SECRET LOGS AWAIT DISCOVERY</p>
     </footer>
   </div>
 
-  <script>
-    const contactTypeSelect = document.getElementById('contactType');
-    const formTitle = document.getElementById('form-title');
-    const inquiryTypeHidden = document.getElementById('inquiryType');
-    const contactForm = document.getElementById('contactForm');
-    const confirmationMessage = document.getElementById('confirmationMessage');
-
-    contactTypeSelect.addEventListener('change', (event) => {
-      const selectedType = event.target.value;
-      formTitle.textContent = selectedType;
-      inquiryTypeHidden.value = selectedType;
-    });
-
-    contactForm.addEventListener('submit', function(event) {
-      event.preventDefault();
-      fetch(contactForm.action, {
-        method: "POST",
-        body: new FormData(contactForm),
-        mode: 'no-cors'
-      }).then(() => {
-        contactForm.style.display = 'none';
-        confirmationMessage.style.display = 'block';
-        contactTypeSelect.disabled = true;
-      }).catch((error) => {
-        console.error('Error submitting the form:', error);
-      });
-    });
-
-    console.log("Dispatch (Contact) page loaded. Communication hub active.");
-  </script>
+  <!-- Script moved to js/page-specific.js -->
 </body>
 </html>

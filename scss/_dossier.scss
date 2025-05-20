@@ -1,0 +1,138 @@
+@use 'variables' as *;
+@use 'animations' as *;
+
+// Styles specific to dossier.html (accordion sections)
+.main-content { // Targeting .main-content on dossier.html
+  max-width: 900px; // Allow dossier content to be a bit wider
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section {
+  margin-bottom: $spacing-lg; // Space between accordion sections
+  border: $border-width-thin solid darken($border-color, 5%);
+  background-color: lighten($primary-bg, 2%); // Slightly different background for section container
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.section-title {
+  font-size: $font-size-xl; // Larger title for sections
+  color: $accent-color;
+  // text-shadow: 1px 1px 0px $primary-bg; // Already in base h2, h3
+  cursor: pointer;
+  position: relative;
+  padding: $spacing-md $spacing-lg; // More padding for title
+  background-color: $secondary-bg; // Header-like background for titles
+  border-bottom: $border-width-thin solid $border-color;
+  transition: background-color $transition-speed-normal $transition-easing, color $transition-speed-normal $transition-easing;
+  letter-spacing: $letter-spacing-wide;
+  display: flex; // For aligning icon and text
+  align-items: center;
+
+  .accordion-icon { // Class for the Font Awesome icon
+    margin-right: $spacing-md;
+    font-size: $font-size-lg * 0.9; // Slightly smaller than title for balance
+    transition: transform $transition-speed-fast $transition-easing;
+    width: 20px; // Fixed width for alignment
+    text-align: center;
+  }
+
+  // &::before { // Chevron-like indicator for open/close state - REMOVED
+  //   content: '►'; // Default: closed
+  //   margin-right: $spacing-md;
+  //   font-size: $font-size-lg;
+  //   transition: transform $transition-speed-fast $transition-easing;
+  //   display: inline-block; // Needed for transform
+  // }
+
+  &:hover, &:focus {
+    background-color: lighten($secondary-bg, 5%);
+    color: lighten($accent-color, 10%);
+    outline: none; // Remove default focus outline if custom is applied
+  }
+
+  // Style for when the section is open (JS will toggle a class like 'active' or rely on :target)
+  // For now, assuming JS will handle display: block on .section-content
+  // We can add a class to .section-title when it's open, e.g., .active
+  &.active {
+    .accordion-icon { // Rotate the Font Awesome icon
+      transform: rotate(90deg);
+    }
+  }
+}
+
+.section-content {
+  display: none; // Initially hidden, JS will toggle
+  background: $primary-bg; // Darker background for content area
+  // border: $border-width-medium double $border-color; // Keep original border style for content
+  padding: $spacing-lg; // Generous padding
+  // box-shadow: inset 0 0 10px rgba($primary-bg, 0.7), 0 0 5px rgba($border-color,0.3); // Inner shadow + subtle outer
+  font-size: $font-size-md; // Standardized font size
+  line-height: $line-height-base * 1.15; // More line height for readability
+  color: $text-color;
+
+  p {
+    margin-bottom: $spacing-md;
+  }
+
+  ul {
+    list-style: none; // Remove default disc
+    padding-left: $spacing-sm; // Indent for custom bullets
+    margin-top: $spacing-sm;
+    margin-bottom: $spacing-md;
+
+    li {
+      margin-bottom: $spacing-sm;
+      padding-left: $spacing-md; // Space for custom bullet
+      position: relative;
+
+      &::before { // Custom bullet for dossier lists
+        content: '»'; // Or '•', '–', etc.
+        position: absolute;
+        left: 0;
+        top: 0;
+        color: $muted-radioactive-green;
+        font-weight: bold;
+      }
+
+      strong { // For highlighting terms within list items
+        color: $accent-color; // Use accent color for strong tags
+        font-weight: bold; // Ensure VT323 is bold
+        // margin-right: $spacing-xs; // Removed to let it flow naturally
+      }
+    }
+  }
+}
+
+// Scroll lock body classes - already in HTML, just ensuring SCSS acknowledges them if needed
+body.scroll-lock {
+  overflow-y: hidden;
+}
+body.scroll-unlock {
+  overflow-y: auto;
+}
+
+// Responsive adjustments for dossier
+@media (max-width: $bp-medium) {
+  .section-title {
+    font-size: $font-size-lg;
+    padding: $spacing-sm $spacing-md;
+    &::before {
+      font-size: $font-size-md;
+    }
+  }
+  .section-content {
+    padding: $spacing-md;
+    font-size: $font-size-sm;
+    ul {
+      padding-left: $spacing-xs;
+      li {
+        padding-left: $spacing-sm + $spacing-xs;
+      }
+    }
+  }
+}

@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>The Chronicle - Investigations Log</title>
   <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.scss" />
   <style>
     /* CSS Variables */
     :root {
@@ -286,7 +287,7 @@
 <body>
   <div class="grid-overlay"></div>
   <div class="scanline"></div>
-  <div class="container">
+  <div class="content-wrapper"> <!-- Changed from container to content-wrapper -->
     <!-- Header -->
     <header class="header">
       <h1>THE CHRONICLE</h1>
@@ -294,126 +295,126 @@
     </header>
 
     <!-- Content Section: Chronicle Entries -->
-    <main class="content-section">
-      <div class="entry-grid">
+    <main class="main-content"> <!-- Changed from content-section to main-content -->
+      <div class="data-grid"> <!-- Changed from entry-grid to data-grid -->
         <!-- Chronicle Entry #010 -->
-        <section class="entry-card">
-          <h2>Entry #010</h2>
+        <section class="data-card"> <!-- Changed from entry-card to data-card -->
+          <h3><i class="fas fa-book-reader card-icon"></i> Entry #010</h3> <!-- Changed h2 to h3 -->
           <ul>
             <li><strong>Date:</strong> 2025-04-24</li>
             <li><strong>Subject:</strong> Minarpara Mobile Minaret - Surveying the Shift</li>
             <li><strong>Entry:</strong> The Minarpara mosque's minaret's 'nocturnal wanderings' are, surprisingly, not entirely unfounded. Precise laser surveying conducted over several nights reveals minute, almost imperceptible, shifts in the minaret's position. Geological instability and slow soil creep are identified as the cause. The 'divine displeasure' is simply the earth subtly rearranging itself. While not paranormal, the phenomenon is a testament to the slow, powerful forces of nature. Case resolved; recommending structural assessment of the mosque.</li>
             <li><strong>Detective:</strong> Agent Fakhruddin</li>
           </ul>
-          <span class="easter-egg">Hidden clue: "Even the steadfast can be moved by unseen forces."</span>
+          <span class="easter-egg" aria-label="Hidden Clue">Hidden clue: "Even the steadfast can be moved by unseen forces."</span>
         </section>
 
         <!-- Chronicle Entry #009 -->
-        <section class="entry-card">
-          <h2>Entry #009</h2>
+        <section class="data-card"> <!-- Changed from entry-card to data-card -->
+          <h3><i class="fas fa-book-reader card-icon"></i> Entry #009</h3> <!-- Changed h2 to h3 -->
           <ul>
             <li><strong>Date:</strong> 2025-04-17</li>
             <li><strong>Subject:</strong> Anderkilla Weeping Well - Unearthing the Lament</li>
             <li><strong>Entry:</strong> The weeping well of Anderkilla is indeed emanating sounds of distress, even in its dryness. Seismic sensors placed around the well detect subtle vibrations originating deep underground. Geological survey reveals an underground water cavity where trapped air is being slowly released through narrow fissures, creating low, sobbing sounds. The 'phantom's lament' is the earth itself sighing. Case resolved; a poignant reminder of nature's subtle voices.</li>
             <li><strong>Detective:</strong> Agent Oli Ullah</li>
           </ul>
-          <span class="easter-egg">Hidden clue: "Earth's sorrow echoes in the quiet depths."</span>
+          <span class="easter-egg" aria-label="Hidden Clue">Hidden clue: "Earth's sorrow echoes in the quiet depths."</span>
         </section>
 
         <!-- Chronicle Entry #008 -->
-        <section class="entry-card">
-          <h2>Entry #008</h2>
+        <section class="data-card"> <!-- Changed from entry-card to data-card -->
+          <h3><i class="fas fa-book-reader card-icon"></i> Entry #008</h3> <!-- Changed h2 to h3 -->
           <ul>
             <li><strong>Date:</strong> 2025-04-10</li>
             <li><strong>Subject:</strong> Polashpur Shadow Market - Exposing the Specters</li>
             <li><strong>Entry:</strong> The spectral figures at Polashpur night market are revealed to be a clever, albeit unsettling, illusion. Projectors, hidden amongst the market stalls, cast pre-recorded shadow puppet shows onto strategically placed screens during the night. The 'shadow jinn' are a deliberate fabrication, likely intended to deter competitors or control market activity. The source of the projectors is under investigation. Fear, once again, exploited for earthly gain. Case resolved, but further inquiry into the perpetrators is warranted.</li>
             <li><strong>Detective:</strong> Agent Moin Uddin</li>
           </ul>
-          <span class="easter-egg">Hidden clue: "Deception dances best in the dim light."</span>
+          <span class="easter-egg" aria-label="Hidden Clue">Hidden clue: "Deception dances best in the dim light."</span>
         </section>
 
         <!-- Chronicle Entry #007 -->
-        <section class="entry-card">
-          <h2>Entry #007</h2>
+        <section class="data-card"> <!-- Changed from entry-card to data-card -->
+          <h3><i class="fas fa-book-reader card-icon"></i> Entry #007</h3> <!-- Changed h2 to h3 -->
           <ul>
             <li><strong>Date:</strong> 2025-04-03</li>
             <li><strong>Subject:</strong> Shimultola Screaming Tree - Deciphering the Shrieks</li>
             <li><strong>Entry:</strong> The screaming Silk Cotton tree in Shimultola is indeed emitting bloodcurdling sounds on full moon nights. Bioacoustic analysis reveals the ‘screams’ are produced by air being forced through hollow branches by strong lunar-influenced winds, amplified by the tree's unique structure. The sound frequency and resonance create an unnervingly human-like scream. The 'Rakshasa' is merely the wind playing a morbid tune on an ancient instrument of wood. Case resolved; natural phenomena mimicking the supernatural.</li>
             <li><strong>Detective:</strong> Agent Fakhruddin</li>
           </ul>
-          <span class="easter-egg">Hidden clue: "Wind's song can echo ancient fears."</span>
+          <span class="easter-egg" aria-label="Hidden Clue">Hidden clue: "Wind's song can echo ancient fears."</span>
         </section>
 
         <!-- Chronicle Entry #006 -->
-        <section class="entry-card">
-          <h2>Entry #006</h2>
+        <section class="data-card"> <!-- Changed from entry-card to data-card -->
+          <h3><i class="fas fa-book-reader card-icon"></i> Entry #006</h3> <!-- Changed h2 to h3 -->
           <ul>
             <li><strong>Date:</strong> 2025-03-28</li>
             <li><strong>Subject:</strong> Kumarpur Charpai - Unraveling the Curse</li>
             <li><strong>Entry:</strong> The cursed charpai of Kumarpur has yielded a surprising, yet mundane, explanation. Analysis of the wood reveals traces of a rare, sleep-inducing fungus. Prolonged exposure could induce vivid nightmares and physical malaise, perfectly aligning with the villagers' accounts. The 'vengeful spirit' is, in fact, a microscopic organism. The charpai has been removed for decontamination. Another case where fear and folklore obscured a natural, albeit unsettling, cause. Case closed.</li>
             <li><strong>Detective:</strong> Agent Oli Ullah</li>
           </ul>
-          <span class="easter-egg">Hidden clue: "The unseen can terrify, even when earthly."</span>
+          <span class="easter-egg" aria-label="Hidden Clue">Hidden clue: "The unseen can terrify, even when earthly."</span>
         </section>
 
         <!-- Chronicle Entry #005 -->
-        <section class="entry-card">
-          <h2>Entry #005</h2>
+        <section class="data-card"> <!-- Changed from entry-card to data-card -->
+          <h3><i class="fas fa-book-reader card-icon"></i> Entry #005</h3> <!-- Changed h2 to h3 -->
           <ul>
             <li><strong>Date:</strong> 2025-03-22</li>
             <li><strong>Subject:</strong> Joynagar Lake - Dhoar Paani Case - Insights</li>
             <li><strong>Entry:</strong> The 'mirror spirit' of Dhoar Paani lake appears to be tied to unusual optical properties. Spectral analysis of the mist reveals a high concentration of particulate matter, causing significant light refraction and reflection. Combined with the naturally occurring fog, this creates complex visual distortions, easily misinterpreted as phantom visions. The villagers’ fear is understandable, but rooted in natural phenomena, not supernatural intervention. Case marked as resolved; educating the community on the science behind the 'visions' is now paramount.</li>
             <li><strong>Detective:</strong> Agent Moin Uddin</li>
           </ul>
-          <span class="easter-egg">Hidden clue: "Illusions fade when light reveals their source."</span>
+          <span class="easter-egg" aria-label="Hidden Clue">Hidden clue: "Illusions fade when light reveals their source."</span>
         </section>
 
         <!-- Chronicle Entry #004 -->
-        <section class="entry-card">
-          <h2>Entry #004</h2>
+        <section class="data-card"> <!-- Changed from entry-card to data-card -->
+          <h3><i class="fas fa-book-reader card-icon"></i> Entry #004</h3> <!-- Changed h2 to h3 -->
           <ul>
             <li><strong>Date:</strong> 2025-03-18</li>
             <li><strong>Subject:</strong> Bottola's Whispering Baobab - Acoustic Analysis</li>
             <li><strong>Entry:</strong> The Baobab of Bottola is indeed producing anomalous sounds at dusk. Acoustic recordings reveal low-frequency murmurs, almost subsonic, coinciding with the villagers’ reported whispers. Wind alone does not account for the complexity of the sounds. We are investigating the tree's internal structure for cavities or unusual formations that could act as natural resonators. Could this be a case of pareidolia, where natural sounds are interpreted as voices due to pre-existing beliefs, or is there a deeper acoustic phenomenon at play?</li>
             <li><strong>Detective:</strong> Agent Fakhruddin</li>
           </ul>
-          <span class="easter-egg">Hidden clue: "Nature speaks in tones we often misinterpret."</span>
+          <span class="easter-egg" aria-label="Hidden Clue">Hidden clue: "Nature speaks in tones we often misinterpret."</span>
         </section>
 
         <!-- Chronicle Entry #003 -->
-        <section class="entry-card">
-          <h2>Entry #003</h2>
+        <section class="data-card"> <!-- Changed from entry-card to data-card -->
+          <h3><i class="fas fa-book-reader card-icon"></i> Entry #003</h3> <!-- Changed h2 to h3 -->
           <ul>
             <li><strong>Date:</strong> 2025-03-12</li>
             <li><strong>Subject:</strong> Temporal Shifts in Shonargaon - Preliminary Assessment</li>
             <li><strong>Entry:</strong> Shonargaon's ruins present a fascinating temporal puzzle. Synchronized clock malfunctions across the village are confirmed. Employing chronometers and temporal field detectors near the Zamindar Bari, we are registering fluctuations in time flow. The readings are subtle but consistent, indicating a localized distortion. The legends of a time-bending jinn may hold a kernel of truth, albeit likely misinterpreted. Focusing on environmental factors within the ruins, particularly electromagnetic fields, is the next step.</li>
             <li><strong>Detective:</strong> Agent Oli Ullah</li>
           </ul>
-          <span class="easter-egg">Hidden clue: "Time's currents are felt, not always seen."</span>
+          <span class="easter-egg" aria-label="Hidden Clue">Hidden clue: "Time's currents are felt, not always seen."</span>
         </section>
 
         <!-- Chronicle Entry #002 -->
-        <section class="entry-card">
-          <h2>Entry #002</h2>
+        <section class="data-card"> <!-- Changed from entry-card to data-card -->
+          <h3><i class="fas fa-book-reader card-icon"></i> Entry #002</h3> <!-- Changed h2 to h3 -->
           <ul>
             <li><strong>Date:</strong> 2025-03-05</li>
             <li><strong>Subject:</strong> Amtali's Vanishing Footprints - Initial Findings</li>
             <li><strong>Entry:</strong> In Amtali, the mystery of the vanishing footprints deepens. Following the tracks to the bamboo grove, I observed no exit points, corroborating local accounts. The soil composition within the grove is peculiar; it seems to absorb impressions unlike the surrounding paddy fields. Could this be natural phenomena amplified by folklore, or is there an entity at play, subtly erasing its passage? Ground penetrating radar will be deployed to map subsurface anomalies within the grove.</li>
             <li><strong>Detective:</strong> Agent Moin Uddin</li>
           </ul>
-          <span class="easter-egg">Hidden clue: "Earth remembers, even when surfaces forget."</span>
+          <span class="easter-egg" aria-label="Hidden Clue">Hidden clue: "Earth remembers, even when surfaces forget."</span>
         </section>
 
         <!-- Chronicle Entry #001 -->
-        <section class="entry-card">
-          <h2>Entry #001</h2>
+        <section class="data-card"> <!-- Changed from entry-card to data-card -->
+          <h3><i class="fas fa-book-reader card-icon"></i> Entry #001</h3> <!-- Changed h2 to h3 -->
           <ul>
             <li><strong>Date:</strong> 2025-03-01</li>
             <li><strong>Subject:</strong> The Koelpur Static Anomaly</li>
             <li><strong>Entry:</strong> Commenced investigation in Koelpur. The reports of phantom radio static are indeed persistent. Utilizing spectral analysis equipment, we are attempting to isolate the source frequency. Initial readings suggest anomalies beyond conventional radio waves. The villagers' unease is palpable, a thick layer of fear clinging to the air itself. Further analysis is crucial to discern if this is a technological deception or something of a more…ethereal nature.</li>
             <li><strong>Detective:</strong> Agent Fakhruddin</li>
           </ul>
-          <span class="easter-egg">Hidden clue: "In static, voices may hide."</span>
+          <span class="easter-egg" aria-label="Hidden Clue">Hidden clue: "In static, voices may hide."</span>
         </section>
       </div>
     </main>
@@ -421,13 +422,11 @@
     <!-- Footer -->
     <footer>
       <p class="copyright-info">
-        <i class="copyright-icon"></i> 2025 THE ECTOPLASMIC INVESTIGATORS
+        <i class="fas fa-copyright copyright-icon"></i> 2025 THE ECTOPLASMIC INVESTIGATORS
       </p>
       <p>SECRET LOGS AWAIT DISCOVERY</p>
     </footer>
   </div>
-  <script>
-    console.log("The Chronicle Page Loaded with Cloned and Optimized CSS.");
-  </script>
+  <!-- Removed inline script -->
 </body>
 </html>

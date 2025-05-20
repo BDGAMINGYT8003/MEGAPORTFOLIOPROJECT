@@ -1,0 +1,72 @@
+@use 'variables' as *;
+@use 'animations' as *;
+
+// Styles specific to chronicle.html content within .data-card elements
+.data-card { // Targeting .data-card specifically on chronicle.html
+  // Assuming ul/li structure for entries, similar to casefiles
+  ul {
+    list-style: none;
+    padding-left: 0;
+    margin-top: $spacing-sm;
+    text-align: left;
+
+    li {
+      margin-bottom: $spacing-sm;
+      padding-left: $spacing-md; // Indent list items
+      position: relative;
+      font-size: $font-size-sm;
+      line-height: $line-height-base * 1.05;
+
+      &::before { // Custom bullet point for chronicle entries
+        content: '»'; // Same as casefiles, or could be different e.g., '»' or '•'
+        position: absolute;
+        left: 0;
+        top: 0; // Adjust if alignment is off with current font/line-height
+        color: $muted-radioactive-green;
+        font-weight: bold;
+      }
+
+      strong { // For labels like "Date:", "Subject:", "Entry:", "Detective:"
+        color: $accent-color;
+        font-weight: bold;
+        margin-right: $spacing-xs;
+        display: block; // Labels on their own line for clarity
+        margin-bottom: $spacing-xs / 2;
+      }
+
+      // Styling for the actual entry text to make it distinct from labels
+      // This assumes the entry text is directly within the <li> or wrapped in a <p> or <span>
+      // If it's just plain text after a <strong>, it will inherit li styles.
+      // Example: if entry is wrapped in <p class="entry-text">
+      p.entry-text {
+        color: $text-color;
+        padding-left: $spacing-xs; // Slight indent for entry text itself
+        font-size: $font-size-sm * 0.95; // Slightly smaller for dense text
+      }
+    }
+  }
+
+  // Easter egg styling can be reused from _casefiles.scss if identical,
+  // or defined here if specific to chronicle pages.
+  // For now, assuming .easter-egg styles in _casefiles.scss are general enough,
+  // or it's styled globally in _components.scss if it's a common component.
+  // If not, copy and adapt .easter-egg styles from _casefiles.scss here.
+  .easter-egg { // Copied and adapted from _casefiles.scss for completeness
+    display: block;
+    font-size: $font-size-sm * 0.9;
+    margin-top: $spacing-md;
+    padding: $spacing-xs $spacing-sm;
+    color: darken($text-color, 20%);
+    background-color: darken($primary-bg, 2%);
+    border-left: $border-width-medium solid $border-color;
+    font-style: italic;
+    text-align: left;
+    animation: blink-caret 1.5s steps(1, start) infinite;
+
+    &::before {
+      content: 'log-entry-meta: '; // Different prefix for chronicle
+      color: $passive-color;
+      font-style: normal;
+    }
+  }
+}

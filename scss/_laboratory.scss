@@ -1,0 +1,84 @@
+@use 'variables' as *;
+@use 'animations' as *;
+
+// Styles specific to laboratory.html (member profile cards)
+.data-card.member-card { // Target data-cards that are also member-cards
+  text-align: center; // Ensure content within the card is centered
+
+  .profile-pic {
+    width: 120px; // Slightly larger profile picture
+    height: 120px;
+    border: $border-width-medium solid $accent-color; // Accent border for profile pic
+    border-radius: 50%; // Circular profile pictures
+    object-fit: cover; // Ensure image covers the area well
+    margin: 0 auto $spacing-md auto; // Center image and add space below
+    display: block;
+    box-shadow: 0 0 15px $glow-color, inset 0 0 8px rgba($primary-bg, 0.5); // Glow and inner shadow
+    transition: transform $transition-speed-normal $transition-easing;
+
+    &:hover {
+      transform: scale(1.05) rotate(3deg); // Slight zoom and tilt on hover
+    }
+  }
+
+  h3 { // Name of the member
+    font-size: $font-size-xl; // Larger name
+    margin-bottom: $spacing-md;
+    color: $text-color; // Name in primary text color for contrast with accent title
+    // text-shadow: 0 0 3px $accent-color; // Subtle glow for name
+  }
+
+  ul {
+    list-style: none; // Remove default disc
+    padding-left: 0; // Remove default padding
+    margin-top: $spacing-sm;
+    text-align: left; // Align list items to the left for readability
+
+    li {
+      margin-bottom: $spacing-sm;
+      padding-left: $spacing-sm; // Indent list items slightly
+      position: relative;
+      font-size: $font-size-sm;
+      line-height: $line-height-base * 1.05;
+
+      // No custom bullet for a cleaner look in profile cards, or use a very subtle one
+      // &::before {
+      //   content: '▪';
+      //   position: absolute;
+      //   left: 0;
+      //   top: 2px; // Adjust alignment
+      //   color: $muted-radioactive-green;
+      // }
+
+      strong { // For labels like "Role:", "Expertise:"
+        color: $accent-color;
+        font-weight: bold;
+        margin-right: $spacing-xs;
+        display: inline-block; // Keep label and value on the same line if possible
+        // width: 80px; // Fixed width for alignment if desired
+      }
+    }
+  }
+
+  // No easter-egg specific styling for laboratory cards unless needed
+}
+
+// Responsive adjustments for laboratory cards
+@media (max-width: $bp-small) {
+  .data-card.member-card {
+    .profile-pic {
+      width: 100px;
+      height: 100px;
+    }
+    h3 {
+      font-size: $font-size-lg;
+    }
+    ul li {
+      font-size: $font-size-sm * 0.95;
+      strong {
+        display: block; // Stack label and value on very small screens
+        margin-bottom: $spacing-xs / 2;
+      }
+    }
+  }
+}

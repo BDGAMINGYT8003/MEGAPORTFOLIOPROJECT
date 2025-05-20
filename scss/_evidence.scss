@@ -1,0 +1,227 @@
+@use 'variables' as *;
+@use 'animations' as *;
+
+// Styles specific to evidence.html (gallery and modal)
+
+// evidence-card is now data-card, specific styles for image content here
+.data-card.evidence-card { // Target data-cards that are also evidence-cards
+  padding: $spacing-sm; // Less padding for image cards to maximize image space
+
+  .image-container {
+    position: relative;
+    cursor: pointer;
+    overflow: hidden; // Ensure expand message is clipped if needed
+    border: $border-width-thin solid $border-color; // Border around image
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+
+    img.gallery-thumb {
+      width: 100%;
+      height: auto; // Maintain aspect ratio
+      display: block;
+      transition: transform $transition-speed-normal $transition-easing;
+    }
+
+    .expand-message {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba($primary-bg, 0.85); // Darker, more thematic overlay
+      color: $accent-color;
+      text-align: center;
+      padding: $spacing-xs;
+      opacity: 0;
+      transition: opacity $transition-speed-normal $transition-easing;
+      font-size: $font-size-sm;
+      text-transform: uppercase;
+      letter-spacing: $letter-spacing-base;
+    }
+  }
+
+  &:hover {
+    .image-container {
+      img.gallery-thumb {
+        transform: scale(1.05); // Subtle zoom on image
+      }
+      .expand-message {
+        opacity: 1;
+      }
+    }
+  }
+
+  // The .details div is hidden by default in HTML (style="display: none;")
+  // and its content is used for the modal. So no specific styling needed here for .details itself.
+  // However, the .easter-egg within .details (which gets copied to modal) might need context.
+  .details {
+    // Styles for .easter-egg if it needs to behave differently inside an evidence card's details
+    // For now, assuming global .easter-egg styles from _casefiles.scss or _chronicle.scss are sufficient
+    // or it's defined in a more general component partial.
+    // If not, style .easter-egg here.
+  }
+}
+
+
+// Modal Styling
+.modal {
+  display: none; // Hidden by default
+  position: fixed;
+  z-index: $z-index-overlay + 10; // Ensure modal is on top of everything
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; // Enable scroll if content overflows
+  background-color: rgba($primary-bg, 0.9); // Dark, slightly transparent background
+  backdrop-filter: blur(5px); // Frosted glass effect for background
+  animation: fadeIn 0.3s $transition-easing; // Modal fade-in
+
+  .modal-content {
+    background-color: $secondary-bg;
+    margin: 5% auto; // Centered, with space from top
+    padding: $spacing-lg;
+    border: $border-width-medium solid $accent-color; // Accent border for modal
+    width: 85%;
+    max-width: 700px; // Max width for modal content
+    position: relative;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.5), 0 0 30px $glow-color; // Stronger shadow + glow
+    animation: slideDown 0.4s $transition-easing; // Content slide-in
+  }
+
+  .close-button {
+    position: absolute;
+    top: $spacing-sm; // Adjusted for better placement
+    right: $spacing-md;
+    font-size: $font-size-xxl; // Larger close button
+    color: $accent-color;
+    cursor: pointer;
+    transition: color $transition-speed-fast $transition-easing, transform $transition-speed-fast $transition-easing;
+    line-height: 1; // Ensure it doesn't affect layout too much
+
+    &:hover, &:focus {
+      color: lighten($accent-color, 15%);
+      transform: scale(1.2);
+      text-shadow: 0 0 5px $glow-color;
+    }
+  }
+
+  .modal-image-container {
+    text-align: center;
+    margin-bottom: $spacing-lg;
+    border-bottom: $border-width-thin dashed $border-color; // Separator line
+    padding-bottom: $spacing-lg;
+
+    img {
+      max-width: 100%;
+      max-height: 60vh; // Limit image height to prevent excessive scrolling
+      height: auto;
+      border: $border-width-medium solid $border-color;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+  }
+
+  .modal-details-container {
+    color: $text-color;
+
+    .evidence-details { // Class wrapping the details content in the modal
+      h3 { // Was h2, changed to h3 to match card content
+        font-size: $font-size-xl; // Slightly larger for modal context
+        margin-bottom: $spacing-md;
+        color: $accent-color;
+        // text-shadow: 1px 1px 0px $primary-bg; // From base style
+        border-bottom: $border-width-thin solid $border-color;
+        padding-bottom: $spacing-sm;
+      }
+
+      ul {
+        list-style: none; // Using custom bullets from _casefiles.scss or similar
+        padding-left: $spacing-sm;
+        margin-bottom: $spacing-md;
+
+        li {
+          margin-bottom: $spacing-sm;
+          padding-left: $spacing-md;
+          position: relative;
+          font-size: $font-size-md;
+
+          &::before { // Custom bullet, can reuse from _casefiles.scss if desired
+            content: '»';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: $muted-radioactive-green;
+          }
+
+          strong {
+            color: $accent-color;
+            font-weight: bold;
+            margin-right: $spacing-xs;
+            display: block;
+            margin-bottom: $spacing-xs / 2;
+          }
+        }
+      }
+
+      .easter-egg { // Copied from _casefiles.scss and adapted
+        display: block;
+        font-size: $font-size-sm;
+        margin-top: $spacing-lg;
+        padding: $spacing-sm;
+        color: darken($text-color, 10%);
+        background-color: lighten($primary-bg, 3%);
+        border: $border-width-thin dashed $border-color;
+        font-style: italic;
+        text-align: left; // Consistent alignment
+        animation: blink-caret 1.5s steps(1, start) infinite;
+
+        &::before {
+          content: 'artifact-meta: '; // Specific prefix for evidence
+          color: $passive-color;
+          font-style: normal;
+        }
+      }
+    }
+  }
+}
+
+// Body class for when modal is open
+body.modal-open {
+  overflow: hidden;
+}
+
+// Responsive adjustments for evidence page & modal
+@media (max-width: $bp-medium) {
+  .modal.modal-content {
+    margin: 10% auto; // More margin for medium screens
+    width: 90%;
+  }
+}
+
+@media (max-width: $bp-small) {
+  .data-card.evidence-card {
+    // On small screens, expand message might always be visible if hover is not primary interaction
+    // .expand-message {
+    //   opacity: 1;
+    // }
+  }
+  .modal.modal-content {
+    margin: 5% auto; // Less margin for small screens
+    width: 95%;
+    padding: $spacing-md;
+  }
+
+  .modal.modal-image-container img {
+    max-height: 40vh; // Smaller image height on small screens
+  }
+
+  .modal.modal-details-container .evidence-details {
+    h3 {
+      font-size: $font-size-lg;
+    }
+    ul li {
+      font-size: $font-size-sm;
+    }
+    .easter-egg {
+      font-size: $font-size-sm * 0.9;
+    }
+  }
+}

@@ -1,0 +1,61 @@
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+@keyframes scanline {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes slideDown {
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes scan {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes slideInLeft {
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInRight {
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+@keyframes valueUpdate {
+  0% { color: var(--accent-color); } // Use variable for consistency
+  100% { color: var(--text-color); }   // Use variable
+}
+
+@keyframes slideInBottom {
+  to { transform: translateY(0); opacity: 1; }
+}
+
+// New animation for a subtle pulse on accent elements
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 var(--glow-color);
+  }
+  70% {
+    box-shadow: 0 0 10px 5px rgba(0, 255, 255, 0); // Transparent glow
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 255, 255, 0);
+  }
+}
+
+// New animation for text focus/highlight
+@keyframes textFocus {
+  0% {
+    text-shadow: 0 0 1px var(--text-color), 0 0 3px var(--accent-color);
+  }
+  100% {
+    text-shadow: 0 0 3px var(--accent-color), 0 0 8px var(--glow-color);
+  }
+}

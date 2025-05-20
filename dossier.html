@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   <title>THE DOSSIER - Unclassified</title>
   <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.scss" />
   <style>
     :root {
       --primary-bg: #111;
@@ -273,26 +274,26 @@
     }
   </style>
 </head>
-<body class="scroll-lock">
+<body class="page-dossier scroll-lock"> <!-- Added page-specific class -->
   <div class="grid-overlay"></div>
   <div class="scanline"></div>
-  <div class="container">
+  <div class="content-wrapper"> <!-- Changed from container to content-wrapper -->
     <header class="header">
       <h1>THE DOSSIER</h1>
       <p>ABOUT US</p>
     </header>
-    <main class="content-section">
+    <main class="main-content"> <!-- Changed from content-section to main-content -->
       <article class="section">
-        <h2 class="section-title" onclick="toggleSection('bio')">► BIOGRAPHY</h2>
-        <div class="section-content" id="bio">
+        <button class="section-title" onclick="toggleSection('bio')" aria-expanded="false" aria-controls="bio"><i class="fas fa-caret-right accordion-icon"></i> BIOGRAPHY</button>
+        <div class="section-content" id="bio" role="region" aria-labelledby="bio-title">
           <p>
             We are The Ectoplasmic Investigators, a team of four cousin brothers driven by a shared fascination with the paranormal that plagues rural Bangladesh. What began as a youthful curiosity and hobby has evolved into a dedicated pursuit of understanding and confronting the unseen forces that disrupt our world. We operate with a profound belief in the paranormal, recognizing it not as folklore, but as a tangible reality orchestrated by entities beyond our ordinary perception. Our investigations are rooted in the conviction that these disturbances are not random, but are deliberate actions from the realm of jinn, masterminds behind the enigmatic events we unravel.
           </p>
         </div>
       </article>
       <article class="section">
-        <h2 class="section-title" onclick="toggleSection('abilities')">► SKILLS</h2>
-        <div class="section-content" id="abilities">
+        <button class="section-title" onclick="toggleSection('abilities')" aria-expanded="false" aria-controls="abilities"><i class="fas fa-caret-right accordion-icon"></i> SKILLS</button>
+        <div class="section-content" id="abilities" role="region" aria-labelledby="abilities-title">
           <p>
             Our expertise lies in the specialized art of paranormal investigation, honed through years of fieldwork and dedicated study of esoteric phenomena. We possess a deep understanding of the patterns and signatures associated with jinn activity, allowing us to effectively identify and analyze their influence in reported events. Our skills encompass:
             <ul>
@@ -305,8 +306,8 @@
         </div>
       </article>
       <article class="section">
-        <h2 class="section-title" onclick="toggleSection('history')">► PROFESSIONAL BACKGROUND</h2>
-        <div class="section-content" id="history">
+        <button class="section-title" onclick="toggleSection('history')" aria-expanded="false" aria-controls="history"><i class="fas fa-caret-right accordion-icon"></i> PROFESSIONAL BACKGROUND</button>
+        <div class="section-content" id="history" role="region" aria-labelledby="history-title">
           <p>
             Though our origins are rooted in a shared personal interest, The Ectoplasmic Investigators operate with unwavering professionalism in every case we undertake. Our history is marked by a series of successful investigations across rural Bangladesh, each adding to our profound understanding of paranormal activities orchestrated by jinn. While we consider this work a deeply engaging pursuit, our commitment to thoroughness, discretion, and effective resolution rivals that of any formal organization. We maintain meticulous case files, ensuring every investigation is rigorously documented and analyzed. Our background is not just in solving mysteries, but in confronting and understanding the very real influence of jinn in the world, offering clarity and solutions to communities facing these often-unseen challenges. Our dedication is to the truth of the paranormal, and to assisting those affected by its manifestations.
           </p>
@@ -315,27 +316,11 @@
     </main>
     <footer>
       <p class="copyright-info">
-        <i class="copyright-icon"></i> 2025 THE ECTOPLASMIC INVESTIGATORS
+        <i class="fas fa-copyright copyright-icon"></i> 2025 THE ECTOPLASMIC INVESTIGATORS
       </p>
       <p>SECRET LOGS AWAIT DISCOVERY</p>
     </footer>
   </div>
-  <script>
-    function toggleSection(sectionId) {
-      const content = document.getElementById(sectionId);
-      content.style.display = (content.style.display === 'block') ? 'none' : 'block';
-      updateScrollLock();
-    }
-
-    function updateScrollLock() {
-      const contents = document.querySelectorAll('.section-content');
-      const isSectionOpen = Array.from(contents).some(c => c.style.display === 'block');
-      document.body.classList.toggle('scroll-unlock', isSectionOpen);
-      document.body.classList.toggle('scroll-lock', !isSectionOpen);
-    }
-
-    // Initialize scroll lock state
-    updateScrollLock();
-  </script>
+  <!-- Script moved to js/page-specific.js -->
 </body>
 </html>

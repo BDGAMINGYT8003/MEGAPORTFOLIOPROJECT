@@ -1,0 +1,91 @@
+@use 'variables' as *; // Import variables to use them
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: $font-family-main;
+  scrollbar-width: thin; // For Firefox
+  scrollbar-color: $accent-color $secondary-bg; // For Firefox
+}
+
+// Webkit scrollbar styling
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: $secondary-bg;
+  border-radius: $border-radius-sm;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: $accent-color;
+  border-radius: $border-radius-sm;
+  border: 2px solid $secondary-bg; // Creates a nice padding effect
+  &:hover {
+    background-color: lighten($accent-color, 10%);
+  }
+}
+
+body {
+  background-color: $primary-bg;
+  color: $text-color;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: $spacing-md;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  letter-spacing: $letter-spacing-base;
+  overflow-x: hidden; // Prevent horizontal scrolling
+  position: relative; // For z-index stacking of pseudo-elements if needed
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: $accent-color;
+  letter-spacing: $letter-spacing-wide;
+  margin-bottom: $spacing-md;
+  text-transform: uppercase; // Classic retro feel
+}
+
+h1 { font-size: $font-size-xxl; }
+h2 { font-size: $font-size-xl; }
+h3 { font-size: $font-size-lg; }
+
+p {
+  margin-bottom: $spacing-md;
+  line-height: $line-height-base * 1.1; // Slightly more line height for paragraphs
+}
+
+a {
+  color: $accent-color;
+  text-decoration: none;
+  transition: color $transition-speed-normal $transition-easing;
+
+  &:hover, &:focus {
+    color: lighten($accent-color, 15%);
+    text-decoration: underline;
+    text-shadow: 0 0 5px $glow-color;
+  }
+}
+
+// Utility class for visually hidden text (for accessibility)
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// Basic focus outline for accessibility, can be customized
+:focus-visible {
+  outline: 2px dashed $accent-color;
+  outline-offset: 2px;
+}

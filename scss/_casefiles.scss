@@ -1,0 +1,65 @@
+@use 'variables' as *;
+@use 'animations' as *; // For any specific animations like blink-caret
+
+// Styles specific to casefiles.html content within .data-card elements
+.data-card { // Targeting .data-card specifically on pages where these elements exist
+  ul {
+    list-style: none; // Remove default disc
+    padding-left: 0; // Remove default padding
+    margin-top: $spacing-sm;
+    text-align: left; // Ensure text alignment is consistent
+
+    li {
+      margin-bottom: $spacing-sm;
+      padding-left: $spacing-md; // Indent list items
+      position: relative; // For custom bullet
+      font-size: $font-size-sm; // Slightly smaller font for list items for density
+      line-height: $line-height-base * 1.05;
+
+      &::before { // Custom bullet point
+        content: '»'; // Using a different type of arrow/bullet
+        position: absolute;
+        left: 0;
+        top: 0;
+        color: $muted-radioactive-green; // Use a highlight color
+        font-weight: bold;
+      }
+
+      strong {
+        color: $accent-color; // Make the label text (Investigation, Description, etc.) stand out
+        font-weight: bold; // VT323 might need explicit bold
+        margin-right: $spacing-xs;
+        display: block; // Make strong tags take full width for better readability
+        margin-bottom: $spacing-xs / 2;
+      }
+    }
+  }
+
+  .easter-egg {
+    display: block;
+    font-size: $font-size-sm * 0.9; // Smaller than list items
+    margin-top: $spacing-md;
+    padding: $spacing-xs $spacing-sm;
+    color: darken($text-color, 20%); // Muted text color
+    background-color: darken($primary-bg, 2%); // Very subtle background
+    border-left: $border-width-medium solid $border-color;
+    font-style: italic;
+    text-align: left; // Align with list items
+    animation: blink-caret 1.5s steps(1, start) infinite; // Slower blink, more subtle
+
+    &::before {
+      content: 'whisper: ';
+      color: $passive-color;
+      font-style: normal;
+    }
+  }
+}
+
+// Keyframe for easter-egg if not already globally defined with this name/purpose
+// Re-using existing blink from _animations.scss if it's suitable,
+// or defining a new one if behavior needs to be different.
+// For this example, assuming 'blink-caret' is specific or needs adjustment:
+@keyframes blink-caret { // Specific for the easter egg
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; } // Less disappearing, more of a flicker
+}

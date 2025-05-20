@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>The Oracle - FAQs & Q&A Sessions</title>
   <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.scss" />
   <style>
     /* CSS Variables for Consistency */
     :root {
@@ -274,13 +275,13 @@
     }
   </style>
 </head>
-<body>
+<body class="page-oracle"> <!-- Added page-specific class -->
   <!-- Retro Background Effects -->
   <div class="grid-overlay"></div>
   <div class="scanline"></div>
 
   <!-- Main Container -->
-  <div class="container">
+  <div class="content-wrapper"> <!-- Changed from container to content-wrapper -->
     <!-- Header -->
     <header class="header">
       <h1>THE ORACLE</h1>
@@ -288,10 +289,10 @@
     </header>
 
     <!-- Content Section: FAQs -->
-    <main class="content-section">
-      <div class="section">
-        <h2 class="section-title" onclick="toggleSection('faq1')">► What exactly do The Ectoplasmic Investigators of Chapitala do?</h2>
-        <div class="section-content" id="faq1">
+    <main class="main-content"> <!-- Changed from content-section to main-content -->
+      <div class="section"> <!-- Assuming .section and .section-title will be styled by _dossier.scss or a new _oracle.scss -->
+        <button class="section-title" onclick="toggleSection('faq1')" aria-expanded="false" aria-controls="faq1"><i class="fas fa-caret-right accordion-icon"></i> What exactly do The Ectoplasmic Investigators of Chapitala do?</button>
+        <div class="section-content" id="faq1" role="region" aria-labelledby="faq1-title">
           <p>
             We are a dedicated paranormal investigation team operating in rural Bangladesh, focused on understanding and addressing the unsettling events reported by villagers. We believe these events are genuine paranormal occurrences, and we use our expertise and respect for local understanding to uncover the underlying causes and bring resolution to affected communities.
           </p>
@@ -299,8 +300,8 @@
       </div>
 
       <div class="section">
-        <h2 class="section-title" onclick="toggleSection('faq2')">► What types of cases do you typically investigate?</h2>
-        <div class="section-content" id="faq2">
+        <button class="section-title" onclick="toggleSection('faq2')" aria-expanded="false" aria-controls="faq2"><i class="fas fa-caret-right accordion-icon"></i> What types of cases do you typically investigate?</button>
+        <div class="section-content" id="faq2" role="region" aria-labelledby="faq2-title">
           <p>
             Our work addresses a range of paranormal phenomena common in rural Bangladesh, often echoing local folklore.  The disturbances we investigate frequently include:
           </p>
@@ -314,8 +315,8 @@
       </div>
 
       <div class="section">
-        <h2 class="section-title" onclick="toggleSection('faq3')">► Are you actually dealing with ghosts and spirits?</h2>
-        <div class="section-content" id="faq3">
+        <button class="section-title" onclick="toggleSection('faq3')" aria-expanded="false" aria-controls="faq3" id="faq3-title"><i class="fas fa-caret-right accordion-icon"></i> Are you actually dealing with ghosts and spirits?</button>
+        <div class="section-content" id="faq3" role="region" aria-labelledby="faq3-title">
           <p>
             Yes, we are directly engaged with what are commonly perceived as ghosts and spirits. We firmly believe that these are manifestations of paranormal entities. While others might seek mundane explanations, we recognize these occurrences as genuinely supernatural and approach our investigations with this understanding as our foundation.  Our aim is to comprehend and document these paranormal interactions.
           </p>
@@ -323,8 +324,8 @@
       </div>
 
       <div class="section">
-        <h2 class="section-title" onclick="toggleSection('faq4')">► How do you investigate a potential paranormal case?</h2>
-        <div class="section-content" id="faq4">
+        <button class="section-title" onclick="toggleSection('faq4')" aria-expanded="false" aria-controls="faq4" id="faq4-title"><i class="fas fa-caret-right accordion-icon"></i> How do you investigate a potential paranormal case?</button>
+        <div class="section-content" id="faq4" role="region" aria-labelledby="faq4-title">
           <p>
             Our investigative process is thorough, combining established methods with specialized tools to effectively address paranormal events:
           </p>
@@ -339,8 +340,8 @@
       </div>
 
       <div class="section">
-        <h2 class="section-title" onclick="toggleSection('faq5')">► What makes The Ectoplasmic Investigators different?</h2>
-        <div class="section-content" id="faq5">
+        <button class="section-title" onclick="toggleSection('faq5')" aria-expanded="false" aria-controls="faq5" id="faq5-title"><i class="fas fa-caret-right accordion-icon"></i> What makes The Ectoplasmic Investigators different?</button>
+        <div class="section-content" id="faq5" role="region" aria-labelledby="faq5-title">
           <p>
             Our distinctiveness comes from our core principles and approach:
           </p>
@@ -354,8 +355,8 @@
       </div>
 
       <div class="section">
-        <h2 class="section-title" onclick="toggleSection('faq6')">► Have you encountered cases that are truly unexplainable?</h2>
-        <div class="section-content" id="faq6">
+        <button class="section-title" onclick="toggleSection('faq6')" aria-expanded="false" aria-controls="faq6"><i class="fas fa-caret-right accordion-icon"></i> Have you encountered cases that are truly unexplainable?</button>
+        <div class="section-content" id="faq6" role="region" aria-labelledby="faq6-title">
           <p>
             Indeed, we have encountered numerous cases that defy conventional explanation, unequivocally demonstrating the presence of paranormal forces. Cases like "The Phantom Radio Static of Koelpur" (Case #001) and "The Bamboo Grove's Vanishing Tracks" (Case #002) presented evidence that traditional science cannot account for, solidifying our understanding of the genuine mysteries we investigate.
           </p>
@@ -363,8 +364,8 @@
       </div>
 
       <div class="section">
-        <h2 class="section-title" onclick="toggleSection('faq7')">► Is paranormal investigation dangerous?</h2>
-        <div class="section-content" id="faq7">
+        <button class="section-title" onclick="toggleSection('faq7')" aria-expanded="false" aria-controls="faq7"><i class="fas fa-caret-right accordion-icon"></i> Is paranormal investigation dangerous?</button>
+        <div class="section-content" id="faq7" role="region" aria-labelledby="faq7-title">
           <p>
             Yes, investigating paranormal phenomena inherently involves risks. We prioritize safety through rigorous planning, extensive preparation, and strict protocols. We equip ourselves with specialized tools and rely on our team's collective experience to minimize potential hazards.  We recognize the unpredictable nature of paranormal events and approach every investigation with utmost caution and professionalism.
           </p>
@@ -372,8 +373,8 @@
       </div>
 
       <div class="section">
-        <h2 class="section-title" onclick="toggleSection('faq8')">► How can I report a potential paranormal event to your team?</h2>
-        <div class="section-content" id="faq8">
+        <button class="section-title" onclick="toggleSection('faq8')" aria-expanded="false" aria-controls="faq8"><i class="fas fa-caret-right accordion-icon"></i> How can I report a potential paranormal event to your team?</button>
+        <div class="section-content" id="faq8" role="region" aria-labelledby="faq8-title">
           <p>
             If you are experiencing unusual events in rural Bangladesh that you believe are paranormal and warrant investigation, please  navigate through "THE DISPATCH" section on our website and send us a detailed message about what is happening. Include specific information such as the location, times, descriptions of the events, and any local stories associated with them. We will review your report and contact you if it aligns with our investigative focus.
           </p>
@@ -381,8 +382,8 @@
       </div>
 
       <div class="section">
-        <h2 class="section-title" onclick="toggleSection('faq9')">► Do you charge for your services?</h2>
-        <div class="section-content" id="faq9">
+        <button class="section-title" onclick="toggleSection('faq9')" aria-expanded="false" aria-controls="faq9"><i class="fas fa-caret-right accordion-icon"></i> Do you charge for your services?</button>
+        <div class="section-content" id="faq9" role="region" aria-labelledby="faq9-title">
           <p>
             The Ectoplasmic Investigators of Chapitala are primarily dedicated to the research of paranormal phenomena and to providing support to rural communities in Bangladesh experiencing these events.  As a non-profit team, we generally do not charge for our investigative services. Depending on the specifics of a case and its location, community support or logistical assistance may be appreciated, but this is discussed on a case-by-case basis. Our primary mission is to understand the truth of paranormal occurrences and assist communities, not financial gain.
           </p>
@@ -393,20 +394,12 @@
     <!-- Footer -->
     <footer>
       <p class="copyright-info">
-        <i class="copyright-icon"></i> 2025 THE ECTOPLASMIC INVESTIGATORS
+        <i class="fas fa-copyright copyright-icon"></i> 2025 THE ECTOPLASMIC INVESTIGATORS
       </p>
       <p>SECRET LOGS AWAIT DISCOVERY</p>
     </footer>
   </div>
 
-  <!-- JavaScript for Collapsible Sections -->
-  <script>
-    function toggleSection(sectionId) {
-      const content = document.getElementById(sectionId);
-      content.style.display = (content.style.display === 'block') ? 'none' : 'block';
-    }
-
-    console.log("The Oracle page loaded with enigmatic wisdom and collapsible insights. Seekers of truth, dispatch your queries via THE DISPATCH.");
-  </script>
+  <!-- JavaScript for Collapsible Sections - Will be handled by js/page-specific.js -->
 </body>
 </html>

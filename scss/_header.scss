@@ -1,0 +1,75 @@
+@use 'variables' as *;
+@use 'animations' as *; // If header-specific animations are needed or existing ones used
+
+.header {
+  text-align: center;
+  padding: $spacing-xl $spacing-md; // More vertical padding
+  background: transparent; // Make it blend with body, rely on border and text for definition
+  border: $border-width-medium solid $border-color;
+  border-bottom: $border-width-thick solid $accent-color; // Accent border at the bottom
+  position: relative;
+  overflow: hidden; // Keep for pseudo-elements like scanline
+  transform: translateY(-30px);
+  opacity: 0;
+  animation: slideDown 1s ease-out 0.3s forwards;
+  margin-bottom: $spacing-lg; // Space below header
+  box-shadow: 0 0 15px rgba($accent-color, 0.15), inset 0 0 10px rgba($primary-bg, 0.5); // Subtle inner/outer glow
+
+  h1 {
+    font-size: $font-size-xxl;
+    margin-bottom: $spacing-sm;
+    color: $text-color; // Main title in primary text color for contrast
+    text-shadow: 0 0 5px $accent-color, 0 0 10px $accent-color, 0 0 15px $muted-radioactive-green; // Enhanced glow
+    letter-spacing: $letter-spacing-wide + 1px; // Slightly wider
+  }
+
+  p {
+    font-size: $font-size-lg; // Larger subtitle
+    color: $accent-color;
+    text-transform: uppercase;
+    letter-spacing: $letter-spacing-base;
+  }
+
+  // Existing scanline effect within the header
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: $border-width-medium; // Match border width
+    background: $accent-color;
+    animation: scan 2.5s linear infinite; // Slightly slower
+    box-shadow: 0 0 10px $glow-color;
+    opacity: 0.8;
+  }
+
+  // Adding a bottom scanline for symmetry, moving slightly differently
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0; // Start from the right
+    width: 100%;
+    height: $border-width-thin;
+    background: $muted-radioactive-green; // Use the new green for variety
+    animation: scan 3s linear infinite reverse; // Reverse direction and different speed
+    box-shadow: 0 0 8px rgba($muted-radioactive-green, 0.5);
+    opacity: 0.6;
+  }
+}
+
+// Responsive adjustments for header if needed
+@media (max-width: $bp-medium) {
+  .header {
+    padding: $spacing-lg $spacing-sm;
+
+    h1 {
+      font-size: $font-size-xl * 1.15; // Adjust for smaller screens
+    }
+
+    p {
+      font-size: $font-size-md;
+    }
+  }
+}

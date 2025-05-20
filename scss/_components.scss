@@ -1,0 +1,179 @@
+@use 'variables' as *;
+@use 'animations' as *;
+
+.data-card {
+  background: lighten($primary-bg, 5%); // Slightly lighter than main bg for differentiation
+  border: $border-width-thin solid $border-color;
+  border-left: $border-width-thick solid $accent-color; // Accent border on the left
+  padding: $spacing-md;
+  position: relative;
+  overflow: hidden; // For pseudo-elements and effects
+  box-shadow: 3px 3px 0px $primary-bg, // Hard shadow for retro feel
+              inset 0 0 10px rgba($primary-bg, 0.5), // Inner shadow for depth
+              0 0 8px rgba($accent-color, 0.1); // Subtle outer glow
+  transition: transform $transition-speed-normal $transition-easing, box-shadow $transition-speed-normal $transition-easing;
+
+  h3 {
+    font-size: $font-size-lg;
+    margin-bottom: $spacing-md;
+    color: $accent-color;
+    text-transform: uppercase;
+    letter-spacing: $letter-spacing-wide;
+    border-bottom: $border-width-thin dashed lighten($border-color, 20%); // Dashed line under title
+    padding-bottom: $spacing-sm;
+    display: flex; // For icon alignment
+    align-items: center;
+
+    .card-icon { // Styling for new Font Awesome icons in card titles
+      margin-right: $spacing-sm;
+      font-size: $font-size-md; // Adjust size as needed, relative to h3
+      color: $accent-color; // Match title color or use a specific icon color
+      width: 20px; // Ensure consistent width for alignment
+      text-align: center;
+    }
+
+    // &::before { // Adding a small icon/marker before the title - REMOVED, using .card-icon now
+    //   content: '>'; // Simple terminal-like prompt
+    //   margin-right: $spacing-sm;
+    //   font-weight: bold;
+    //   color: $muted-radioactive-green; // Using the highlight color
+    // }
+  }
+
+  p {
+    font-size: $font-size-md;
+    margin: $spacing-sm 0;
+    line-height: $line-height-base * 1.1;
+
+    span { // For the values within the paragraphs
+      color: $text-color; // Ensure values are in primary text color
+      font-weight: bold; // Make values stand out
+      padding-left: $spacing-xs;
+    }
+  }
+
+  // Existing bottom border hover effect - enhanced
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: $border-width-medium;
+    background: $muted-radioactive-green;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform $transition-speed-fast $transition-easing;
+    box-shadow: 0 0 8px rgba($muted-radioactive-green, 0.7);
+  }
+
+  &:hover {
+    transform: translateY(-3px) scale(1.01); // Lift effect
+    box-shadow: 5px 5px 0px $primary-bg, // Slightly larger hard shadow
+                inset 0 0 12px rgba($primary-bg, 0.6),
+                0 0 15px rgba($accent-color, 0.25); // Stronger glow
+
+    &::after {
+      transform: scaleX(1);
+    }
+
+    h3 {
+      color: lighten($accent-color, 10%);
+    }
+  }
+}
+
+.status-panel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: $spacing-sm $spacing-md;
+  border: $border-width-thin solid $status-border-color;
+  background: transparent; // Let parent background show, or set to primary-bg if needed
+  font-size: $font-size-md; // Adjusted size
+  // margin-bottom: $spacing-md; // Spacing handled by parent flex gap or specific overrides
+  text-transform: uppercase;
+  letter-spacing: $letter-spacing-base;
+  box-shadow: inset 0 0 8px rgba($primary-bg, 0.4), 0 0 5px rgba($status-border-color, 0.2);
+
+  span { // Text parts within status panel
+    color: $text-color;
+    &:not(:last-child) {
+      margin-right: $spacing-md; // Space between items
+    }
+
+    span { // Inner span (the actual status value)
+      color: $accent-color; // Value in accent color
+      font-weight: bold;
+      padding-left: $spacing-xs;
+    }
+  }
+}
+
+.status-indicator {
+  display: inline-flex; // Use flex to center icon
+  align-items: center;
+  justify-content: center;
+  width: auto; // Adjust width to content
+  height: auto; // Adjust height to content
+  // border-radius: 50%; // No longer needed for icon
+  margin-left: $spacing-sm;
+  font-size: $font-size-sm; // Control icon size via font-size
+
+  i { // Target the icon directly
+    transition: color $transition-speed-normal $transition-easing, text-shadow $transition-speed-normal $transition-easing;
+    animation: blink 1.2s step-end infinite;
+  }
+
+
+  &.status-active i {
+    color: $success-color;
+    text-shadow: 0 0 6px $success-color, 0 0 10px $success-color; // Apply shadow to icon
+  }
+
+  &.status-passive i {
+    color: $passive-color;
+    animation: none;
+    opacity: 0.7;
+    text-shadow: 0 0 4px $passive-color;
+  }
+
+  // Potential warning/danger states would also target the <i> tag
+  &.status-warning i {
+    color: $warning-color;
+    text-shadow: 0 0 6px $warning-color, 0 0 10px $warning-color;
+  }
+
+   &.status-danger i {
+    color: $danger-color;
+    text-shadow: 0 0 6px $danger-color, 0 0 10px $danger-color;
+  }
+}
+
+.value-change { // Applied to elements whose text content changes
+  animation: valueUpdate 0.5s $transition-easing;
+}
+
+// Responsive adjustments for components
+@media (max-width: $bp-medium) {
+  .data-card {
+    padding: $spacing-sm;
+    h3 {
+      font-size: $font-size-md; // Smaller headings on mobile
+    }
+    p {
+      font-size: $font-size-sm; // Smaller text on mobile
+    }
+  }
+
+  .status-panel {
+    font-size: $font-size-sm;
+    padding: $spacing-xs $spacing-sm;
+    flex-direction: column; // Stack status items on small screens
+    gap: $spacing-xs;
+
+    span:not(:last-child) {
+      margin-right: 0; // Remove margin when stacked
+    }
+  }
+}

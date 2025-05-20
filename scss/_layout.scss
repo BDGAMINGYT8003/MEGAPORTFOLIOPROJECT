@@ -1,0 +1,91 @@
+@use 'variables' as *; // Import variables
+
+.content-wrapper {
+  display: flex;
+  flex: 1; // Takes up remaining vertical space
+  gap: $spacing-md;
+  margin-top: $spacing-md;
+  opacity: 0; // Start with 0 opacity
+  animation: fadeIn 1s ease-out forwards;
+  width: 100%; // Ensure it takes full width
+}
+
+.grid-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    linear-gradient(90deg, rgba($accent-color, 0.02) $border-width-thin, transparent $border-width-thin), // Thinner, more subtle lines
+    linear-gradient(rgba($accent-color, 0.02) $border-width-thin, transparent $border-width-thin);
+  background-size: 25px 25px; // Slightly larger grid
+  pointer-events: none;
+  z-index: $z-index-background; // Ensure it's behind content
+  opacity: 0.7; // Slightly reduced opacity
+}
+
+.scanline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(0, 0, 0, 0.1) 50% // Darker, more noticeable scanline
+  );
+  background-size: 100% 6px; // Thicker scanline
+  pointer-events: none;
+  z-index: $z-index-overlay; // Ensure it's above most content but below modals if any
+  animation: scanline 12s linear infinite; // Slightly slower
+  opacity: 0.6; // Adjusted opacity
+}
+
+// Responsive Layout Adjustments
+// Mobile first: Styles outside media queries are for smallest screens.
+
+// Medium devices (tablets) and up
+@media (min-width: $bp-medium) {
+  body {
+    padding: $spacing-lg; // More padding on larger screens
+  }
+
+  .content-wrapper {
+    gap: $spacing-lg; // More gap between nav and main content
+  }
+}
+
+// Large devices (desktops) and up
+@media (min-width: $bp-large) {
+  // Styles for larger desktops, if any specific layout changes are needed
+  // For example, max-width for content area if desired
+  // .container {
+  //   max-width: 1200px;
+  //   margin-left: auto;
+  //   margin-right: auto;
+  // }
+}
+
+// Specific media query from original CSS for content-wrapper stacking
+@media (max-width: $bp-large) { // Adjusted to use $bp-large for consistency
+  .content-wrapper {
+    flex-direction: column;
+  }
+
+  .nav-section { // Will be defined in _nav.scss
+    flex: none; // Reset flex behavior for stacking
+    width: 100%; // Take full width when stacked
+  }
+}
+
+// The original max-width: 480px media query seems to be covered by mobile-first approach
+// and specific component styles. If specific overrides are needed for very small screens,
+// they can be added here or within component partials.
+// @media (max-width: 480px) {
+// body {
+// font-size: 14px; // This is now in _base.scss for small screens
+// padding: 0.5rem;
+// }
+// }

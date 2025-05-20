@@ -1,0 +1,40 @@
+// This is the main SCSS file.
+
+// Import Font Awesome
+@import '@fortawesome/fontawesome-free/css/all.min.css';
+
+// It should only contain imports for SCSS partials.
+
+// 1. Variables & Mixins (if any)
+@use 'scss/variables' as *; // Global variables, must be first
+
+// 2. Animations
+@use 'scss/animations'; // Keyframe animations
+
+// 3. Base Styles
+@use 'scss/base'; // *, body, typography defaults, global element styles
+
+// 4. Layout Structure
+@use 'scss/layout'; // .content-wrapper, .grid-overlay, .scanline, global media queries
+
+// 5. Reusable Components
+@use 'scss/components'; // .data-card, .status-panel, .nav-button (if considered a component) etc.
+
+// 6. Page Sections / Specific Layout Areas
+@use 'scss/header';   // Styles for the <header>
+@use 'scss/nav';      // Styles for the <nav> or .nav-section
+@use 'scss/main';     // Styles for the <main> or .main-content
+@use 'scss/footer';   // Styles for the <footer>
+
+// 7. Page-Specific Styles (Import last to allow overrides)
+@use 'scss/casefiles'; // Styles specific to casefiles.html
+@use 'scss/chronicle'; // Styles specific to chronicle.html
+@use 'scss/dispatch';  // Styles specific to dispatch.html
+@use 'scss/dossier';   // Styles specific to dossier.html
+@use 'scss/evidence';  // Styles specific to evidence.html
+@use 'scss/laboratory';// Styles specific to laboratory.html
+
+// Note: The original .nav-button was very specific to .nav-section.
+// If it were a more generic button, it might live in _components.scss.
+// For now, keeping its primary styling within _nav.scss is fine as it's tightly coupled.
+// The .status-panel is used in both nav and main, so _components.scss is appropriate.

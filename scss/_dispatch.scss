@@ -1,0 +1,188 @@
+@use 'variables' as *;
+@use 'animations' as *;
+
+// Styles specific to dispatch.html (contact form)
+.main-content { // Targeting .main-content specifically on dispatch.html for form layout
+  max-width: 800px; // Limit width of form container for better readability
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.inquiry-type {
+  margin-bottom: $spacing-lg; // Space below the dropdown
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm;
+  border: $border-width-thin dashed $border-color; // Subtle border around inquiry type
+  background-color: lighten($primary-bg, 3%);
+
+  label {
+    font-size: $font-size-md;
+    color: $accent-color;
+    margin-right: $spacing-sm;
+  }
+
+  select {
+    font-family: $font-family-main;
+    background: $secondary-bg;
+    color: $text-color;
+    border: $border-width-medium solid $border-color;
+    padding: $spacing-sm;
+    flex-grow: 1; // Allow select to take available space
+    font-size: $font-size-md;
+    cursor: pointer;
+    transition: border-color $transition-speed-normal $transition-easing, box-shadow $transition-speed-normal $transition-easing;
+
+    &:hover, &:focus {
+      border-color: $accent-color;
+      box-shadow: 0 0 8px $glow-color;
+    }
+
+    option {
+      background: $secondary-bg;
+      color: $text-color;
+    }
+
+    &:disabled {
+      background: darken($secondary-bg, 5%);
+      color: $passive-color;
+      opacity: 0.7;
+      cursor: not-allowed;
+      border-color: $border-color;
+    }
+  }
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md; // Consistent gap between form elements
+
+  label {
+    font-size: $font-size-md;
+    color: $text-color;
+    margin-bottom: $spacing-xs / 2; // Small space below label, above input
+    padding-left: $spacing-xs; // Align with input padding
+    text-transform: uppercase;
+    letter-spacing: $letter-spacing-base;
+    display: flex; // For icon alignment
+    align-items: center;
+
+    .label-icon { // Class for icons next to labels
+      margin-right: $spacing-sm;
+      color: $accent-color;
+      font-size: $font-size-sm; // Slightly smaller than label text
+      width: 18px; // Fixed width for alignment
+      text-align: center;
+    }
+  }
+
+  input[type="text"],
+  input[type="email"],
+  textarea {
+    font-family: $font-family-main;
+    background: lighten($primary-bg, 5%);
+    color: $text-color;
+    border: $border-width-medium solid $border-color;
+    padding: $spacing-sm $spacing-md;
+    font-size: $font-size-md;
+    transition: border-color $transition-speed-normal $transition-easing, box-shadow $transition-speed-normal $transition-easing;
+    box-shadow: inset 0 0 5px rgba($primary-bg, 0.3);
+
+    &::placeholder {
+      color: darken($text-color, 30%);
+      opacity: 0.8;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $accent-color;
+      box-shadow: inset 0 0 8px rgba($primary-bg, 0.5), 0 0 10px $glow-color;
+      background-color: $primary-bg; // Darken on focus for terminal feel
+    }
+  }
+
+  textarea {
+    min-height: 150px; // Good default height for message
+    resize: vertical; // Allow vertical resize
+  }
+
+  .button-row {
+    display: flex;
+    justify-content: space-between; // Pushes "Go Back" and "Send" apart
+    align-items: center;
+    margin-top: $spacing-md;
+    gap: $spacing-md; // Gap between buttons if they wrap or are close
+  }
+
+  // Specific styling for buttons within the form if .nav-button isn't enough
+  // .nav-button or button (if not using .nav-button class)
+  button[type="submit"].nav-button,
+  a.nav-button.button-link {
+    flex-grow: 1; // Allow buttons to grow if needed, or set specific width
+    max-width: 200px; // Max width for form buttons for aesthetics
+    text-align: center; // Ensure text is centered
+
+    &:hover, &:focus {
+      // Hover/focus styles are already in _nav.scss for .nav-button
+      // Add specific overrides if needed
+    }
+  }
+   a.nav-button.button-link { // for the "Go Back" link styled as a button
+    background-color: $secondary-bg; // Different base color for "Go Back"
+    border-color: $secondary-bg;
+    color: $text-color;
+    &:hover, &:focus {
+        background: lighten($secondary-bg, 10%);
+        color: $accent-color;
+        border-color: lighten($secondary-bg, 10%);
+    }
+   }
+}
+
+.confirmation-message {
+  display: none; // Initially hidden
+  text-align: center;
+  padding: $spacing-xl;
+  border: $border-width-medium dashed $success-color;
+  background-color: lighten($primary-bg, 3%);
+  box-shadow: 0 0 15px rgba($success-color, 0.2);
+
+  h2 {
+    font-size: $font-size-xl;
+    color: $success-color;
+    margin-bottom: $spacing-md;
+  }
+
+  p {
+    font-size: $font-size-lg;
+    color: $text-color;
+    margin-bottom: $spacing-lg;
+  }
+
+  .button-row {
+    justify-content: center; // Center the single "Go Back" button
+  }
+}
+
+// Responsive adjustments for dispatch page
+@media (max-width: $bp-small) {
+  .inquiry-type {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .contact-form {
+    .button-row {
+      flex-direction: column;
+      gap: $spacing-md;
+
+      button[type="submit"].nav-button,
+      a.nav-button.button-link {
+        width: 100%; // Full width buttons on small screens
+        max-width: none;
+      }
+    }
+  }
+}

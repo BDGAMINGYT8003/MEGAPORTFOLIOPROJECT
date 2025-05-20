@@ -1,0 +1,102 @@
+@use 'variables' as *;
+@use 'animations' as *;
+
+.nav-section {
+  flex: 0 0 280px; // Slightly wider navigation panel
+  background: darken($secondary-bg, 3%); // Darker background for nav
+  border: $border-width-medium solid $border-color;
+  border-right: $border-width-medium solid lighten($border-color, 10%); // Lighter right border for depth
+  padding: $spacing-md;
+  transform: translateX(-30px);
+  opacity: 0;
+  animation: slideInLeft 1s ease-out 0.6s forwards;
+  box-shadow: inset 0 0 15px rgba($primary-bg, 0.6), 0 0 10px rgba($accent-color, 0.1); // Inner shadow and subtle outer glow
+  overflow-y: auto; // If nav items exceed height
+
+  // Styling for the status panel within the nav section
+  .status-panel { // This will be further styled in _components.scss
+    margin-bottom: $spacing-lg; // More space below the nav's status panel
+    border-width: $border-width-medium; // Thicker border for this specific panel
+    background-color: $primary-bg; // Ensure it stands out from nav background
+  }
+}
+
+.nav-button {
+  display: block;
+  width: 100%;
+  padding: $spacing-sm $spacing-md; // Adjusted padding
+  margin: $spacing-sm 0;
+  background: $primary-bg; // Darker background for buttons
+  border: $border-width-thin solid $border-color;
+  border-left: $border-width-thick solid $accent-color; // Accent on the left
+  color: $text-color;
+  text-decoration: none;
+  text-align: left;
+  transition: all $transition-speed-normal $transition-easing;
+  font-size: $font-size-md; // Standardized font size
+  letter-spacing: $letter-spacing-base;
+  position: relative; // For pseudo-elements
+  display: flex; // Use flexbox for icon and text alignment
+  align-items: center; // Vertically align icon and text
+
+  .nav-icon {
+    margin-right: $spacing-sm; // Space between icon and text
+    font-size: $font-size-md; // Match text size or adjust as needed
+    width: 20px; // Fixed width for icon container for alignment
+    text-align: center; // Center icon if it's narrower than width
+    color: $accent-color; // Default icon color
+    transition: color $transition-speed-normal $transition-easing, transform $transition-speed-normal $transition-easing;
+  }
+
+  // span { // Assuming text is wrapped in span for precise positioning if needed
+  //   display: inline-block;
+  //   // padding-left: $spacing-lg; // Space for the marker - no longer needed
+  // }
+
+
+  &:hover, &:focus {
+    background: $accent-color;
+    color: $primary-bg; // High contrast on hover
+    border-color: $accent-color;
+    transform: translateX(5px) scale(1.02); // Slight lift and grow
+    box-shadow: 0 0 15px $glow-color, 0 0 5px $accent-color;
+    text-shadow: 0 0 2px $primary-bg;
+
+    .nav-icon {
+      color: $primary-bg; // Icon color changes with text
+      transform: scale(1.1); // Slight grow for icon
+    }
+  }
+
+  // Active state for current page (requires JS or specific class on current page link)
+  &.active {
+    background: $muted-radioactive-green;
+    color: $primary-bg;
+    border-left-color: $success-color; // Different accent for active state
+    box-shadow: inset 0 0 10px rgba($primary-bg, 0.3);
+
+    .nav-icon {
+      color: $primary-bg;
+    }
+  }
+}
+
+// Responsive adjustments for nav
+@media (max-width: $bp-large) { // When nav stacks on top
+  .nav-section {
+    flex-basis: auto; // Allow it to size based on content when stacked
+    margin-bottom: $spacing-md; // Add space below when stacked
+    max-height: 300px; // Limit height and allow scroll if many items
+  }
+}
+
+@media (max-width: $bp-medium) {
+  .nav-button {
+    padding: $spacing-sm ($spacing-sm + $spacing-xs);
+    font-size: $font-size-sm; // Slightly smaller font on mobile
+
+    span {
+        padding-left: $spacing-md + $spacing-xs;
+    }
+  }
+}

@@ -1,0 +1,49 @@
+@use 'variables' as *;
+@use 'animations' as *;
+
+.main-content {
+  flex: 1; // Takes remaining space
+  background: transparent; // Blend with body, rely on border
+  border: $border-width-medium solid $border-color;
+  padding: $spacing-lg;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg; // Consistent gap between elements inside main
+  min-width: 0; // Prevents flex items from overflowing
+  transform: translateX(30px);
+  opacity: 0;
+  animation: slideInRight 1s ease-out 0.6s forwards;
+  box-shadow: inset 0 0 20px rgba($primary-bg, 0.7); // Deeper inner shadow for depth
+
+  // Style for the status panel within the main content area
+  .status-panel { // This will be further styled in _components.scss
+    margin-bottom: 0; // Remove default margin if it's the first child or manage spacing via gap
+    border-width: $border-width-thin; // Thinner border for this panel
+    font-size: $font-size-md; // Slightly smaller for this context
+  }
+}
+
+.data-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); // Slightly larger minmax
+  gap: $spacing-lg; // Consistent gap for data cards
+}
+
+// Responsive adjustments for main content
+@media (max-width: $bp-medium) {
+  .main-content {
+    padding: $spacing-md;
+    gap: $spacing-md;
+  }
+
+  .data-grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); // Adjust for smaller screens
+    gap: $spacing-md;
+  }
+}
+
+@media (max-width: $bp-small) {
+  .data-grid {
+    grid-template-columns: 1fr; // Single column on very small screens
+  }
+}
