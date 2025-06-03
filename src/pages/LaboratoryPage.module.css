@@ -1,0 +1,20 @@
+/* src/pages/LaboratoryPage.module.css */
+.laboratoryPageContainer {
+  max-width: 1200px; /* Allow wider for grid */
+  margin: 0 auto;
+  padding: var(--spacing-unit);
+}
+
+.pageTitle {
+  font-size: 2.2em;
+  color: var(--color-text-primary);
+  text-align: center;
+  margin-bottom: calc(var(--spacing-unit) * 3);
+  text-transform: uppercase;
+}
+
+.memberGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+  gap: calc(var(--spacing-unit) * 3);
+}

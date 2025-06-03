@@ -1,0 +1,56 @@
+/* src/components/Evidence/EvidenceCard.module.css */
+.evidenceCard {
+  background-color: var(--color-secondary-bg);
+  border-radius: var(--border-radius-small); /* Smaller radius for cards in grid */
+  border: 1px solid var(--color-border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  overflow: hidden; /* Important for image container */
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.evidenceCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+}
+
+.evidenceCard:hover .expandMessage {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  padding-top: 75%; /* Aspect ratio 4:3 for thumbnails, adjust as needed */
+  overflow: hidden;
+}
+
+.galleryThumb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure image covers the area */
+  transition: transform 0.3s ease;
+}
+
+.evidenceCard:hover .galleryThumb {
+    transform: scale(1.05);
+}
+
+.expandMessage {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  color: var(--color-accent-primary);
+  text-align: center;
+  padding: var(--spacing-unit);
+  font-size: 0.9em;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}

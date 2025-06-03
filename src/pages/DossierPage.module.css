@@ -1,0 +1,14 @@
+/* src/pages/DossierPage.module.css */
+.dossierPageContainer {
+  max-width: 900px; /* Or your preferred max width for content pages */
+  margin: 0 auto;
+  padding: var(--spacing-unit);
+}
+
+.pageTitle {
+  font-size: 2.2em;
+  color: var(--color-text-primary);
+  text-align: center;
+  margin-bottom: calc(var(--spacing-unit) * 3);
+  text-transform: uppercase;
+}

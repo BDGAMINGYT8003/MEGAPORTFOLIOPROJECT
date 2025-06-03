@@ -1,0 +1,52 @@
+/* src/components/Team/MemberCard.module.css */
+.memberCard {
+  background-color: var(--color-secondary-bg);
+  padding: calc(var(--spacing-unit) * 2.5);
+  border-radius: var(--border-radius-medium);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.memberCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.profilePic {
+  width: 120px; /* Slightly larger than original */
+  height: 120px;
+  border-radius: 50%; /* Circular images */
+  border: 3px solid var(--color-accent-primary);
+  object-fit: cover;
+  margin: 0 auto calc(var(--spacing-unit) * 2) auto;
+  box-shadow: 0 0 15px rgba(0, 168, 255, 0.5); /* Direct RGBA for accent color shadow */
+}
+
+.name {
+  font-size: 1.8em; /* Adjusted from original 2em */
+  margin-bottom: calc(var(--spacing-unit) * 1.5);
+  color: var(--color-accent-primary);
+}
+
+.detailsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 1em; /* Adjusted from original 1.2em */
+  text-align: left;
+  color: var(--color-text-secondary);
+}
+
+.detailsList li {
+  margin-bottom: var(--spacing-unit);
+  padding-left: var(--spacing-unit);
+  border-left: 3px solid var(--color-tertiary-bg); /* Subtle left border for list items */
+}
+
+.detailsList li strong {
+  color: var(--color-text-primary); /* Brighter color for the label part */
+  font-weight: bold;
+  margin-right: calc(var(--spacing-unit) * 0.5);
+}

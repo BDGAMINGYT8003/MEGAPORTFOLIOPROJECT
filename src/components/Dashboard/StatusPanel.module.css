@@ -1,0 +1,50 @@
+/* src/components/Dashboard/StatusPanel.module.css */
+.statusPanel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap; /* Allow items to wrap */
+  gap: calc(var(--spacing-unit) * 3);
+  padding: calc(var(--spacing-unit) * 1.5);
+  border: 2px solid var(--color-accent-primary);
+  background-color: var(--color-secondary-bg); /* Changed from primary-bg */
+  font-size: 1.1em; /* Adjusted from original 1.2em */
+  margin-bottom: calc(var(--spacing-unit) * 2);
+  border-radius: var(--border-radius-small);
+}
+
+.statusItem {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-unit);
+  color: var(--color-text-secondary);
+}
+
+.value {
+    color: var(--color-text-primary);
+    font-weight: bold;
+}
+
+.statusIndicator {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--color-accent-success); /* Add a glow */
+}
+
+.statusActive {
+  background-color: var(--color-accent-success);
+  animation: blinkActive 1.5s infinite ease-in-out;
+}
+
+.statusPassive {
+  background-color: var(--color-text-disabled); /* More distinct passive color */
+  box-shadow: 0 0 8px var(--color-text-disabled);
+  opacity: 0.7;
+}
+
+@keyframes blinkActive {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}

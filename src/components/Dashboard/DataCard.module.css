@@ -1,0 +1,51 @@
+/* src/components/Dashboard/DataCard.module.css */
+.dataCard {
+  background-color: var(--color-secondary-bg);
+  padding: calc(var(--spacing-unit) * 2.5);
+  border-radius: var(--border-radius-medium);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dataCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.title {
+  font-size: 1.5em; /* Adjusted from original 1.3em */
+  margin-bottom: calc(var(--spacing-unit) * 2);
+  color: var(--color-accent-primary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 1px solid var(--color-tertiary-bg);
+  padding-bottom: var(--spacing-unit);
+}
+
+.item {
+  font-size: 1.1em; /* Adjusted from original 1.2em */
+  margin: var(--spacing-unit) 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.label {
+  color: var(--color-text-secondary);
+  margin-right: var(--spacing-unit);
+}
+
+.value {
+  color: var(--color-text-primary);
+  font-weight: bold;
+}
+
+/* Animation for value changes - similar to original */
+.value.valueChange {
+  animation: valueUpdate 0.5s ease-in-out;
+}
+
+@keyframes valueUpdate {
+  0% { color: var(--color-accent-secondary); transform: scale(1.1); }
+  100% { color: var(--color-text-primary); transform: scale(1); }
+}

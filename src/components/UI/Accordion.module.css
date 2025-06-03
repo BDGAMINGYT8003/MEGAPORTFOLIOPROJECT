@@ -1,0 +1,80 @@
+/* src/components/UI/Accordion.module.css */
+.accordion {
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-medium);
+  overflow: hidden; /* Ensures children conform to border radius */
+  background-color: var(--color-secondary-bg);
+}
+
+.accordionItem {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.accordionItem:last-child {
+  border-bottom: none;
+}
+
+.accordionTitle {
+  background-color: var(--color-secondary-bg); /* Slightly different from item content for depth */
+  color: var(--color-accent-primary);
+  cursor: pointer;
+  padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 2.5);
+  width: 100%;
+  text-align: left;
+  border: none;
+  outline: none;
+  font-size: 1.4em; /* Larger title */
+  transition: background-color 0.3s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.accordionTitle:hover {
+  background-color: var(--color-tertiary-bg);
+}
+
+.accordionItem.open .accordionTitle {
+    background-color: var(--color-tertiary-bg);
+    color: var(--color-accent-secondary); /* Change color when open */
+}
+
+.icon {
+    font-size: 0.8em;
+    transition: transform 0.2s ease-in-out;
+}
+
+.accordionItem.open .icon {
+    /* transform: rotate(90deg); // If using a single arrow icon */
+}
+
+.accordionContent {
+  padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 2.5);
+  background-color: var(--color-primary-bg); /* Content background */
+  border-top: 1px solid var(--color-border);
+  font-size: 1.1em;
+  line-height: 1.7;
+}
+
+.accordionContent p {
+    margin-bottom: var(--spacing-unit);
+}
+.accordionContent p:last-child {
+    margin-bottom: 0;
+}
+
+.accordionContent ul {
+  list-style-type: disc; /* Or '► ' with pseudo-elements */
+  margin-left: calc(var(--spacing-unit) * 2.5);
+  padding-left: var(--spacing-unit);
+}
+
+.accordionContent ul li {
+  margin-bottom: var(--spacing-unit);
+  color: var(--color-text-secondary);
+}
+
+.accordionContent ul li strong {
+  color: var(--color-accent-primary); /* Use theme accent */
+  font-weight: bold; /* Ensure it's bold if not default */
+}

@@ -1,0 +1,26 @@
+/* src/pages/HomePage.module.css */
+.homePage {
+  padding: var(--spacing-unit); /* Minimal padding for the page itself */
+}
+
+.dataGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
+  gap: calc(var(--spacing-unit) * 2.5);
+}
+
+/*
+The .valueChange animation is defined in DataCard.module.css
+and applied to the span with class .value within DataCard.
+HomePage.tsx uses document.getElementById(id).classList.add() to trigger it.
+The id is passed to DataCard items and assigned to the value span.
+Make sure DataCard.module.css has:
+.value.valueChange {
+  animation: valueUpdate 0.5s ease-in-out;
+}
+@keyframes valueUpdate {
+  0% { color: var(--color-accent-secondary); transform: scale(1.1); }
+  100% { color: var(--color-text-primary); transform: scale(1); }
+}
+This is already confirmed to be in DataCard.module.css.
+*/

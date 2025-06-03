@@ -1,0 +1,22 @@
+/* src/components/Layout/Footer.module.css */
+.footer {
+  background-color: var(--color-secondary-bg);
+  padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 3);
+  border-top: 2px solid var(--color-border);
+  text-align: center;
+  font-size: 0.9em;
+  color: var(--color-text-secondary);
+}
+
+.copyrightInfo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: calc(var(--spacing-unit) * 0.5);
+  margin-bottom: var(--spacing-unit);
+}
+
+.copyrightIcon { /* Basic styling, will be replaced by a proper icon */
+  font-weight: bold;
+  color: var(--color-accent-primary);
+}

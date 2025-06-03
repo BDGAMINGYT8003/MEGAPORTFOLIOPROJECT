@@ -1,0 +1,53 @@
+/* src/components/Layout/Header.module.css */
+.header {
+  background-color: var(--color-secondary-bg);
+  padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 3);
+  border-bottom: 2px solid var(--color-border);
+  display: flex;
+  flex-direction: column; /* Stack logo and nav on smaller screens */
+  align-items: center;
+  gap: calc(var(--spacing-unit) * 2);
+}
+
+.logoContainer {
+  text-align: center;
+}
+
+.logo {
+  text-decoration: none;
+  color: var(--color-text-primary);
+}
+
+.logo h1 {
+  font-size: 2em; /* Adjust as needed */
+  margin-bottom: calc(var(--spacing-unit) * 0.5);
+  color: var(--color-accent-primary);
+  text-transform: uppercase;
+}
+
+.logo p {
+  font-size: 0.9em;
+  color: var(--color-text-secondary);
+  margin-bottom: 0;
+}
+
+.navigation {
+  display: flex;
+  flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+  justify-content: center;
+  gap: var(--spacing-unit);
+}
+
+/* Basic responsive behavior for header */
+@media (min-width: 768px) {
+    .header {
+        flex-direction: row; /* Side-by-side on larger screens */
+        justify-content: space-between;
+    }
+    .logoContainer {
+        text-align: left;
+    }
+    .navigation {
+        justify-content: flex-end;
+    }
+}

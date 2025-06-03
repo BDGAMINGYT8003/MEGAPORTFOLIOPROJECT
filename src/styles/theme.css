@@ -1,0 +1,33 @@
+/* src/styles/theme.css */
+:root {
+    /* Fonts */
+    --font-primary: 'Roboto Condensed', sans-serif; /* Example: For headings and impactful text */
+    --font-secondary: 'Roboto', sans-serif; /* Example: For body text and UI elements */
+
+    /* Modern Dark Theme Color Palette (Inspired by Epic/Rockstar) */
+    --color-primary-bg: #0F0F12; /* Very dark, near black for main background */
+    --color-secondary-bg: #1C1C21; /* Slightly lighter dark for cards, sections */
+    --color-tertiary-bg: #2A2A30; /* For borders, lines, or subtle backgrounds */
+
+    --color-text-primary: #E0E0E0; /* Light grey for primary text */
+    --color-text-secondary: #A0A0A0; /* Medium grey for secondary text, placeholders */
+    --color-text-disabled: #606060; /* Dark grey for disabled states */
+
+    --color-accent-primary: #00A8FF; /* Bright blue - can be adjusted */
+    --color-accent-secondary: #FF4081; /* Bright pink/magenta - for contrast or highlights */
+    --color-accent-success: #00D1B2; /* Green for success states */
+    --color-accent-warning: #FFAA00; /* Orange for warnings */
+    --color-accent-danger: #FF3860; /* Red for errors/danger */
+
+    /* UI Elements */
+    --color-border: #3A3A42; /* Subtle borders */
+    --color-input-bg: #25252A;
+    --color-button-bg: var(--color-accent-primary);
+    --color-button-text: #FFFFFF;
+    --color-button-hover-bg: #0086CC;
+
+    /* Sizes & Spacing (examples) */
+    --spacing-unit: 8px;
+    --border-radius-small: 4px;
+    --border-radius-medium: 8px;
+}

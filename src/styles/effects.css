@@ -1,0 +1,51 @@
+/* src/styles/effects.css */
+body::before { /* Grid Overlay */
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image:
+        linear-gradient(to right, rgba(42, 42, 48, 0.3) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(42, 42, 48, 0.3) 1px, transparent 1px);
+    background-size: 30px 30px; /* Slightly larger grid */
+    pointer-events: none;
+    z-index: -10;
+    opacity: 0.3; /* More subtle */
+}
+
+body::after { /* Scanline Effect */
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        transparent 98%,
+        rgba(15, 15, 18, 0.2) 99%, /* Darker, more subtle scanline */
+        transparent 100%
+    );
+    background-size: 100% 3px; /* Thinner scanline */
+    pointer-events: none;
+    z-index: -9;
+    animation: subtleScanline 12s linear infinite;
+    opacity: 0.5; /* More subtle */
+}
+
+@keyframes subtleScanline {
+    0% { transform: translateY(-100%); } /* Start off-screen */
+    100% { transform: translateY(100%); } /* End off-screen */
+}
+
+/* Helper to convert hex to RGB for rgba usage in effects.css if needed,
+   though direct rgba with transparency is fine. This is more for theme consistency.
+   For simplicity, I'll use direct rgba values in effects.css but note this for future.
+   Example: --color-tertiary-bg-rgb: 42, 42, 48; (derived from #2A2A30)
+   --color-primary-bg-rgb: 15, 15, 18; (derived from #0F0F12)
+   These would be defined in theme.css if used.
+   For now, I've used rgba(42, 42, 48, 0.3) and rgba(15, 15, 18, 0.2) directly.
+*/
