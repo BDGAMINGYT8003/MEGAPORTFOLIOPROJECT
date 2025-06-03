@@ -1,70 +1,60 @@
 :root {
-    /* M3 Light Theme Core Colors */
-    --md-sys-color-primary: #6750A4; /* Purple */
-    --md-sys-color-on-primary: #FFFFFF;
-    --md-sys-color-primary-container: #EADDFF;
-    --md-sys-color-on-primary-container: #21005D;
+    /* Custom "Gaming Platform Dark" Theme Tokens */
+    --md-sys-color-primary: #007FFF; /* Vibrant Blue */
+    --md-sys-color-on-primary: #FFFFFF; /* White */
+    --md-sys-color-primary-container: #003C7A; /* Darker Blue for container */
+    --md-sys-color-on-primary-container: #DCEBFF; /* Light Blue for text on container */
 
-    --md-sys-color-secondary: #625B71; /* Neutral */
+    --md-sys-color-secondary: #5260ff; /* Another vibrant color or a more neutral one if preferred */
     --md-sys-color-on-secondary: #FFFFFF;
-    --md-sys-color-secondary-container: #E8DEF8;
-    --md-sys-color-on-secondary-container: #1D192B;
+    --md-sys-color-secondary-container: #00227A;
+    --md-sys-color-on-secondary-container: #DCEBFF;
 
-    --md-sys-color-tertiary: #7D5260; /* Pinkish */
+    --md-sys-color-tertiary: #7D5260; /* Kept M3 dark for now, can be customized */
     --md-sys-color-on-tertiary: #FFFFFF;
     --md-sys-color-tertiary-container: #FFD8E4;
     --md-sys-color-on-tertiary-container: #31111D;
 
-    --md-sys-color-error: #B3261E; /* Red */
-    --md-sys-color-on-error: #FFFFFF;
-    --md-sys-color-error-container: #F9DEDC;
-    --md-sys-color-on-error-container: #410E0B;
+    --md-sys-color-error: #F2B8B5; /* M3 Dark Error */
+    --md-sys-color-on-error: #601410;
+    --md-sys-color-error-container: #8C1D18;
+    --md-sys-color-on-error-container: #F9DEDC;
 
-    /* M3 Light Theme Surface Colors */
-    --md-sys-color-background: #FFFBFE; /* Light grey/off-white */
-    --md-sys-color-on-background: #1C1B1F; /* Dark grey for text on background */
+    /* Main Gaming Platform Dark Surface Colors */
+    --md-sys-color-background: #121212; /* Very dark gray */
+    --md-sys-color-on-background: #E0E0E0; /* Off-white/Light Gray */
 
-    --md-sys-color-surface: #FFFBFE; /* Similar to background, for surfaces */
-    --md-sys-color-on-surface: #1C1B1F; /* Dark grey for text on surface */
+    --md-sys-color-surface: #1E1E1E; /* Slightly lighter dark gray for surfaces */
+    --md-sys-color-on-surface: #E0E0E0; /* Off-white/Light Gray */
 
-    --md-sys-color-surface-variant: #E7E0EC; /* Slightly darker surface variant */
-    --md-sys-color-on-surface-variant: #49454F; /* Grey for text on surface variant */
+    --md-sys-color-surface-variant: #2C2C2C; /* For hover or less prominent surfaces */
+    --md-sys-color-on-surface-variant: #CCCCCC; /* Lighter gray for text on variant */
 
-    --md-sys-color-surface-dim: #DED8E1; /* M3 Surface Dim */
-    --md-sys-color-surface-bright: #FFFBFE; /* M3 Surface Bright */
-    --md-sys-color-surface-container-lowest: #FFFFFF; /* M3 Surface Container Lowest */
-    --md-sys-color-surface-container-low: #F7F2FA;    /* M3 Surface Container Low */
-    --md-sys-color-surface-container: #F3EDF7;     /* M3 Surface Container */
-    --md-sys-color-surface-container-high: #ECE6F0;   /* M3 Surface Container High */
-    --md-sys-color-surface-container-highest: #E6E0E9; /* M3 Surface Container Highest */
+    /* Assuming container colors are derived from surface or primary/secondary as needed */
+    /* These specific M3 container levels might not map directly if we simplify */
+    --md-sys-color-surface-dim: #0A0A0A; /* Even darker for dim effect */
+    --md-sys-color-surface-bright: #2A2A2A; /* Brighter surface for highlights */
+    --md-sys-color-surface-container-lowest: #080808;
+    --md-sys-color-surface-container-low: #121212;
+    --md-sys-color-surface-container: #1E1E1E;
+    --md-sys-color-surface-container-high: #2C2C2C;
+    --md-sys-color-surface-container-highest: #3A3A3A;
 
-    /* M3 Light Theme Outline & Shadow */
-    --md-sys-color-outline: #79747E; /* Grey for outlines */
-    --md-sys-color-outline-variant: #CAC4D0; /* Lighter outline */
-    --md-sys-color-shadow: #000000; /* Black for shadows */
-    --md-sys-color-scrim: #000000; /* For overlays */
+    /* Outline & Shadow */
+    --md-sys-color-outline: #444444; /* Darker, subtle outlines */
+    --md-sys-color-outline-variant: #333333; /* Even more subtle for less emphasis */
+    --md-sys-color-shadow: #000000;
+    --md-sys-color-scrim: #000000;
 
-    /* M3 Inverse (for dark text on light primary, etc. - less common for full theme) */
-    --md-sys-color-inverse-primary: #D0BCFF;
-    --md-sys-color-inverse-surface: #313033;
-    --md-sys-color-inverse-on-surface: #F4EFF4;
+    /* Inverse colors (less critical for a full dark theme override) */
+    --md-sys-color-inverse-primary: #A0CFFF;
+    --md-sys-color-inverse-surface: #E0E0E0;
+    --md-sys-color-inverse-on-surface: #121212;
 
-    /* Additional for text emphasis */
-    --md-text-emphasis-high: #1C1B1F; /* Usually on-surface or on-background */
-    --md-text-emphasis-medium: rgba(28, 27, 31, 0.6); /* on-surface with medium emphasis */
-    --md-text-emphasis-disabled: rgba(28, 27, 31, 0.38); /* on-surface with disabled emphasis */
-
-    /* Old variables, kept for now if any old styles rely on them, but should be phased out */
-    --primary-bg-old: #111;
-    --secondary-bg-old: #222;
-    --accent-color-old: #66eeff;
-    --text-color-old: #f0f0f0;
-    --border-color-old: #555;
-    --status-border-color-old: var(--accent-color-old);
-    --danger-color-old: #ff4444;
-    --warning-color-old: #ffaa00;
-    --success-color-old: #00ff99;
-    --passive-color-old: #aaa;
+    /* Text emphasis */
+    --md-text-emphasis-high: #E0E0E0;
+    --md-text-emphasis-medium: rgba(224, 224, 224, 0.7);
+    --md-text-emphasis-disabled: rgba(224, 224, 224, 0.4);
 }
 * {
         margin: 0;
@@ -101,10 +91,10 @@
 
     .header {
         text-align: center;
-        padding: 1rem; /* M3 often uses 1rem or 1.5rem padding */
-        background: var(--md-sys-color-surface-container-high); /* M3 surface color */
-        color: var(--md-sys-color-on-surface-variant); /* M3 text on surface */
-        border-bottom: 1px solid var(--md-sys-color-outline-variant); /* M3 subtle border */
+        padding: 1rem;
+        background: var(--md-sys-color-surface);
+        color: var(--md-sys-color-on-surface);
+        border-bottom: 1px solid var(--md-sys-color-outline);
         position: relative;
         overflow: hidden;
          transform: translateY(-30px);
@@ -145,9 +135,9 @@
 
     .nav-section {
         flex: 0 0 250px;
-        background: var(--md-sys-color-surface-container); /* M3 surface */
+        background: var(--md-sys-color-surface);
         padding: 1rem;
-        border-right: 1px solid var(--md-sys-color-outline-variant); /* M3 subtle border */
+        border-right: 1px solid var(--md-sys-color-outline);
         transform: translateX(-30px);
       opacity: 0;
       animation: slideInLeft 1s ease-out 0.6s forwards;
@@ -213,8 +203,8 @@
     }
 
     .nav-button:hover {
-        background: var(--md-sys-color-surface-container-high); /* M3 hover state */
-        color: var(--md-sys-color-on-surface);
+        background: var(--md-sys-color-surface-variant);
+        color: var(--md-sys-color-primary);
         /* transform: translateX(5px); Remove this transform, M3 prefers subtle bg change */
     }
     /* Example for an "active" nav button state if we add it later */
@@ -231,22 +221,17 @@
     }
 
     .data-card {
-        background: var(--md-sys-color-surface-container-low); /* M3 surface */
-        border: 1px solid var(--md-sys-color-outline-variant); /* M3 Outlined Card style border */
-        /* Or for elevated:
-        border: none;
-        box-shadow: 0px 1px 2px rgba(0,0,0,0.3), 0px 1px 3px 1px rgba(0,0,0,0.15); M3 Elevation 1
-        */
-        padding: 1rem; /* M3 padding */
+        background: var(--md-sys-color-surface);
+        border: 1px solid var(--md-sys-color-outline);
+        padding: 1rem;
         position: relative;
         overflow: hidden;
-        border-radius: 12px; /* M3 rounded corners */
-        transition: background-color 0.2s ease, box-shadow 0.2s ease; /* M3 transitions */
+        border-radius: 4px; /* Sharper corners */
+        transition: background-color 0.2s ease, box-shadow 0.2s ease;
     }
 
     .data-card:hover {
-        background-color: var(--md-sys-color-surface-container);
-        /* box-shadow: 0px 2px 4px rgba(0,0,0,0.3), 0px 2px 6px 2px rgba(0,0,0,0.15); M3 Elevation 2 if elevated */
+        background-color: var(--md-sys-color-surface-variant); /* Use surface-variant for hover */
     }
 
     .data-card h3 {
@@ -286,21 +271,20 @@
         50% { opacity: 0; }
     }
 
-    @media (max-width: 1024px) { /* M3 'Medium' breakpoint range can be up to 839dp, 1024px is more 'Expanded' */
+    @media (max-width: 1024px) {
         body {
-            padding: 0.75rem; /* Slightly reduced body padding */
+            padding: 0.75rem;
         }
         .content-wrapper {
             flex-direction: column;
         }
 
         .nav-section {
-            /* flex: none; */ /* Not needed when column */
-            flex-basis: auto; /* Allow it to take content height */
-            width: 100%; /* Take full width when stacked */
-            border-right: none; /* Remove side border */
-            border-bottom: 1px solid var(--md-sys-color-outline-variant); /* Add bottom border */
-            margin-bottom: 1rem; /* Space when stacked */
+            flex-basis: auto;
+            width: 100%;
+            border-right: none;
+            border-bottom: 1px solid var(--md-sys-color-outline); /* Use main outline */
+            margin-bottom: 1rem;
         }
 
         .data-grid {
@@ -387,10 +371,10 @@
     footer {
         text-align: center;
         padding: 1rem;
-        background: var(--md-sys-color-surface-container); /* M3 surface */
-        color: var(--md-sys-color-on-surface-variant); /* M3 text */
-        border-top: 1px solid var(--md-sys-color-outline-variant); /* M3 subtle border */
-        font-size: 0.875em; /* M3 Body Small or Label Medium */
+        background: var(--md-sys-color-surface);
+        color: var(--md-sys-color-on-surface-variant);
+        border-top: 1px solid var(--md-sys-color-outline);
+        font-size: 0.875em;
         margin-top: 1rem;
         transform: translateY(30px);
       opacity: 0;
