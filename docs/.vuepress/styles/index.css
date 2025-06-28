@@ -1,0 +1,308 @@
+/* Import VT323 Font */
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+/* CSS Variables - Dark Black-Grey-Teal Palette */
+:root {
+  --primary-bg: #111111; /* Dark Black */
+  --secondary-bg: #222222; /* Dark Grey */
+  --accent-color: #66eeff; /* Teal */
+  --text-color: #f0f0f0; /* Light Grey/Off-White */
+  --border-color: #555555; /* Medium Grey */
+  --success-color: #00ff99; /* For status indicators, etc. */
+  --warning-color: #ffaa00; /* For status indicators, etc. */
+  --danger-color: #ff4444; /* For status indicators, etc. */
+  --passive-color: #aaaaaa; /* For status indicators, etc. */
+
+
+  /* VuePress specific variables override */
+  --c-bg: var(--primary-bg);
+  --c-text: var(--text-color);
+  --c-brand: var(--accent-color);
+  --c-border: var(--border-color);
+  --c-bg-navbar: var(--secondary-bg);
+  --c-bg-sidebar: var(--secondary-bg);
+  --c-bg-arrow: var(--secondary-bg);
+  --c-text-accent: var(--accent-color); /* Ensure brand text uses accent */
+  --c-border-dark: var(--border-color); /* General border */
+
+  /* Sidebar specific colors */
+  --c-bg-sidebar: var(--secondary-bg);
+  --c-text-sidebar-title: var(--accent-color);
+  --c-text-sidebar-link: var(--text-color);
+  --c-text-sidebar-link-active: var(--accent-color);
+  --c-border-sidebar: var(--border-color);
+
+  /* Navbar specific colors */
+  --c-text-navbar-title: var(--accent-color);
+  --c-text-navbar-link: var(--text-color);
+  --c-text-navbar-link-active: var(--accent-color);
+
+
+  /* Typography */
+  --font-family: 'VT323', monospace;
+  --font-family-heading: 'VT323', monospace;
+  --font-size-content: 16px; /* Base font size for content */
+}
+
+/* Global Styles */
+html, body {
+  background-color: var(--primary-bg);
+  color: var(--text-color);
+  font-family: var(--font-family);
+  font-size: var(--font-size-content);
+}
+
+* {
+  font-family: var(--font-family) !important;
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-heading) !important;
+  color: var(--accent-color);
+  font-weight: normal; /* VT323 is quite bold already */
+}
+h1 { font-size: 2.5em; margin-bottom: 0.75rem; }
+h2 { font-size: 2em; margin-bottom: 0.6rem; }
+h3 { font-size: 1.75em; margin-bottom: 0.5rem; }
+h4 { font-size: 1.5em; margin-bottom: 0.4rem; }
+
+
+a {
+  color: var(--accent-color);
+  text-decoration: none; /* Remove underline by default */
+  transition: color 0.3s ease;
+}
+a:hover {
+  color: #8effff; /* Lighter teal on hover */
+  text-decoration: underline;
+}
+
+/* VuePress Link Overrides */
+.nav-link, .sidebar-link {
+  color: var(--text-color) !important;
+}
+.nav-link.active, .sidebar-link.active,
+.nav-link:hover, .sidebar-link:hover {
+  color: var(--accent-color) !important;
+  border-bottom-color: var(--accent-color) !important; /* For active navbar links */
+}
+.sidebar-link.active {
+  border-left-color: var(--accent-color) !important;
+}
+
+
+/* Grid Overlay and Scanline Effects */
+.grid-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    linear-gradient(90deg, rgba(102, 238, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(rgba(102, 238, 255, 0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+  z-index: -1000;
+}
+
+.scanline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(0, 0, 0, 0.05) 50%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 1000;
+  animation: scanline-animation 10s linear infinite;
+}
+
+@keyframes scanline-animation {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(100vh); }
+}
+
+#app {
+  background-color: var(--primary-bg);
+}
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--secondary-bg); }
+::-webkit-scrollbar-thumb { background-color: var(--accent-color); border-radius: 4px; border: 2px solid var(--secondary-bg); }
+::-webkit-scrollbar-thumb:hover { background-color: #55cbd9; }
+
+div[class*="language-"] { background-color: var(--secondary-bg) !important; border-radius: 6px; border: 1px solid var(--border-color); }
+pre[class*="language-"] code { color: var(--text-color) !important; }
+
+.navbar { background-color: var(--secondary-bg) !important; border-bottom: 1px solid var(--border-color) !important; }
+.sidebar { background-color: var(--secondary-bg) !important; border-right: 1px solid var(--border-color) !important; }
+.theme-default-content { background-color: var(--primary-bg) !important; padding: 2rem !important; }
+
+/* Page meta and nav links styling */
+.page-meta, .page-nav {
+  color: var(--text-color);
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+  margin-top: 2rem;
+}
+.page-meta span, .page-nav .label, .page-nav .text {
+  color: var(--text-color);
+}
+.page-meta a, .page-nav a {
+  color: var(--accent-color);
+}
+.page-meta a:hover, .page-nav a:hover {
+  color: #8effff;
+}
+
+
+blockquote {
+  border-left: 0.25rem solid var(--accent-color);
+  color: var(--text-color);
+  background-color: var(--secondary-bg);
+  padding: 1rem;
+  margin: 1rem 0; /* Added top/bottom margin */
+}
+
+table { border-collapse: collapse; width: 100%; margin: 1rem 0; display: block; overflow-x: auto; }
+th, td { border: 1px solid var(--border-color); padding: 0.75rem; text-align: left; }
+th { background-color: var(--secondary-bg); color: var(--accent-color); }
+tbody tr:nth-child(odd) { background-color: var(--primary-bg); }
+tbody tr:nth-child(even) { background-color: var(--secondary-bg); }
+
+button, .button, input[type="button"], input[type="submit"] {
+  font-family: 'VT323', monospace !important;
+  background: var(--primary-bg);
+  color: var(--accent-color);
+  border: 2px solid var(--accent-color);
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+  text-align: center;
+}
+button:hover, .button:hover, input[type="button"]:hover, input[type="submit"]:hover {
+  background-color: var(--accent-color);
+  color: var(--primary-bg);
+}
+
+input[type="text"], input[type="email"], textarea, select {
+  font-family: 'VT323', monospace !important;
+  background: var(--primary-bg);
+  color: var(--text-color);
+  border: 2px solid var(--border-color);
+  padding: 10px; /* Increased padding */
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 0; /* Sharp edges for retro feel */
+}
+input[type="text"]:focus, input[type="email"]:focus, textarea:focus, select:focus {
+  border-color: var(--accent-color);
+  outline: none;
+  box-shadow: 0 0 8px var(--accent-color); /* Enhanced glow */
+}
+
+select {
+  appearance: none;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2366eeff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.4-5.4-13z%22%2F%3E%3C%2Fsvg%3E');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px;
+  padding-right: 30px;
+}
+select:disabled {
+  background-color: #333; color: #777; opacity: 0.7; border-color: #444;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23777777%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.4-5.4-13z%22%2F%3E%3C%2Fsvg%3E');
+}
+
+.custom-card {
+  background: var(--secondary-bg);
+  border: 2px solid var(--border-color);
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 7px 7px 0px var(--primary-bg);
+  margin-bottom: 1rem;
+}
+.custom-card h2, .custom-card h3 { color: var(--accent-color); margin-top: 0; }
+.custom-card ul { list-style: disc; margin-left: 20px; font-size: 1em; text-align: left; color: var(--text-color); padding-left: 0; }
+.custom-card ul li { margin-bottom: 8px; }
+.custom-card ul li strong { color: var(--accent-color); font-weight: bold; margin-right: 10px; }
+.custom-card::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: var(--accent-color); transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease; }
+.custom-card:hover::after { transform: scaleX(1); }
+
+footer.site-footer {
+  text-align: center; padding: 1rem; background: var(--secondary-bg); border-top: 2px solid var(--border-color); font-size: 1em; margin-top: 2rem;
+  width: 100%; /* Ensure footer spans width if not already by parent */
+  box-sizing: border-box;
+}
+footer.site-footer p { margin: 0.5rem 0; color: var(--text-color); }
+
+.copyright-info { display: flex; justify-content: center; align-items: center; gap: 0.5rem; }
+.copyright-icon { display: inline-block; width: 16px; height: 16px; background-color: var(--accent-color); -webkit-mask-image: url('data:image/svg+xml,<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM16 12c0 2.21-1.79 4-4 4-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4z"/></svg>'); mask-image: url('data:image/svg+xml,<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM16 12c0 2.21-1.79 4-4 4-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4z"/></svg>'); -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center; -webkit-mask-size: contain; mask-size: contain; }
+
+.fade-in { opacity: 0; animation: fadeInAnimation 1s ease-out forwards; }
+@keyframes fadeInAnimation { to { opacity: 1; } }
+.slide-down { transform: translateY(-30px); opacity: 0; animation: slideDownAnimation 1s ease-out 0.3s forwards; }
+@keyframes slideDownAnimation { to { transform: translateY(0); opacity: 1; } }
+.slide-in-right { transform: translateX(30px); opacity: 0; animation: slideInRightAnimation 1s ease-out 0.6s forwards; }
+@keyframes slideInRightAnimation { to { transform: translateX(0); opacity: 1; } }
+.slide-in-left { transform: translateX(-30px); opacity: 0; animation: slideInLeftAnimation 1s ease-out 0.6s forwards; }
+@keyframes slideInLeftAnimation { to { transform: translateX(0); opacity: 1; } }
+.slide-in-bottom { transform: translateY(30px); opacity: 0; animation: slideInBottomAnimation 1s ease-out 0.9s forwards; }
+@keyframes slideInBottomAnimation { to { transform: translateY(0); opacity: 1; } }
+
+.easter-egg-blink { animation: blink-caret-animation 1s steps(2, start) infinite; }
+@keyframes blink-caret-animation { 50% { opacity: 0; } }
+
+.header-scan-effect::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: var(--accent-color); animation: headerScanAnimation 2s linear infinite; }
+@keyframes headerScanAnimation { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+
+.navbar .dropdown-wrapper .dropdown-title,
+.navbar .dropdown-wrapper .dropdown-item { background-color: var(--secondary-bg); color: var(--text-color); }
+.navbar .dropdown-wrapper .dropdown-item:hover { background-color: var(--primary-bg); color: var(--accent-color); }
+
+.page { padding-bottom: 2rem; }
+.theme-default-content:not(.custom) { max-width: 100%; padding: 2rem 2.5rem; }
+
+/* Added body.modal-open for evidence gallery modal */
+body.modal-open {
+  overflow: hidden;
+}
+
+/* Ensure HTML fills viewport for overlays */
+html {
+  min-height: 100vh;
+  position: relative;
+}
+
+@media (max-width: 719px) { /* Default mobile breakpoint for VuePress */
+  .theme-default-content:not(.custom) {
+    padding: 1rem 1.5rem;
+  }
+  h1 { font-size: 2em; }
+  h2 { font-size: 1.75em; }
+  h3 { font-size: 1.5em; }
+  .custom-card { padding: 1rem; }
+  input[type="text"], input[type="email"], textarea, select, button, .button {
+    padding: 8px 15px; /* Adjust padding for smaller screens */
+    font-size: 1em; /* Ensure font size is not too large */
+  }
+}
+
+@media (max-width: 480px) {
+  /* Further fine-tuning for very small screens if needed */
+  .theme-default-content:not(.custom) {
+    padding: 1rem;
+  }
+   h1 { font-size: 1.8em; }
+  h2 { font-size: 1.6em; }
+  h3 { font-size: 1.4em; }
+}
