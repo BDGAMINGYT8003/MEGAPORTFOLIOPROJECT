@@ -1,0 +1,407 @@
+:root {
+    /* Custom "Gaming Platform Dark" Theme Tokens */
+    --md-sys-color-primary: #007FFF; /* Vibrant Blue */
+    --md-sys-color-on-primary: #FFFFFF; /* White */
+    --md-sys-color-primary-container: #003C7A; /* Darker Blue for container */
+    --md-sys-color-on-primary-container: #DCEBFF; /* Light Blue for text on container */
+
+    --md-sys-color-secondary: #5260ff; /* Another vibrant color or a more neutral one if preferred */
+    --md-sys-color-on-secondary: #FFFFFF;
+    --md-sys-color-secondary-container: #00227A;
+    --md-sys-color-on-secondary-container: #DCEBFF;
+
+    --md-sys-color-tertiary: #7D5260; /* Kept M3 dark for now, can be customized */
+    --md-sys-color-on-tertiary: #FFFFFF;
+    --md-sys-color-tertiary-container: #FFD8E4;
+    --md-sys-color-on-tertiary-container: #31111D;
+
+    --md-sys-color-error: #F2B8B5; /* M3 Dark Error */
+    --md-sys-color-on-error: #601410;
+    --md-sys-color-error-container: #8C1D18;
+    --md-sys-color-on-error-container: #F9DEDC;
+
+    /* Main Gaming Platform Dark Surface Colors */
+    --md-sys-color-background: #121212; /* Very dark gray */
+    --md-sys-color-on-background: #E0E0E0; /* Off-white/Light Gray */
+
+    --md-sys-color-surface: #1E1E1E; /* Slightly lighter dark gray for surfaces */
+    --md-sys-color-on-surface: #E0E0E0; /* Off-white/Light Gray */
+
+    --md-sys-color-surface-variant: #2C2C2C; /* For hover or less prominent surfaces */
+    --md-sys-color-on-surface-variant: #CCCCCC; /* Lighter gray for text on variant */
+
+    /* Assuming container colors are derived from surface or primary/secondary as needed */
+    /* These specific M3 container levels might not map directly if we simplify */
+    --md-sys-color-surface-dim: #0A0A0A; /* Even darker for dim effect */
+    --md-sys-color-surface-bright: #2A2A2A; /* Brighter surface for highlights */
+    --md-sys-color-surface-container-lowest: #080808;
+    --md-sys-color-surface-container-low: #121212;
+    --md-sys-color-surface-container: #1E1E1E;
+    --md-sys-color-surface-container-high: #2C2C2C;
+    --md-sys-color-surface-container-highest: #3A3A3A;
+
+    /* Outline & Shadow */
+    --md-sys-color-outline: #444444; /* Darker, subtle outlines */
+    --md-sys-color-outline-variant: #333333; /* Even more subtle for less emphasis */
+    --md-sys-color-shadow: #000000;
+    --md-sys-color-scrim: #000000;
+
+    /* Inverse colors (less critical for a full dark theme override) */
+    --md-sys-color-inverse-primary: #A0CFFF;
+    --md-sys-color-inverse-surface: #E0E0E0;
+    --md-sys-color-inverse-on-surface: #121212;
+
+    /* Text emphasis */
+    --md-text-emphasis-high: #E0E0E0;
+    --md-text-emphasis-medium: rgba(224, 224, 224, 0.7);
+    --md-text-emphasis-disabled: rgba(224, 224, 224, 0.4);
+}
+* {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Roboto', sans-serif; /* Updated font */
+    }
+
+    body {
+        background-color: var(--md-sys-color-background); /* M3 background */
+        color: var(--md-sys-color-on-background); /* M3 text on background */
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        font-size: 16px;
+        overflow-x: hidden; /* PREVENT HORIZONTAL SCROLLING */
+    }
+
+    .content-wrapper {
+        display: flex;
+        flex: 1;
+        gap: 1rem;
+        margin-top: 1rem;
+          opacity: 0; /* Start with 0 opacity */
+        animation: fadeIn 1s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    /* Removed .grid-overlay and .scanline styles */
+
+    .header {
+        text-align: center;
+        padding: 1rem;
+        background: var(--md-sys-color-surface);
+        color: var(--md-sys-color-on-surface);
+        border-bottom: 1px solid var(--md-sys-color-outline);
+        position: relative;
+        overflow: hidden;
+         transform: translateY(-30px);
+      opacity: 0;
+      animation: slideDown 1s ease-out 0.3s forwards;
+    }
+     @keyframes slideDown {
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+
+    .header h1 {
+        font-size: 2em; /* M3 Title Large equivalent */
+        margin-bottom: 0.25rem;
+        color: var(--md-sys-color-on-surface);
+    }
+
+    .header p {
+        font-size: 1em; /* M3 Title Small or Body Large */
+        color: var(--md-sys-color-secondary); /* M3 secondary text color */
+    }
+
+    .header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: var(--md-sys-color-primary); /* Use M3 primary for accent line */
+        animation: scan 2s linear infinite;
+    }
+
+    @keyframes scan {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+    }
+
+    .nav-section {
+        flex: 0 0 250px;
+        background: var(--md-sys-color-surface);
+        padding: 1rem;
+        border-right: 1px solid var(--md-sys-color-outline);
+        transform: translateX(-30px);
+      opacity: 0;
+      animation: slideInLeft 1s ease-out 0.6s forwards;
+    }
+
+    @keyframes slideInLeft {
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    .main-content {
+        flex: 1;
+        background: var(--md-sys-color-surface); /* M3 surface */
+        padding: 1rem; /* M3 consistent padding */
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        min-width: 0;
+        transform: translateX(30px);
+      opacity: 0;
+      animation: slideInRight 1s ease-out 0.6s forwards;
+
+    }
+     @keyframes slideInRight {
+        to { transform: translateX(0); opacity: 1; }
+    }
+
+    .status-panel {
+        display: flex;
+        justify-content: center; /* Center the content horizontally */
+        align-items: center;
+        padding: 0.75rem 1rem; /* Adjusted padding */
+        border: 1px solid var(--md-sys-color-outline); /* M3 outline */
+        background: var(--md-sys-color-surface-container-high); /* M3 surface */
+        color: var(--md-sys-color-on-surface-variant);
+        font-size: 1em; /* M3 Body Large or Medium */
+        margin-bottom: 1rem;
+        border-radius: 8px; /* M3 rounded corners */
+    }
+
+    /* Add space between SYSTEM and PRESENCE in status panel */
+    .status-panel > span:not(:last-child) {
+        margin-right: 0.7rem;
+    }
+
+    .nav-button {
+        display: flex; /* For icon alignment */
+        align-items: center;
+        width: 100%;
+        padding: 0.75rem 1rem; /* M3 typical padding */
+        margin: 0.25rem 0; /* Reduced margin */
+        background: transparent; /* M3 nav items are often transparent */
+        border: none; /* Remove border */
+        color: var(--md-sys-color-on-surface-variant); /* M3 text color */
+        text-decoration: none;
+        text-align: left;
+        transition: background-color 0.2s ease, color 0.2s ease; /* M3 transitions */
+        font-size: 1em; /* M3 Body Large */
+        border-radius: 24px; /* M3 full rounded shape for active indicator or hover */
+    }
+
+    .nav-button i.fa-fw { /* Target Font Awesome fixed-width icons */
+        margin-right: 0.75rem; /* Space between icon and text */
+    }
+
+    .nav-button:hover {
+        background: var(--md-sys-color-surface-variant);
+        color: var(--md-sys-color-primary);
+        /* transform: translateX(5px); Remove this transform, M3 prefers subtle bg change */
+    }
+    /* Example for an "active" nav button state if we add it later */
+    /* .nav-button.active {
+        background: var(--md-sys-color-secondary-container);
+        color: var(--md-sys-color-on-secondary-container);
+        font-weight: bold; // M3 uses font weight for active items
+    } */
+
+    .data-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+    }
+
+    .data-card {
+        background: var(--md-sys-color-surface);
+        border: 1px solid var(--md-sys-color-outline);
+        padding: 1rem;
+        position: relative;
+        overflow: hidden;
+        border-radius: 4px; /* Sharper corners */
+        transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .data-card:hover {
+        background-color: var(--md-sys-color-surface-variant); /* Use surface-variant for hover */
+    }
+
+    .data-card h3 {
+        font-size: 1.25em; /* M3 Title Medium */
+        margin-bottom: 0.75rem;
+        color: var(--md-sys-color-primary); /* M3 primary or on-surface */
+    }
+
+    .data-card p {
+        font-size: 0.875em; /* M3 Body Small or Medium */
+        margin: 0.25rem 0;
+        color: var(--md-sys-color-on-surface-variant); /* M3 secondary text */
+    }
+
+    /* Removed .data-card::after pseudo-element animation */
+
+    .status-indicator {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        margin-left: 8px;
+        animation: blink 1s step-end infinite;
+    }
+
+    .status-active {
+        background-color: var(--md-sys-color-primary); /* M3 Primary or a success-like color */
+    }
+
+    .status-passive {
+        background-color: var(--md-sys-color-outline); /* M3 Outline or a neutral gray */
+        animation: none; /* No blink in passive mode */
+        opacity: 0.7; /* Slightly dimmed in passive mode */
+    }
+
+    @keyframes blink {
+        50% { opacity: 0; }
+    }
+
+    @media (max-width: 1024px) {
+        body {
+            padding: 0.75rem;
+        }
+        .content-wrapper {
+            flex-direction: column;
+        }
+
+        .nav-section {
+            flex-basis: auto;
+            width: 100%;
+            border-right: none;
+            border-bottom: 1px solid var(--md-sys-color-outline); /* Use main outline */
+            margin-bottom: 1rem;
+        }
+
+        .data-grid {
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Wider cards for tablets */
+        }
+    }
+
+    @media (max-width: 600px) { /* M3 'Compact' breakpoint typically starts here or up to 599dp */
+        body {
+            font-size: 14px; /* M3 Body Small / 0.875rem */
+            padding: 0.5rem;
+        }
+
+        .header {
+            padding: 0.75rem;
+        }
+        .header h1 {
+            font-size: 1.75em; /* M3 Headline Medium/Small */
+        }
+        .header p {
+            font-size: 0.875em; /* M3 Body Medium */
+        }
+
+        .main-content {
+            padding: 0.75rem;
+        }
+        .nav-section {
+            padding: 0.5rem;
+        }
+        .nav-button {
+            padding: 0.75rem; /* Ensure tappable */
+        }
+
+        .status-panel {
+            padding: 0.5rem;
+            font-size: 0.875em;
+            flex-wrap: wrap; /* Allow items to wrap */
+            gap: 0.5rem; /* Add gap for wrapped items */
+        }
+        .status-panel > span { /* Ensure individual items don't cause overflow */
+            flex-basis: content;
+        }
+
+
+        .data-grid {
+            grid-template-columns: 1fr; /* Single column for cards */
+        }
+        .data-card {
+            padding: 0.75rem;
+        }
+        .data-card h3 {
+            font-size: 1.125em; /* M3 Title Small */
+        }
+        .data-card p {
+            font-size: 0.875em; /* M3 Body Small */
+        }
+
+        footer {
+            padding: 0.75rem;
+            font-size: 0.75em; /* M3 Label Small */
+        }
+    }
+    /* The old 480px breakpoint can be removed or merged if 600px covers it well enough */
+    /* For now, I'll keep it and ensure its specific rules are still relevant or adjusted */
+    @media (max-width: 480px) {
+        /* Most rules might be covered by 600px now, but can add more specific overrides if needed */
+        .header h1 {
+            font-size: 1.5em; /* Further refinement for very small screens - M3 Headline Small */
+        }
+         .nav-button i.fa-fw {
+            margin-right: 0.5rem; /* Slightly reduce icon spacing */
+        }
+    }
+
+    .value-change {
+        animation: valueUpdate 0.5s ease-in-out;
+    }
+
+    @keyframes valueUpdate {
+        0% { color: var(--md-sys-color-primary); } /* M3 Primary for highlight */
+        100% { color: var(--md-sys-color-on-surface); } /* M3 standard text color */
+    }
+
+    footer {
+        text-align: center;
+        padding: 1rem;
+        background: var(--md-sys-color-surface);
+        color: var(--md-sys-color-on-surface-variant);
+        border-top: 1px solid var(--md-sys-color-outline);
+        font-size: 0.875em;
+        margin-top: 1rem;
+        transform: translateY(30px);
+      opacity: 0;
+      animation: slideInBottom 1s ease-out 0.9s forwards;
+    }
+
+      @keyframes slideInBottom {
+        to { transform: translateY(0); opacity: 1; }
+      }
+
+    footer p {
+        margin: 0.25rem 0; /* Reduced margin */
+    }
+
+    footer .copyright-info {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    footer .copyright-icon { /* Now refers to the Font Awesome <i> tag if that class is kept, or can be removed if <i> has its own FA classes */
+        display: inline-block; /* May not be needed for FA */
+        width: auto; /* FA handles its own width */
+        height: auto; /* FA handles its own height */
+        /* Removed background-color and mask properties */
+        /* Color should be inherited from parent, or can be set explicitly */
+        /* Ensure vertical alignment if needed, e.g., vertical-align: middle; */
+        margin-right: 0.25em; /* Add some space if the class is kept on the <i> */
+    }

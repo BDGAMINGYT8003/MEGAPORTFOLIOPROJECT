@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dispatch - Ectoplasmic Investigators</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <link rel="stylesheet" href="/src/css/main.css">
+    <script type="module" src="/src/js/main.js"></script>
+    <!--Removed inline styles -->
+</head>
+<body>
+    <div class="grid-overlay"></div>
+    <div class="scanline"></div>
+
+    <header class="header">
+      <h1>DISPATCH: <span id="form-title">General Inquiry</span></h1>
+      <p>COMMUNICATION HUB</p>
+      <div class="inquiry-type">
+        <label for="contactType">Inquiry Type:</label>
+        <select id="contactType">
+          <option value="General Inquiry" selected>General Inquiry</option>
+          <option value="Technical Support">Technical Support</option>
+          <option value="Partnerships">Partnerships</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+    </header>
+
+    <div class="content-wrapper">
+        <nav class="nav-section">
+            <div class="status-panel">
+                <span>STATUS: <span id="system-operational-status">ACTIVE</span><span class="status-indicator status-active" id="status-indicator"></span></span>
+            </div>
+            <a href="dossier.html" class="nav-button"><i class="fa-solid fa-file-zipper fa-fw"></i> THE DOSSIER</a>
+            <a href="laboratory.html" class="nav-button"><i class="fa-solid fa-flask-vial fa-fw"></i> THE LABORATORY</a>
+            <a href="casefiles.html" class="nav-button"><i class="fa-solid fa-briefcase fa-fw"></i> CASE FILES</a>
+            <a href="evidence.html" class="nav-button"><i class="fa-solid fa-magnifying-glass fa-fw"></i> EVIDENCE ARCHIVES</a>
+            <a href="chronicle.html" class="nav-button">► FIELD CHRONICLE</a>
+            <a href="oracle.html" class="nav-button">► COMMAND ORACLE</a>
+            <a href="dispatch.html" class="nav-button">► DISPATCH INQUIRY</a>
+        </nav>
+
+        <main class="main-content">
+          <form class="contact-form" id="contactForm" action="https://formsubmit.co/gizaimoin@gmail.com" method="POST">
+            <input type="hidden" name="inquiryType" id="inquiryType" value="General Inquiry" />
+            <input type="hidden" name="_captcha" value="false">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" placeholder="Your Name" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required>
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" placeholder="Your message here" rows="4" required></textarea>
+            <div class="button-row">
+              <a href="index.html" class="go-back-button">Go Back</a>
+              <button type="submit">Send</button>
+            </div>
+          </form>
+          <div class="confirmation-message" id="confirmationMessage">
+            <h2>Message Sent!</h2>
+            <p>Thanks for reaching out. We'll get back to you shortly.</p>
+            <div class="button-row">
+              <a href="index.html" class="go-back-button">Go Back</a>
+            </div>
+          </div>
+        </main>
+    </div>
+
+    <footer>
+        <p class="copyright-info">
+            <i class="fa-regular fa-copyright"></i> 2025 THE ECTOPLASMIC INVESTIGATORS
+        </p>
+        <p>SECRET LOGS AWAIT DISCOVERY</p>
+    </footer>
+    <script type="module" src="/src/js/dispatch.js"></script>
+</body>
+</html>

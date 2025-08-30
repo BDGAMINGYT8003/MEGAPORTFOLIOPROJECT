@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Ectoplasmic Investigators - Command Center</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <link rel="stylesheet" href="/src/css/main.css">
+<script type="module" src="/src/js/main.js"></script>
+</head>
+<body>
+    <div class="grid-overlay"></div>
+    <div class="scanline"></div>
+<header class="header">
+    <h1>THE ECTOPLASMIC INVESTIGATORS</h1>
+    <p>COMMAND CENTER • CLEARANCE LEVEL ALPHA</p>
+</header>
+
+<div class="content-wrapper">
+    <nav class="nav-section">
+        <div class="status-panel">
+            <span>STATUS: <span id="system-operational-status">ACTIVE</span><span class="status-indicator status-active" id="status-indicator"></span></span>
+        </div>
+        <a href="dossier.html" class="nav-button"><i class="fa-solid fa-file-zipper fa-fw"></i> THE DOSSIER</a>
+        <a href="laboratory.html" class="nav-button"><i class="fa-solid fa-flask-vial fa-fw"></i> THE LABORATORY</a>
+        <a href="casefiles.html" class="nav-button"><i class="fa-solid fa-briefcase fa-fw"></i> CASE FILES</a>
+        <a href="evidence.html" class="nav-button"><i class="fa-solid fa-magnifying-glass fa-fw"></i> EVIDENCE ARCHIVES</a>
+        <a href="chronicle.html" class="nav-button">► FIELD CHRONICLE</a>
+        <a href="oracle.html" class="nav-button">► COMMAND ORACLE</a>
+        <a href="dispatch.html" class="nav-button">► DISPATCH INQUIRY</a>
+    </nav>
+
+    <main class="main-content">
+       <div class="status-panel">
+            <span>SYSTEM: <span id="system-status">OPERATIONAL</span></span><span>PRESENCE: <span id="uptime">00:00:00</span></span>
+        </div>
+
+
+        <div class="data-grid">
+            <div class="data-card">
+                <h3>ACTIVE INVESTIGATIONS</h3>
+                <p>Current Cases: <span id="current-cases">0</span></p>
+                <p>Priority Alerts: <span id="priority-alerts">0</span></p>
+            </div>
+            <div class="data-card">
+                <h3>FIELD AGENTS</h3>
+                <p>Total Agents: <span id="total-agents">4</span></p>
+                <p>Agents Deployed: <span id="deployed-agents">0</span></p>
+            </div>
+            <div class="data-card">
+                <h3>ANOMALY READINGS</h3>
+                <p>Level: <span id="anomaly-level">ANALYZING...</span></p>
+                <p>Trending: <span id="anomaly-trend">--</span></p>
+            </div>
+            <div class="data-card">
+                <h3>EQUIPMENT STATUS</h3>
+                <p>Systems: <span id="system-condition">ANALYZING...</span></p>
+                <p>Maintenance: <span id="maintenance-level">0</span>%</p>
+            </div>
+        </div>
+    </main>
+</div>
+
+<footer>
+    <p class="copyright-info">
+        <i class="fa-regular fa-copyright"></i> 2025 THE ECTOPLASMIC INVESTIGATORS
+    </p>
+    <p>SECRET LOGS AWAIT DISCOVERY</p>
+</footer>
+
+</body>
+</html>
